@@ -4,7 +4,7 @@
 
 @php $mapUrl = trim($mapUrl ?? ''); @endphp
 
-<x-page-banner title="Contact Us" crumb="Contact" image="/images/aheadsolar/banner.jpg" />
+<x-page-banner title="Contact" titleAccent="Us" crumb="Contact Us" image="/images/aheadsolar/banner.jpg" />
 
 <section class="bg-white py-20 lg:py-25 px-4 sm:px-8 font-sans">
     <div class="max-w-6xl w-full mx-auto flex flex-col md:flex-row gap-6">
@@ -66,16 +66,16 @@
                 @csrf
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div class="flex flex-col gap-2">
-                        <label for="name" class="text-accent-500 text-xs font-bold tracking-wide">Your Name*</label>
-                        <input type="text" id="name" name="name" value="{{ old('name') }}" placeholder="Enter your name" class="w-full bg-white px-4 py-3 rounded-lg border outline-none placeholder-gray-400 text-sm focus:ring-2 transition-all @error('name') border-red-500 focus:ring-red-500 @else border-transparent focus:ring-accent-500 @enderror">
-                        @error('name')
+                        <label for="first_name" class="text-accent-500 text-xs font-bold tracking-wide">First Name*</label>
+                        <input type="text" id="first_name" name="first_name" value="{{ old('first_name') }}" placeholder="Enter First Name" class="w-full bg-white px-4 py-3 rounded-lg border outline-none placeholder-gray-400 text-sm focus:ring-2 transition-all @error('first_name') border-red-500 focus:ring-red-500 @else border-transparent focus:ring-accent-500 @enderror">
+                        @error('first_name')
                             <span class="text-red-500 text-xs font-medium px-1">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="flex flex-col gap-2">
-                        <label for="email" class="text-accent-500 text-xs font-bold tracking-wide">Email Address*</label>
-                        <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="Enter your email" class="w-full bg-white px-4 py-3 rounded-lg border outline-none placeholder-gray-400 text-sm focus:ring-2 transition-all @error('email') border-red-500 focus:ring-red-500 @else border-transparent focus:ring-accent-500 @enderror">
-                        @error('email')
+                        <label for="last_name" class="text-accent-500 text-xs font-bold tracking-wide">Last Name*</label>
+                        <input type="text" id="last_name" name="last_name" value="{{ old('last_name') }}" placeholder="Enter Last Name" class="w-full bg-white px-4 py-3 rounded-lg border outline-none placeholder-gray-400 text-sm focus:ring-2 transition-all @error('last_name') border-red-500 focus:ring-red-500 @else border-transparent focus:ring-accent-500 @enderror">
+                        @error('last_name')
                             <span class="text-red-500 text-xs font-medium px-1">{{ $message }}</span>
                         @enderror
                     </div>
@@ -83,16 +83,16 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div class="flex flex-col gap-2">
-                        <label for="phone" class="text-accent-500 text-xs font-bold tracking-wide">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" value="{{ old('phone') }}" placeholder="Enter phone number" class="w-full bg-white px-4 py-3 rounded-lg border outline-none placeholder-gray-400 text-sm focus:ring-2 transition-all @error('phone') border-red-500 focus:ring-red-500 @else border-transparent focus:ring-accent-500 @enderror">
+                        <label for="phone" class="text-accent-500 text-xs font-bold tracking-wide">Phone Number*</label>
+                        <input type="tel" id="phone" name="phone" value="{{ old('phone') }}" placeholder="Enter Phone Number" class="w-full bg-white px-4 py-3 rounded-lg border outline-none placeholder-gray-400 text-sm focus:ring-2 transition-all @error('phone') border-red-500 focus:ring-red-500 @else border-transparent focus:ring-accent-500 @enderror">
                         @error('phone')
                             <span class="text-red-500 text-xs font-medium px-1">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="flex flex-col gap-2">
-                        <label for="subject" class="text-accent-500 text-xs font-bold tracking-wide">Subject*</label>
-                        <input type="text" id="subject" name="subject" value="{{ old('subject') }}" placeholder="Enter subject" class="w-full bg-white px-4 py-3 rounded-lg border outline-none placeholder-gray-400 text-sm focus:ring-2 transition-all @error('subject') border-red-500 focus:ring-red-500 @else border-transparent focus:ring-accent-500 @enderror">
-                        @error('subject')
+                        <label for="email" class="text-accent-500 text-xs font-bold tracking-wide">Email Address*</label>
+                        <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="Enter Email Address" class="w-full bg-white px-4 py-3 rounded-lg border outline-none placeholder-gray-400 text-sm focus:ring-2 transition-all @error('email') border-red-500 focus:ring-red-500 @else border-transparent focus:ring-accent-500 @enderror">
+                        @error('email')
                             <span class="text-red-500 text-xs font-medium px-1">{{ $message }}</span>
                         @enderror
                     </div>

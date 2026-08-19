@@ -2,7 +2,7 @@
 
 @section('content')
 
-<x-page-banner title="Blogs" crumb="Blogs" image="/images/aheadsolar/banner.jpg" />
+<x-page-banner title="Latest" titleAccent="Articles" crumb="Blogs" image="/images/aheadsolar/banner.jpg" />
 
 <section class="bg-white py-20 lg:py-25 font-sans overflow-x-hidden">
     <div class="solar-container">

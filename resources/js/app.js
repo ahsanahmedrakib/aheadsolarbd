@@ -1,6 +1,8 @@
 // ================================================================
 // AHEAD SOLAR — Frontend interactivity
 // ================================================================
+import Swiper from "swiper/bundle";
+import "swiper/css/bundle";
 
 document.addEventListener("DOMContentLoaded", () => {
   initNavbar();
@@ -8,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initRevealImages();
   initFadeSliders();
   initImageSliders();
+  initSwiper();
   initCounters();
   initChatWidget();
   initFaqAccordions();
@@ -68,7 +71,10 @@ function initMobileSubmenus() {
       const chevron = btn.querySelector("[data-submenu-chevron]");
       if (!panel) return;
       const open = panel.classList.toggle("open");
-      panel.classList.toggle("hidden", !open);
+      panel.classList.toggle("grid-rows-[1fr]", open);
+      panel.classList.toggle("grid-rows-[0fr]", !open);
+      panel.classList.toggle("opacity-100", open);
+      panel.classList.toggle("opacity-0", !open);
       chevron?.classList.toggle("rotate-180", open);
     });
   });
@@ -148,7 +154,7 @@ function initFadeSliders() {
 
     const autoplay = slider.dataset.autoplay === "false" ? false : true;
     if (autoplay && count > 1) {
-      setInterval(() => show(current + 1), 6000);
+      setInterval(() => show(current + 1), 7000);
     }
   });
 }
@@ -191,6 +197,48 @@ function initImageSliders() {
       if (current < slides.length - 1) { current += 1; render(); }
     });
     render();
+  });
+}
+
+// ----------------------------------------------------------------
+// Swiper.js carousels — driven by data attributes:
+//   [data-swiper]                → container
+//   data-delay="3000"            → autoplay delay (ms), omit to disable
+//   data-loop="true"             → loop (default true)
+//   data-slides="1"              → slidesPerView (default 1)
+//   data-breakpoints='{"640":2,"1024":3}' → responsive slidesPerView
+//   data-navigation="true"       → prev/next arrows (.swiper-button-prev/next)
+//   data-pagination="false"      → disable dots
+// ----------------------------------------------------------------
+function initSwiper() {
+  document.querySelectorAll("[data-swiper]").forEach((el) => {
+    const breakpoints = {};
+    try {
+      for (const [w, v] of Object.entries(JSON.parse(el.dataset.breakpoints || "{}"))) {
+        breakpoints[parseInt(w, 10)] = { slidesPerView: parseFloat(v) };
+      }
+    } catch (e) {}
+
+    new Swiper(el, {
+      loop: el.dataset.loop !== "false",
+      autoplay: el.dataset.delay
+        ? { delay: parseInt(el.dataset.delay, 10), disableOnInteraction: false }
+        : false,
+      spaceBetween: parseInt(el.dataset.space || "24", 10),
+      slidesPerView: parseFloat(el.dataset.slides || "1"),
+      pagination:
+        el.dataset.pagination === "false"
+          ? false
+          : { el: el.querySelector(".swiper-pagination") || undefined, clickable: true },
+      navigation:
+        el.dataset.navigation === "true"
+          ? {
+              nextEl: el.querySelector(".swiper-button-next"),
+              prevEl: el.querySelector(".swiper-button-prev"),
+            }
+          : false,
+      breakpoints,
+    });
   });
 }
 
@@ -253,12 +301,21 @@ function initFaqAccordions() {
   document.querySelectorAll("[data-faq-item]").forEach((item) => {
     const btn = item.querySelector("[data-faq-toggle]");
     const body = item.querySelector("[data-faq-body]");
-    if (!btn || !body) return;
+    const badge = btn?.querySelector("div");
+    if (!btn || !body || !badge) return;
     btn.addEventListener("click", () => {
       const open = item.classList.toggle("faq-open");
-      body.classList.toggle("hidden", !open);
-      const icon = btn.querySelector("[data-faq-icon]");
-      if (icon) icon.classList.toggle("rotate-45", open);
+      body.classList.toggle("grid-rows-[1fr]", open);
+      body.classList.toggle("grid-rows-[0fr]", !open);
+      body.classList.toggle("opacity-100", open);
+      body.classList.toggle("opacity-0", !open);
+      body.classList.toggle("mt-3", open);
+      badge.classList.toggle("bg-accent-500", open);
+      badge.classList.toggle("text-white", open);
+      badge.classList.toggle("rotate-0", open);
+      badge.classList.toggle("bg-secondary", !open);
+      badge.classList.toggle("text-accent-500", !open);
+      badge.classList.toggle("rotate-180", !open);
     });
   });
 }

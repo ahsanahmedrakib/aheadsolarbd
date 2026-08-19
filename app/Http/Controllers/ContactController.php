@@ -11,18 +11,19 @@ class ContactController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'name' => ['required', 'string', 'min:2', 'max:120'],
+            'first_name' => ['required', 'string', 'min:2', 'max:60'],
+            'last_name' => ['required', 'string', 'min:2', 'max:60'],
             'email' => ['required', 'email', 'max:190'],
-            'phone' => ['nullable', 'string', 'max:40'],
-            'subject' => ['required', 'string', 'min:2', 'max:190'],
+            'phone' => ['required', 'string', 'max:40'],
+            'subject' => ['nullable', 'string', 'max:190'],
             'message' => ['required', 'string', 'min:10', 'max:5000'],
         ]);
 
         ContactQuery::create([
-            'name' => $validated['name'],
+            'name' => trim($validated['first_name'].' '.$validated['last_name']),
             'email' => $validated['email'],
             'phone' => $validated['phone'] ?? '',
-            'subject' => $validated['subject'],
+            'subject' => $validated['subject'] ?? 'Inquiry from website contact form',
             'message' => $validated['message'],
             'status' => 'new',
         ]);

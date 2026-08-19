@@ -32,19 +32,17 @@
                     <section class="flex flex-col gap-6">
                         <div class="flex flex-col">
                             <div class="reveal-image relative w-full h-64 sm:h-96 rounded-lg overflow-hidden shadow-md border border-gray-100">
-                                <div data-image-slider class="single-image-slider absolute inset-0">
-                                    @foreach ($slides as $i => $img)
-                                        <div class="slide {{ $i === 0 ? 'active' : '' }} relative w-full h-full">
-                                            <img src="{{ $img }}" alt="{{ $service->title }}" class="absolute inset-0 w-full h-full object-cover">
-                                        </div>
-                                    @endforeach
-                                    <button type="button" data-slider-prev class="slider-btn-prev" aria-label="Previous image">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-                                    </button>
-                                    <button type="button" data-slider-next class="slider-btn-next" aria-label="Next image">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                                    </button>
-                                    <div data-slider-pagination class="single-image-pagination absolute bottom-0 left-0 right-0 z-10"></div>
+                                <div data-swiper data-loop="true" data-delay="4000" data-navigation="true" data-slides="1"  class="single-image-slider absolute inset-0">
+                                    <div class="swiper-wrapper">
+                                        @foreach ($slides as $img)
+                                            <div class="swiper-slide relative w-full h-full">
+                                                <img src="{{ $img }}" alt="{{ $service->title }}" class="absolute inset-0 w-full h-full object-cover">
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <div class="swiper-button-prev"></div>
+                                    <div class="swiper-button-next"></div>
+                                    <div class="swiper-pagination"></div>
                                 </div>
                             </div>
                         </div>

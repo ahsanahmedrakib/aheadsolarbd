@@ -4,12 +4,13 @@
 {{-- ================================================================
      HERO — fade slider
      ================================================================ --}}
+@php $heroVideo = $heroSlides->first()->background_video ?? '/videos/hero.mp4'; @endphp
 <section class="w-full relative min-h-187.5 overflow-hidden select-none" data-fade-slider data-autoplay="true">
-    @foreach ($heroSlides as $i => $slide)
-        <div class="slide {{ $i === 0 ? 'active' : '' }} relative min-h-187.5 flex items-start bg-forest-900">
-            <video class="absolute inset-0 w-full h-full object-cover" src="{{ $slide->background_video }}" autoplay muted loop playsinline preload="auto"></video>
-            <div class="absolute inset-0 bg-linear-to-r from-forest-900/90 via-forest-900/60 to-transparent z-10"></div>
+    <video class="absolute inset-0 w-full h-full object-cover" src="{{ $heroVideo }}" autoplay muted loop playsinline preload="auto"></video>
+    <div class="absolute inset-0 bg-linear-to-r from-forest-900/90 via-forest-900/60 to-transparent z-10"></div>
 
+    @foreach ($heroSlides as $i => $slide)
+        <div class="slide {{ $i === 0 ? 'active' : '' }} relative min-h-187.5 flex items-start">
             <div class="solar-container z-20 pt-20 pb-16 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative">
                 <div class="lg:col-span-7 flex flex-col items-start space-y-6">
                     <div class="hero-anime-item inline-flex items-center space-x-2 bg-white text-accent-500 px-4 py-1.5 rounded-full shadow-lg">
@@ -18,11 +19,17 @@
                     </div>
 
                     <h1 class="font-heading text-4xl md:text-5xl lg:text-[68px] font-bold text-accent-600 leading-[1.1] tracking-tight max-w-3xl uppercase">
-                        <span class="anime-word" style="transition-delay:0.35s">{{ $slide->title }}</span>
+                        @php $titleWords = preg_split('/\s+/', trim($slide->title)); @endphp
+                        @foreach ($titleWords as $wi => $word)
+                            <span class="anime-word" style="transition-delay:{{ 0.35 + $wi * 0.06 }}s">{{ $word }}{!! $wi < count($titleWords) - 1 ? '&nbsp;' : '' !!}</span>
+                        @endforeach
                         <br class="hidden md:inline">
                         @if ($slide->title_accent)
+                            @php $accentWords = preg_split('/\s+/', trim($slide->title_accent)); @endphp
                             <span class="text-stroke-white">
-                                <span class="anime-word" style="transition-delay:0.9s">{{ $slide->title_accent }}</span>
+                                @foreach ($accentWords as $wi => $word)
+                                    <span class="anime-word" style="transition-delay:{{ 0.35 + count($titleWords) * 0.06 + $wi * 0.06 }}s">{{ $word }}{!! $wi < count($accentWords) - 1 ? '&nbsp;' : '' !!}</span>
+                                @endforeach
                             </span>
                         @endif
                     </h1>
@@ -34,7 +41,7 @@
                     <div class="hero-anime-item flex flex-wrap items-center gap-4 pt-4 w-full sm:w-auto">
                         <a href="/contact" class="btn-brand w-full sm:w-auto justify-center group">
                             <span>Get Free Consultation</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="transition-transform duration-300 group-hover:translate-x-1"><path d="M6 12h12M12 6v12" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="transition-transform duration-300 group-hover:translate-x-1"><path d="M6 4v16l14-8z"/></svg>
                         </a>
 
                         @if ($slide->show_video_button && $slide->video_url)
@@ -55,7 +62,7 @@
     @endforeach
 
     @if (count($heroSlides) > 1)
-        <div class="swiper-dots" data-slider-dots>
+        <div class="swiper-dots hero-dots" data-slider-dots>
             @foreach ($heroSlides as $i => $slide)
                 <button type="button" data-bullet class="hero-swiper-bullet {{ $i === 0 ? 'hero-swiper-bullet-active' : '' }}"></button>
             @endforeach
@@ -176,23 +183,28 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-12">
-            @foreach ($services as $service)
-                <a href="{{ url('services/' . $service->slug) }}" class="relative h-115 rounded-lg overflow-hidden shadow-sm group flex flex-col justify-end p-4 transition-transform duration-300 hover:-translate-y-1">
-                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style="background-image:url('{{ $service->image }}')"></div>
-                    <div class="absolute inset-0 bg-linear-to-t from-accent-400/80 via-transparent to-transparent z-0"></div>
-                    <div class="relative z-10 w-full rounded-xl p-5 backdrop-blur-md transition-all duration-300 border bg-gold-900/40 backdrop-brightness-90 border-white/20 group-hover:bg-gold-900/70 group-hover:border-accent-500/30">
-                        <h3 class="font-heading text-lg lg:text-xl font-bold leading-snug tracking-tight text-white">{{ $service->title }}</h3>
-                        <p class="mt-2 text-sm text-white/80 line-clamp-2 max-h-0 opacity-0 overflow-hidden transition-all duration-300 group-hover:max-h-20 group-hover:opacity-100">{{ $service->description }}</p>
-                        <div class="mt-4 inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-wider text-white group-hover:text-accent-400 transition-colors">
-                            <span>View Details</span>
-                            <span class="flex items-center justify-center w-5 h-5 rounded-full bg-accent-500 text-gold-700">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-                            </span>
-                        </div>
+        <div class="swiper-dots pb-12" data-swiper data-loop="true" data-delay="3000" data-slides="1" data-breakpoints='{"640":2,"1024":3}'>
+            <div class="swiper-wrapper">
+                @foreach ($services as $service)
+                    <div class="swiper-slide h-auto">
+                        <a href="{{ url('services/' . $service->slug) }}" class="relative h-115 rounded-lg overflow-hidden shadow-sm group flex flex-col justify-end p-4 transition-transform duration-300 hover:-translate-y-1">
+                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style="background-image:url('{{ $service->image }}')"></div>
+                            <div class="absolute inset-0 bg-linear-to-t from-accent-400/80 via-transparent to-transparent z-0"></div>
+                            <div class="relative z-10 w-full rounded-xl p-5 backdrop-blur-md transition-all duration-300 border bg-gold-900/40 backdrop-brightness-90 border-white/20 group-hover:bg-gold-900/70 group-hover:border-accent-500/30">
+                                <h3 class="font-heading text-lg lg:text-xl font-bold leading-snug tracking-tight text-white">{{ $service->title }}</h3>
+                                <p class="mt-2 text-sm text-white/80 line-clamp-2 max-h-0 opacity-0 overflow-hidden transition-all duration-300 group-hover:max-h-20 group-hover:opacity-100">{{ $service->description }}</p>
+                                <div class="mt-4 inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-wider text-white group-hover:text-accent-400 transition-colors">
+                                    <span>View Details</span>
+                                    <span class="flex items-center justify-center w-5 h-5 rounded-full bg-accent-500 text-gold-700">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                </a>
-            @endforeach
+                @endforeach
+            </div>
+            <div class="swiper-pagination"></div>
         </div>
     </div>
 </section>
@@ -291,7 +303,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 relative">
             @foreach ([
                 ['number' => '01', 'title' => 'Site Assessment & Planning', 'desc' => 'We evaluate your roof structure, energy consumption, and design a custom solar system optimized for maximum savings.', 'd' => 'M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2m-6 9 2 2 4-4'],
-                ['number' => '02', 'title' => 'Engineering & Installation', 'desc' => 'Our certified team handles system design, permitting, and professional installation with minimal disruption.', 'd' => 'M12 15v2m-6 4h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2zm10-10V7a4 4 0 0 0-8 0v4h8z'],
+                ['number' => '02', 'title' => 'Engineering & Installation', 'desc' => 'Our certified team handles system design, permitting, and professional installation with minimal disruption.', 'd' => 'M8.21 13.89a7 7 0 0 0 7.58 0M21 9a3 3 0 0 1-3 3v.5A3.5 3.5 0 0 1 14.5 16h-5A3.5 3.5 0 0 1 6 12.5V12a3 3 0 0 1-3-3M3 9h18l-1.07-4.2A3 3 0 0 0 17 2.5H7a3 3 0 0 0-2.93 2.3L3 9zM6.5 20h11l-0.9-3a1.5 1.5 0 0 0-1.46-1.15H8.86A1.5 1.5 0 0 0 7.4 17l-0.9 3z'],
                 ['number' => '03', 'title' => 'Commissioning & Monitoring', 'desc' => 'Your system starts generating clean energy immediately, backed by real-time 24/7 remote performance monitoring.', 'd' => 'M22 12h-4l-3 9L9 3l-3 9H2'],
             ] as $idx => $step)
                 <div class="reveal group relative flex flex-col items-center text-center" data-variant="fade-up" data-delay="{{ $idx * 160 }}">
@@ -322,7 +334,7 @@
     <div class="absolute inset-0 bg-linear-to-t from-forest-900/95 via-forest-900/60 to-black/40"></div>
     <div class="relative z-10 h-full flex flex-col items-center justify-center px-4 py-24">
         <div class="reveal" data-variant="zoom" data-delay="100">
-            <button type="button" data-video-open="{{ $heroSlides->firstWhere('show_video_button', true)->video_url ?? '' }}" aria-label="Play intro video" class="group relative w-24 h-24 sm:w-28 sm:h-28 rounded-full flex items-center justify-center bg-accent-500 hover:bg-accent-600 text-accent-500 transition-all duration-300 shadow-2xl cursor-pointer">
+            <button type="button" data-video-open="{{ $heroSlides->firstWhere('show_video_button', true)->video_url ?? '' }}" aria-label="Play intro video" {{ empty($heroSlides->firstWhere('show_video_button', true)->video_url ?? '') ? 'disabled' : '' }} class="group relative w-24 h-24 sm:w-28 sm:h-28 rounded-full flex items-center justify-center bg-accent-500 hover:bg-accent-600 text-accent-500 transition-all duration-300 shadow-2xl cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed">
                 <span class="absolute inset-0 rounded-full bg-accent-500 pulse-ring"></span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="#fff" class="ml-1 relative transition-transform duration-300 group-hover:scale-110"><path d="M6 4v16l14-8z"/></svg>
             </button>
@@ -359,15 +371,17 @@
                 ['q' => '4. What maintenance does a rooftop solar system require?', 'a' => 'Rooftop solar systems require minimal maintenance. Regular cleaning to remove dust and debris, combined with annual performance inspections, is usually sufficient. We also provide 24/7 remote monitoring to detect issues early.'],
                 ['q' => '5. Can excess energy be sent back to the grid?', 'a' => 'Yes, depending on your local regulations, excess energy can be exported to the grid through net metering arrangements. This further reduces your electricity costs and can generate additional revenue.'],
             ] as $idx => $faq)
-                <div class="reveal py-5 first:pt-0 last:pb-0" data-variant="fade-up" data-delay="{{ $idx * 80 }}" data-faq-item>
+                <div class="reveal py-5 first:pt-0 last:pb-0 {{ $idx === 0 ? 'faq-open' : '' }}" data-variant="fade-up" data-delay="{{ $idx * 80 }}" data-faq-item>
                     <button type="button" data-faq-toggle class="w-full flex items-center cursor-pointer justify-between gap-4 text-left group focus:outline-none">
                         <h3 class="font-heading text-base sm:text-lg font-bold text-accent-500 tracking-tight transition-colors duration-200 group-hover:text-accent-700">{{ $faq['q'] }}</h3>
-                        <div class="shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all duration-300 bg-accent-500 text-white rotate-0">
+                        <div class="shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all duration-300 {{ $idx === 0 ? 'bg-accent-500 text-white rotate-0' : 'bg-secondary text-accent-500 rotate-180' }}">
                             <svg data-faq-icon xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3.5 h-3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"/></svg>
                         </div>
                     </button>
-                    <div data-faq-body class="hidden mt-3">
-                        <p class="text-sm sm:text-base text-[#888888] font-medium leading-relaxed pl-0 pr-4 sm:pr-8">{{ $faq['a'] }}</p>
+                    <div data-faq-body class="grid transition-all duration-300 ease-in-out overflow-hidden {{ $idx === 0 ? 'grid-rows-[1fr] opacity-100 mt-3' : 'grid-rows-[0fr] opacity-0' }}">
+                        <div class="overflow-hidden">
+                            <p class="text-sm sm:text-base text-[#888888] font-medium leading-relaxed pl-0 pr-4 sm:pr-8">{{ $faq['a'] }}</p>
+                        </div>
                     </div>
                 </div>
             @endforeach
@@ -436,23 +450,28 @@
             </div>
 
             <div class="reveal lg:col-span-7 w-full" data-variant="fade-up" data-delay="150">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    @foreach ($reviews as $item)
-                        <div class="bg-white rounded-lg mt-2 py-6 px-6 border border-accent-500 shadow-sm flex flex-col justify-between space-y-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 min-h-80">
-                            <div class="space-y-4">
-                                <div class="flex text-accent-500">
-                                    @for ($s = 0; $s < $item->rating; $s++)
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-7 h-7 mr-0.5"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                    @endfor
+                <div class="swiper-dots pb-12" data-swiper data-loop="true" data-delay="3000" data-slides="1" data-breakpoints='{"640":1.3,"768":2,"1024":2.3}'>
+                    <div class="swiper-wrapper">
+                        @foreach ($reviews as $item)
+                            <div class="swiper-slide h-auto">
+                                <div class="bg-white rounded-lg mt-2 py-6 px-6 border border-accent-500 shadow-sm flex flex-col justify-between space-y-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 h-80">
+                                    <div class="space-y-4">
+                                        <div class="flex text-accent-500">
+                                            @for ($s = 0; $s < $item->rating; $s++)
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-7 h-7 mr-0.5"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                                            @endfor
+                                        </div>
+                                        <p class="text-sm sm:text-base font-medium text-[#888888] leading-snug tracking-tight" title="{{ $item->quote }}">&ldquo;{{ \Illuminate\Support\Str::limit($item->quote, 181) }}&rdquo;</p>
+                                    </div>
+                                    <div class="pt-4 border-t border-gray-100/80">
+                                        <h4 class="font-heading text-base font-bold text-accent-500 tracking-tight">{{ $item->name }}</h4>
+                                        <p class="text-xs sm:text-sm font-semibold text-[#888888] mt-0.5">{{ $item->role }}</p>
+                                    </div>
                                 </div>
-                                <p class="text-sm sm:text-base font-medium text-[#888888] leading-snug tracking-tight">&ldquo;{{ \Illuminate\Support\Str::limit($item->quote, 181) }}&rdquo;</p>
                             </div>
-                            <div class="pt-4 border-t border-gray-100/80">
-                                <h4 class="font-heading text-base font-bold text-accent-500 tracking-tight">{{ $item->name }}</h4>
-                                <p class="text-xs sm:text-sm font-semibold text-[#888888] mt-0.5">{{ $item->role }}</p>
-                            </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
+                    <div class="swiper-pagination"></div>
                 </div>
             </div>
         </div>
@@ -523,26 +542,33 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            @foreach ($blogs as $blog)
-                <a href="{{ url('blogs/' . $blog->slug) }}" class="group bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
-                    <div class="relative aspect-16/10 overflow-hidden">
-                        <img src="{{ $blog->image_url }}" alt="{{ $blog->title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                        <span class="absolute top-3 left-3 z-10 text-[11px] font-semibold text-white px-2.5 py-1 rounded-md bg-accent-500">{{ $blog->category }}</span>
+        <div class="swiper-dots pb-12" data-swiper data-loop="true" data-delay="3000" data-slides="1" data-breakpoints='{"640":2,"1024":3}'>
+            <div class="swiper-wrapper">
+                @foreach ($blogs as $blog)
+                    <div class="swiper-slide h-auto">
+                        <a href="{{ url('blogs/' . $blog->slug) }}" class="relative h-115 rounded-lg overflow-hidden shadow-sm group flex flex-col justify-end p-4 transition-transform duration-300 hover:-translate-y-1">
+                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style="background-image:url('{{ $blog->image_url }}')"></div>
+                            <div class="absolute inset-0 bg-linear-to-t from-accent-400/80 via-transparent to-transparent z-0"></div>
+                            <div class="relative z-10 w-full rounded-lg p-5 backdrop-blur-md transition-all duration-300 border bg-gold-900/40 backdrop-brightness-90 border-white/20 group-hover:bg-gold-900/70 group-hover:border-accent-500/30">
+                                @if ($blog->category)
+                                    <span class="inline-block mb-2 text-[10px] font-semibold uppercase tracking-wider text-accent-400">{{ $blog->category }}</span>
+                                @endif
+                                <h3 class="font-heading text-lg lg:text-xl font-bold leading-snug tracking-tight text-white">{{ $blog->title }}</h3>
+                                @if ($blog->content)
+                                    <p class="mt-2 text-sm text-white/80 line-clamp-2 max-h-0 opacity-0 overflow-hidden transition-all duration-300 group-hover:max-h-20 group-hover:opacity-100">{{ $blog->content }}</p>
+                                @endif
+                                <div class="mt-4 inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-wider text-white group-hover:text-accent-400 transition-colors">
+                                    <span>Read More</span>
+                                    <span class="flex items-center justify-center w-5 h-5 rounded-full bg-accent-500 text-gold-700">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                    <div class="p-5">
-                        <h3 class="font-heading text-lg font-bold text-accent-500 leading-snug tracking-tight group-hover:text-gold-600 transition-colors">{{ \Illuminate\Support\Str::limit($blog->title, 62) }}</h3>
-                        <p class="mt-2 text-sm text-[#888888] leading-relaxed line-clamp-2">{{ $blog->content }}</p>
-                        <div class="mt-4 flex items-center justify-between">
-                            <span class="text-xs text-[#888888]">{{ $blog->date }}</span>
-                            <span class="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-accent-500 group-hover:text-gold-600 transition-colors">
-                                Read More
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-                            </span>
-                        </div>
-                    </div>
-                </a>
-            @endforeach
+                @endforeach
+            </div>
+            <div class="swiper-pagination"></div>
         </div>
     </div>
 </section>

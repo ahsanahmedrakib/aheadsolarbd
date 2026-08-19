@@ -255,7 +255,7 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($reviews as $review) {
-            Review::create($review);
+            Review::updateOrCreate(['name' => $review['name']], $review);
         }
     }
 
@@ -352,6 +352,8 @@ class DatabaseSeeder extends Seeder
                 'order' => 1,
             ],
         ];
+
+        HeroSlide::query()->delete();
 
         foreach ($slides as $slide) {
             HeroSlide::create($slide);

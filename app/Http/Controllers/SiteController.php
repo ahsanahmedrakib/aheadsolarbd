@@ -28,7 +28,7 @@ class SiteController extends Controller
             'heroSlides' => $heroSlides,
             'services' => Service::orderBy('id')->get(),
             'projects' => Project::orderBy('id')->get(),
-            'blogs' => Blog::orderBy('date', 'desc')->limit(3)->get(),
+            'blogs' => Blog::orderBy('date', 'desc')->get(),
             'reviews' => Review::orderBy('created_at', 'desc')->get(),
             'site' => 'ahead',
         ]);
@@ -76,16 +76,10 @@ class SiteController extends Controller
     public function project(string $slug): View
     {
         $project = Project::where('slug', $slug)->firstOrFail();
-        $related = Project::where('id', '!=', $project->id)
-            ->where('category', $project->category)
-            ->orWhere('id', '!=', $project->id)
-            ->inRandomOrder()
-            ->limit(3)
-            ->get();
 
         return view('pages.project-single', [
             'project' => $project,
-            'related' => $related,
+            'allProjects' => Project::orderBy('id')->get(),
         ]);
     }
 
@@ -99,11 +93,10 @@ class SiteController extends Controller
     public function blog(string $slug): View
     {
         $blog = Blog::where('slug', $slug)->firstOrFail();
-        $recent = Blog::where('id', '!=', $blog->id)->orderBy('date', 'desc')->limit(3)->get();
 
         return view('pages.blog-single', [
             'blog' => $blog,
-            'recent' => $recent,
+            'allBlogs' => Blog::orderBy('date', 'desc')->get(),
         ]);
     }
 
