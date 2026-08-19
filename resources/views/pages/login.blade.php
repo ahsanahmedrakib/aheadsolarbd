@@ -22,7 +22,7 @@
 
                 <div class="flex flex-col gap-1.5">
                     <label for="email" class="text-xs font-semibold text-gray-700 uppercase tracking-wider">Email Address</label>
-                    <input type="email" name="email" id="email" value="{{ old('email') }}" placeholder="admin@sunexsolar.com" autofocus class="w-full bg-white border border-forest-700/10 text-sm text-forest-900 rounded-lg p-3 outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 transition">
+                    <input type="email" name="email" id="email" value="{{ old('email') }}" placeholder="admin@aheadsolarbd.com" autofocus class="w-full bg-white border border-forest-700/10 text-sm text-forest-900 rounded-lg p-3 outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 transition">
                 </div>
 
                 <div class="flex flex-col gap-1.5">
