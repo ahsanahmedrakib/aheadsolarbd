@@ -66,7 +66,7 @@
                     </div>
                     <div class="sidebar-user-info">
                         <p class="sidebar-user-name">{{ auth()->user()?->name ?? 'Admin' }}</p>
-                        <p class="sidebar-user-role">{{ auth()->user()?->role === 'superadmin' ? 'Super Admin' : 'Admin' }}</p>
+                        <p class="sidebar-user-role">Admin</p>
                     </div>
                 </div>
                 <form method="POST" action="{{ route('logout') }}">
@@ -93,7 +93,7 @@
                     <div class="flex items-center gap-3">
                         <div class="text-right hidden sm:block">
                             <p class="text-xs font-semibold text-(--admin-text-primary)">{{ auth()->user()?->name }}</p>
-                            <p class="text-[10px] text-(--admin-text-muted) capitalize">{{ auth()->user()?->role === 'superadmin' ? 'Super Admin' : 'Admin' }}</p>
+                            <p class="text-[10px] text-(--admin-text-muted) capitalize">Admin</p>
                         </div>
                         <div class="admin-header-avatar">
                             <span>{{ auth()->user()?->name ? mb_substr(auth()->user()->name, 0, 1) : 'A' }}</span>
@@ -135,5 +135,7 @@
         });
     });
     </script>
+
+    @stack('scripts')
 </body>
 </html>

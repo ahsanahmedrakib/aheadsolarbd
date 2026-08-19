@@ -43,19 +43,15 @@
 
             <div class="flex flex-col gap-1.5">
                 <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">{{ $isEdit ? 'Password (leave blank to keep current)' : 'Password *' }}</label>
-                <input type="password" name="password" placeholder="{{ $isEdit ? 'Enter a new password to change it' : 'Minimum 8 characters' }}"
-                    class="w-full bg-(--admin-surface-2) border {{ $errors->has('password') ? 'border-(--admin-danger)' : 'border-(--admin-border)' }} text-sm text-(--admin-text-primary) rounded-lg p-2.5 outline-none focus:border-(--admin-accent) transition">
+                <div class="relative">
+                    <input type="password" name="password" data-password-toggle placeholder="{{ $isEdit ? 'Enter a new password to change it' : 'Minimum 8 characters' }}"
+                        class="w-full bg-(--admin-surface-2) border pl-2.5 pr-12 py-2.5 {{ $errors->has('password') ? 'border-(--admin-danger)' : 'border-(--admin-border)' }} text-sm text-(--admin-text-primary) rounded-lg outline-none focus:border-(--admin-accent) transition">
+                    <button type="button" data-password-eye class="absolute right-1.5 top-0 bottom-0 flex items-center justify-center px-2 text-(--admin-text-secondary) hover:text-(--admin-accent) transition-colors cursor-pointer" title="Show password">
+                        <svg data-eye-open xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                        <svg data-eye-closed xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg>
+                    </button>
+                </div>
                 @error('password')<span class="text-[11px] text-(--admin-danger)">{{ $message }}</span>@enderror
-            </div>
-
-            <div class="flex flex-col gap-1.5">
-                <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">Role *</label>
-                <select name="role"
-                    class="w-full bg-(--admin-surface-2) border {{ $errors->has('role') ? 'border-(--admin-danger)' : 'border-(--admin-border)' }} text-sm text-(--admin-text-primary) rounded-lg p-2.5 outline-none focus:border-(--admin-accent) transition">
-                    <option value="superadmin" {{ old('role', $item?->role) === 'superadmin' ? 'selected' : '' }}>Super Admin</option>
-                    <option value="admin" {{ old('role', $item?->role) === 'admin' ? 'selected' : '' }}>Admin</option>
-                </select>
-                @error('role')<span class="text-[11px] text-(--admin-danger)">{{ $message }}</span>@enderror
             </div>
 
             <div class="flex justify-end gap-3 pt-3 border-t border-(--admin-border)">
@@ -66,3 +62,23 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("[data-password-toggle]").forEach(function (input) {
+        var eye = input.closest(".relative").querySelector("[data-password-eye]");
+        if (!eye) return;
+        var open = eye.querySelector("[data-eye-open]");
+        var closed = eye.querySelector("[data-eye-closed]");
+        eye.addEventListener("click", function () {
+            var show = input.type === "password";
+            input.type = show ? "text" : "password";
+            if (open) open.classList.toggle("hidden", show);
+            if (closed) closed.classList.toggle("hidden", !show);
+            eye.title = show ? "Hide password" : "Show password";
+        });
+    });
+});
+</script>
+@endpush

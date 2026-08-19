@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Project;
 use App\Support\MediaHelper;
+use App\Support\SiteData;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,8 @@ class ProjectController extends BaseApiController
 {
     public function index(Request $request): JsonResponse
     {
-        $projects = Project::orderBy('id')->get();
+        $isAdmin = (bool) $this->tokenPayload($request);
+        $projects = $isAdmin ? Project::orderBy('id')->get() : SiteData::projects();
         return $this->ok($projects);
     }
 

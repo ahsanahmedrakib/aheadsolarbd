@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Review;
+use App\Support\SiteData;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,8 @@ class ReviewController extends BaseApiController
 {
     public function index(Request $request): JsonResponse
     {
-        $reviews = Review::orderBy('created_at', 'desc')->get();
+        $isAdmin = (bool) $this->tokenPayload($request);
+        $reviews = $isAdmin ? SiteData::allReviewsDb() : SiteData::reviews();
         return $this->ok($reviews);
     }
 
@@ -30,6 +32,7 @@ class ReviewController extends BaseApiController
             'role' => $role,
             'rating' => $data['rating'] ?? 5,
             'quote' => $quote,
+            'status' => Review::STATUS_PENDING,
             'created_at' => now(),
         ]);
 

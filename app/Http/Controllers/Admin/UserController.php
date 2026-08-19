@@ -29,7 +29,6 @@ class UserController extends Controller
             'name' => ['required', 'string', 'min:2', 'max:255'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'min:8'],
-            'role' => ['required', 'in:superadmin,admin'],
         ]);
 
         $data['password'] = Hash::make($data['password']);
@@ -50,7 +49,6 @@ class UserController extends Controller
             'name' => ['required', 'string', 'min:2', 'max:255'],
             'email' => ['required', 'email', 'unique:users,email,' . $user->id],
             'password' => ['nullable', 'min:8'],
-            'role' => ['required', 'in:superadmin,admin'],
         ]);
 
         if (!empty($data['password'])) {
@@ -70,8 +68,8 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'You cannot delete your own account.');
         }
 
-        if ($user->role === 'superadmin' && User::where('role', 'superadmin')->count() <= 1) {
-            return redirect()->back()->with('error', 'You cannot delete the last superadmin.');
+        if (User::count() <= 1) {
+            return redirect()->back()->with('error', 'You cannot delete the last admin user.');
         }
 
         $user->delete();

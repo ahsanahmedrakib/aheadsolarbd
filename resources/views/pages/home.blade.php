@@ -416,6 +416,14 @@
      ================================================================ --}}
 <section class="bg-secondary py-20 lg:py-25 px-4 sm:px-6 lg:px-8 font-sans overflow-hidden">
     <div class="solar-container">
+        @if (session('success'))
+            <div class="reveal mb-10" data-variant="fade-up">
+                <div class="flex items-start gap-3 bg-accent-500/10 border border-accent-500/40 rounded-xl px-5 py-4">
+                    <svg class="w-5 h-5 shrink-0 text-accent-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                    <p class="text-accent-700 text-sm font-semibold">{{ session('success') }}</p>
+                </div>
+            </div>
+        @endif
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
             <div class="lg:col-span-5 space-y-6">
                 <div class="reveal" data-variant="fade-up"><span class="section-eyebrow">Our Testimonials</span></div>

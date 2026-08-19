@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\HeroSlide;
+use App\Support\Defaults;
 use App\Support\MediaHelper;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -12,13 +13,18 @@ class HeroSlideController extends BaseApiController
     public function index(Request $request): JsonResponse
     {
         $site = $request->query('site');
-        $slides = HeroSlide::orderBy('order')->orderBy('id')->get();
+        $isAdmin = (bool) $this->tokenPayload($request);
+        $stored = HeroSlide::orderBy('order')->orderBy('id')->get();
 
         if ($site === 'ahead' || $site === 'palash') {
-            $slides = $slides->filter(fn ($s) => $s->site === $site)->values();
+            $stored = $stored->filter(fn ($s) => $s->site === $site)->values();
         }
 
-        return $this->ok($slides);
+        $data = $isAdmin
+            ? $stored
+            : ($stored->isNotEmpty() ? $stored : collect(Defaults::heroSlides())->filter(fn ($s) => ($s['site'] ?? null) === $site)->map(fn ($s) => new HeroSlide($s))->values());
+
+        return $this->ok($data);
     }
 
     public function store(Request $request): JsonResponse

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Service;
 use App\Support\MediaHelper;
+use App\Support\SiteData;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,8 @@ class ServiceController extends BaseApiController
 {
     public function index(Request $request): JsonResponse
     {
-        $services = Service::orderBy('id')->get();
+        $isAdmin = (bool) $this->tokenPayload($request);
+        $services = $isAdmin ? Service::orderBy('id')->get() : SiteData::services();
         return $this->ok($services);
     }
 

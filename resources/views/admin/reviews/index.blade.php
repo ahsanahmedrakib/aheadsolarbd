@@ -27,7 +27,8 @@
                             <th>Customer</th>
                             <th>Rating</th>
                             <th>Review</th>
-                            <th class="text-center w-32">Actions</th>
+                            <th>Status</th>
+                            <th class="text-center w-44">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,7 +49,37 @@
                                     <p class="text-[12px] text-(--admin-text-secondary) line-clamp-2 max-w-lg italic">"{{ $review->quote }}"</p>
                                 </td>
                                 <td>
-                                    <div class="flex gap-2 justify-center">
+                                    @if ($review->status === \App\Models\Review::STATUS_APPROVED)
+                                        <span class="inline-flex items-center gap-1 text-[11px] font-semibold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                            Approved
+                                        </span>
+                                    @else
+                                        <span class="inline-flex items-center gap-1 text-[11px] font-semibold px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-600">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                                            Pending
+                                        </span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <div class="flex gap-2 justify-center items-center">
+                                        @if ($review->status !== \App\Models\Review::STATUS_APPROVED)
+                                            <form method="POST" action="{{ route('admin.reviews.approve', $review->id) }}">
+                                                @csrf
+                                                <input type="hidden" name="action" value="approve">
+                                                <button type="submit" class="admin-action-btn success" title="Approve & Show on Website">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                                                </button>
+                                            </form>
+                                        @else
+                                            <form method="POST" action="{{ route('admin.reviews.approve', $review->id) }}">
+                                                @csrf
+                                                <input type="hidden" name="action" value="reject">
+                                                <button type="submit" class="admin-action-btn warning" title="Reject / Hide from Website">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                                                </button>
+                                            </form>
+                                        @endif
                                         <a href="{{ route('admin.reviews.edit', $review->id) }}" class="admin-action-btn" title="Edit Review">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
                                         </a>

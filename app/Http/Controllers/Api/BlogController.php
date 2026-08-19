@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Blog;
 use App\Support\MediaHelper;
+use App\Support\SiteData;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class BlogController extends BaseApiController
     public function index(Request $request): JsonResponse
     {
         $isAdmin = (bool) $this->tokenPayload($request);
-        $blogs = $isAdmin ? Blog::orderBy('id')->get() : Blog::orderBy('id')->get();
+        $blogs = $isAdmin ? Blog::orderBy('id')->get() : SiteData::blogs();
         return $this->ok($blogs);
     }
 

@@ -49,6 +49,15 @@
             </div>
 
             <div class="flex flex-col gap-1.5">
+                <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">Status</label>
+                <select name="status" class="w-full bg-(--admin-surface-2) border {{ $errors->has('status') ? 'border-(--admin-danger)' : 'border-(--admin-border)' }} text-sm text-(--admin-text-primary) rounded-lg p-2.5 outline-none focus:border-(--admin-accent) transition">
+                    <option value="pending" {{ old('status', $item?->status) === 'pending' ? 'selected' : '' }}>Pending (hidden)</option>
+                    <option value="approved" {{ old('status', $item?->status) === 'approved' ? 'selected' : '' }}>Approved (visible)</option>
+                </select>
+                @error('status')<span class="text-[11px] text-(--admin-danger)">{{ $message }}</span>@enderror
+            </div>
+
+            <div class="flex flex-col gap-1.5">
                 <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">Quote *</label>
                 <textarea name="quote" rows="5" placeholder="What did this customer say about their experience?"
                     class="w-full bg-(--admin-surface-2) border {{ $errors->has('quote') ? 'border-(--admin-danger)' : 'border-(--admin-border)' }} text-sm text-(--admin-text-primary) rounded-lg p-2.5 outline-none focus:border-(--admin-accent) transition resize-none">{{ old('quote', $item?->quote) }}</textarea>

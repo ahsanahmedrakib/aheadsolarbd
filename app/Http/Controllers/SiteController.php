@@ -2,12 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blog;
-use App\Models\HeroSlide;
-use App\Models\Project;
-use App\Models\Review;
-use App\Models\Service;
-use App\Models\TeamMember;
+use App\Support\SiteData;
 use App\Support\SiteSettings;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -16,20 +11,12 @@ class SiteController extends Controller
 {
     public function home(): View
     {
-        $heroSlides = HeroSlide::where('site', 'ahead')
-            ->where('is_active', true)
-            ->orderBy('order')->orderBy('id')->get();
-
-        if ($heroSlides->isEmpty()) {
-            $heroSlides = HeroSlide::where('site', 'ahead')->orderBy('order')->get();
-        }
-
         return view('pages.home', [
-            'heroSlides' => $heroSlides,
-            'services' => Service::orderBy('id')->get(),
-            'projects' => Project::orderBy('id')->get(),
-            'blogs' => Blog::orderBy('date', 'desc')->get(),
-            'reviews' => Review::orderBy('created_at', 'desc')->get(),
+            'heroSlides' => SiteData::heroSlides('ahead'),
+            'services' => SiteData::services(),
+            'projects' => SiteData::projects(),
+            'blogs' => SiteData::blogs(),
+            'reviews' => SiteData::reviews(),
             'site' => 'ahead',
         ]);
     }
@@ -37,24 +24,31 @@ class SiteController extends Controller
     public function about(): View
     {
         return view('pages.about', [
-            'services' => Service::orderBy('id')->get(),
-            'team' => TeamMember::orderBy('id')->get(),
-            'reviews' => Review::orderBy('created_at', 'desc')->get(),
+            'services' => SiteData::services(),
+            'team' => SiteData::team(),
+            'reviews' => SiteData::reviews(),
         ]);
     }
 
     public function services(): View
     {
         return view('pages.services', [
-            'services' => Service::orderBy('id')->get(),
+            'services' => SiteData::services(),
         ]);
     }
 
     public function service(string $slug): View
     {
-        $service = Service::where('slug', $slug)->firstOrFail();
+        $service = SiteData::services()->firstWhere('slug', $slug);
+        if (!$service) {
+            abort(404);
+        }
 
-        $related = Service::where('id', '!=', $service->id)->inRandomOrder()->limit(3)->get();
+        $related = SiteData::services()
+            ->where('slug', '!=', $service->slug)
+            ->shuffle()
+            ->take(3)
+            ->values();
 
         return view('pages.service-single', [
             'service' => $service,
@@ -64,7 +58,7 @@ class SiteController extends Controller
 
     public function projects(): View
     {
-        $projects = Project::orderBy('id')->get();
+        $projects = SiteData::projects();
         $categories = $projects->pluck('category')->unique()->values();
 
         return view('pages.projects', [
@@ -75,28 +69,34 @@ class SiteController extends Controller
 
     public function project(string $slug): View
     {
-        $project = Project::where('slug', $slug)->firstOrFail();
+        $project = SiteData::projects()->firstWhere('slug', $slug);
+        if (!$project) {
+            abort(404);
+        }
 
         return view('pages.project-single', [
             'project' => $project,
-            'allProjects' => Project::orderBy('id')->get(),
+            'allProjects' => SiteData::projects(),
         ]);
     }
 
     public function blogs(): View
     {
         return view('pages.blogs', [
-            'blogs' => Blog::orderBy('date', 'desc')->get(),
+            'blogs' => SiteData::blogs(),
         ]);
     }
 
     public function blog(string $slug): View
     {
-        $blog = Blog::where('slug', $slug)->firstOrFail();
+        $blog = SiteData::blogs()->firstWhere('slug', $slug);
+        if (!$blog) {
+            abort(404);
+        }
 
         return view('pages.blog-single', [
             'blog' => $blog,
-            'allBlogs' => Blog::orderBy('date', 'desc')->get(),
+            'allBlogs' => SiteData::blogs(),
         ]);
     }
 
@@ -121,16 +121,8 @@ class SiteController extends Controller
 
     public function palash(): View
     {
-        $heroSlides = HeroSlide::where('site', 'palash')
-            ->where('is_active', true)
-            ->orderBy('order')->orderBy('id')->get();
-
-        if ($heroSlides->isEmpty()) {
-            $heroSlides = HeroSlide::where('site', 'palash')->orderBy('order')->get();
-        }
-
         return view('pages.palash', [
-            'heroSlides' => $heroSlides,
+            'heroSlides' => SiteData::heroSlides('palash'),
         ]);
     }
 

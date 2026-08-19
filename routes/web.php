@@ -62,6 +62,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('contact', ContactController::class)->only(['index', 'edit', 'update', 'destroy'])->names('admin.contact');
     Route::resource('palash-applications', PalashApplicationController::class)->only(['index', 'edit', 'update', 'destroy'])->names('admin.palash-applications');
     Route::resource('reviews', ReviewController::class)->only(['index', 'edit', 'update', 'destroy'])->names('admin.reviews');
+    Route::post('reviews/{review}/approve', [ReviewController::class, 'approve'])->name('admin.reviews.approve');
     Route::resource('users', UserController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy'])->names('admin.users');
 
     Route::get('settings', [SettingController::class, 'edit'])->name('admin.settings.edit');

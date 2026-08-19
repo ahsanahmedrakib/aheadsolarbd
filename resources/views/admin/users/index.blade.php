@@ -32,7 +32,6 @@
                         <tr>
                             <th>User</th>
                             <th>Email</th>
-                            <th>Role</th>
                             <th class="text-center w-32">Actions</th>
                         </tr>
                     </thead>
@@ -52,13 +51,6 @@
                                 </td>
                                 <td>
                                     <span class="font-mono text-[12px] text-(--admin-text-secondary)">{{ $user->email }}</span>
-                                </td>
-                                <td>
-                                    @if ($user->role === 'superadmin')
-                                        <span class="inline-block text-[11px] font-semibold px-2 py-1 rounded bg-amber-500/10 text-amber-500 border border-amber-500/30">Super Admin</span>
-                                    @else
-                                        <span class="inline-block text-[11px] font-semibold px-2 py-1 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">Admin</span>
-                                    @endif
                                 </td>
                                 <td>
                                     <div class="flex gap-2 justify-center">

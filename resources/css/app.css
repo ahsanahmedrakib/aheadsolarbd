@@ -1697,7 +1697,8 @@ button.nav-link-sweep::after {
     pointer-events: none;
 }
 .admin-table-search-input {
-    width: 240px;
+    width: 100%;
+    min-width: 200px;
     padding-left: 34px !important;
     background: var(--admin-surface-2) !important;
     border-color: var(--admin-border) !important;

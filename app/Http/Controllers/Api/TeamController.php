@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\TeamMember;
 use App\Support\MediaHelper;
+use App\Support\SiteData;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,8 @@ class TeamController extends BaseApiController
 {
     public function index(Request $request): JsonResponse
     {
-        $members = TeamMember::orderBy('id')->get();
+        $isAdmin = (bool) $this->tokenPayload($request);
+        $members = $isAdmin ? TeamMember::orderBy('id')->get() : SiteData::team();
         return $this->ok($members);
     }
 

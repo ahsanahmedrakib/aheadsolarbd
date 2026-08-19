@@ -15,15 +15,15 @@ class UserController extends BaseApiController
         if (!$payload) {
             return $this->error('Unauthorized', 401);
         }
-        $users = User::orderBy('id')->get()->map(fn ($u) => $u->only(['id', 'name', 'email', 'role', 'created_at', 'updated_at']));
+        $users = User::orderBy('id')->get()->map(fn ($u) => $u->only(['id', 'name', 'email', 'created_at', 'updated_at']));
         return $this->ok($users);
     }
 
     public function store(Request $request): JsonResponse
     {
         $payload = $this->tokenPayload($request);
-        if (!$payload || ($payload['role'] ?? null) !== 'superadmin') {
-            return $this->error('Only superadmin can create users', 403);
+        if (!$payload) {
+            return $this->error('Unauthorized', 401);
         }
 
         $data = $request->json()->all();
@@ -37,9 +37,6 @@ class UserController extends BaseApiController
         if (strlen($password) < 6) {
             return $this->error('Password must be at least 6 characters');
         }
-        if (isset($data['role']) && !in_array($data['role'], ['admin', 'superadmin'], true)) {
-            return $this->error("Role must be 'admin' or 'superadmin'");
-        }
         if (User::where('email', strtolower($email))->exists()) {
             return $this->error('A user with this email already exists', 409);
         }
@@ -48,10 +45,9 @@ class UserController extends BaseApiController
             'name' => $name,
             'email' => $email,
             'password' => Hash::make($password),
-            'role' => $data['role'] ?? 'admin',
         ]);
 
-        return $this->ok($user->only(['id', 'name', 'email', 'role', 'created_at', 'updated_at']));
+        return $this->ok($user->only(['id', 'name', 'email', 'created_at', 'updated_at']));
     }
 
     public function update(Request $request): JsonResponse
@@ -72,30 +68,14 @@ class UserController extends BaseApiController
             return $this->error('User not found', 404);
         }
 
-        $isSuperadmin = ($payload['role'] ?? null) === 'superadmin';
-        $isOwnProfile = (string) $payload['userId'] === (string) $id;
-
-        if (!$isSuperadmin && !$isOwnProfile) {
-            return $this->error('You can only update your own profile', 403);
-        }
-        if (isset($data['role']) && !$isSuperadmin) {
-            return $this->error('Only superadmin can change roles', 403);
-        }
-        if (isset($data['role']) && !in_array($data['role'], ['admin', 'superadmin'], true)) {
-            return $this->error("Role must be 'admin' or 'superadmin'");
-        }
-
         if (!empty($data['name'])) {
             $user->name = $data['name'];
         }
-        if (!empty($data['email']) && $isSuperadmin) {
+        if (!empty($data['email'])) {
             if (User::where('email', strtolower($data['email']))->where('id', '!=', $id)->exists()) {
                 return $this->error('Email already in use', 409);
             }
             $user->email = $data['email'];
-        }
-        if (isset($data['role']) && $isSuperadmin) {
-            $user->role = $data['role'];
         }
         if (!empty($data['password'])) {
             if (strlen($data['password']) < 6) {
@@ -105,14 +85,14 @@ class UserController extends BaseApiController
         }
 
         $user->save();
-        return $this->ok($user->only(['id', 'name', 'email', 'role', 'created_at', 'updated_at']));
+        return $this->ok($user->only(['id', 'name', 'email', 'created_at', 'updated_at']));
     }
 
     public function destroy(Request $request): JsonResponse
     {
         $payload = $this->tokenPayload($request);
-        if (!$payload || ($payload['role'] ?? null) !== 'superadmin') {
-            return $this->error('Only superadmin can delete users', 403);
+        if (!$payload) {
+            return $this->error('Unauthorized', 401);
         }
 
         $id = $request->query('id');
@@ -125,8 +105,12 @@ class UserController extends BaseApiController
             return $this->error('User not found', 404);
         }
 
-        if ($user->role === 'superadmin' && User::where('role', 'superadmin')->count() <= 1) {
-            return $this->error('Cannot delete the only superadmin account', 403);
+        if ((string) $payload['userId'] === (string) $id) {
+            return $this->error('You cannot delete your own account', 403);
+        }
+
+        if (User::count() <= 1) {
+            return $this->error('Cannot delete the last admin user', 403);
         }
 
         $user->delete();

@@ -34,7 +34,6 @@ class AuthController extends BaseApiController
         $payload = [
             'userId' => $user->id,
             'email' => $user->email,
-            'role' => $user->role,
         ];
 
         $accessToken = Jwt::encode($payload, config('auth.jwt_secret'), 15 * 60);
@@ -47,7 +46,6 @@ class AuthController extends BaseApiController
                 'id' => $user->id,
                 'name' => $user->name,
                 'email' => $user->email,
-                'role' => $user->role,
             ],
         ]);
     }
@@ -58,7 +56,7 @@ class AuthController extends BaseApiController
         if (!$user) {
             return $this->error('Unauthorized', 401);
         }
-        return $this->ok($user->only(['id', 'name', 'email', 'role', 'created_at', 'updated_at']));
+        return $this->ok($user->only(['id', 'name', 'email', 'created_at', 'updated_at']));
     }
 
     public function refresh(Request $request): JsonResponse
@@ -73,7 +71,6 @@ class AuthController extends BaseApiController
             $accessToken = Jwt::encode([
                 'userId' => $payload['userId'],
                 'email' => $payload['email'],
-                'role' => $payload['role'],
             ], config('auth.jwt_secret'), 15 * 60);
 
             return $this->ok(['accessToken' => $accessToken]);

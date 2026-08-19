@@ -22,8 +22,9 @@ class ReviewController extends Controller
             'role' => $validated['role'],
             'rating' => $validated['rating'],
             'quote' => $validated['quote'],
+            'status' => \App\Models\Review::STATUS_PENDING,
         ]);
 
-        return back()->with('success', 'Review submitted successfully!');
+        return back()->with('success', 'Thank you! Your review has been submitted and is awaiting approval.');
     }
 }

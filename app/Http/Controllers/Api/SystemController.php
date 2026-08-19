@@ -18,7 +18,7 @@ class SystemController extends BaseApiController
 {
     public function db(Request $request): JsonResponse
     {
-        if (($this->tokenPayload($request)['role'] ?? null) !== 'superadmin') {
+        if (!$this->tokenPayload($request)) {
             return $this->error('Unauthorized', 401);
         }
 
@@ -43,7 +43,7 @@ class SystemController extends BaseApiController
 
     public function env(Request $request): JsonResponse
     {
-        if (($this->tokenPayload($request)['role'] ?? null) !== 'superadmin') {
+        if (!$this->tokenPayload($request)) {
             return $this->error('Unauthorized', 401);
         }
 
