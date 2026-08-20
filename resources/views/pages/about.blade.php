@@ -193,7 +193,7 @@
     </div>
 </section>
 
-<section class="relative w-full bg-white px-4 py-12 md:px-8 lg:px-16 lg:py-25">
+<!-- <section class="relative w-full bg-white px-4 py-12 md:px-8 lg:px-16 lg:py-25">
     <div class="solar-container">
         <div class="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-12 items-end mb-16">
             <div class="lg:col-span-7 space-y-4">
@@ -265,7 +265,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 @endsection
 

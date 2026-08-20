@@ -29,6 +29,31 @@ class SiteController extends Controller
         ]);
     }
 
+    public function companyProfile(): View
+    {
+        return view('pages.about-company-profile', [
+            'team' => SiteData::team(),
+            'reviews' => SiteData::reviews(),
+        ]);
+    }
+
+    public function sisterConcern(): View
+    {
+        return view('pages.about-sister-concern');
+    }
+
+    public function mdMessage(): View
+    {
+        return view('pages.about-md-message');
+    }
+
+    public function ourManagement(): View
+    {
+        return view('pages.about-our-management', [
+            'team' => SiteData::team(),
+        ]);
+    }
+
     public function services(): View
     {
         return view('pages.services', [

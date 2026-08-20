@@ -22,6 +22,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [SiteController::class, 'home']);
 Route::get('/about', [SiteController::class, 'about']);
+Route::get('/about/company-profile', [SiteController::class, 'companyProfile']);
+Route::get('/about/sister-concern', [SiteController::class, 'sisterConcern']);
+Route::get('/about/md-message', [SiteController::class, 'mdMessage']);
+Route::get('/about/our-management', [SiteController::class, 'ourManagement']);
 Route::get('/services', [SiteController::class, 'services']);
 Route::get('/services/{slug}', [SiteController::class, 'service']);
 Route::get('/projects', [SiteController::class, 'projects']);

@@ -42,15 +42,15 @@
                 @php
                     $navItems = [
                         ['label' => 'Home', 'href' => '/', 'match' => ['/', '/home']],
-                        ['label' => 'About Us', 
+                        ['label' => 'About', 
                             'children' => [
-                                ['label' => 'About', 'href' => '/about'],
+                                ['label' => 'About Us', 'href' => '/about'],
                                 ['label' => 'Company Profile', 'href' => '/about/company-profile'],
                                 ['label' => 'Sister Concern', 'href' => '/about/sister-concern'],
                                 ['label' => "MD's Message", 'href' => '/about/md-message'],
                                 ['label' => 'Our Management', 'href' => '/about/our-management'],
                             ],
-                             'match' => ['/about/*'],
+                             'match' => ['/about', '/about/*'],
                         ],
                         [
                             'label' => 'Solution',
