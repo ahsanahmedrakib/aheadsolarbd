@@ -22,9 +22,9 @@
             </a>
         </div>
 
-        <div class="flex items-center gap-1">
+        <!-- <div class="flex items-center gap-1">
             @include('partials.social-icons')
-        </div>
+        </div> -->
     </div>
 </div>
 
