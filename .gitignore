@@ -22,6 +22,8 @@
 /storage/pail
 /vendor
 _ide_helper.php
+*.zip
+*.tar.gz
 Homestead.json
 Homestead.yaml
 Thumbs.db
