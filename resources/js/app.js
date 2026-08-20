@@ -11,9 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initFadeSliders();
   initImageSliders();
   initSwiper();
-  initCounters();
   initChatWidget();
-  initFaqAccordions();
   initMobileSubmenus();
   initToasts();
   initVideoModals();
@@ -165,7 +163,7 @@ function initFadeSliders() {
 }
 
 // ----------------------------------------------------------------
-// Image gallery sliders (single project / service / blog)
+// Image gallery sliders (single project / service)
 // ----------------------------------------------------------------
 function initImageSliders() {
   document.querySelectorAll("[data-image-slider]").forEach((slider) => {
@@ -248,44 +246,6 @@ function initSwiper() {
 }
 
 // ----------------------------------------------------------------
-// Counters (animated numbers)
-// ----------------------------------------------------------------
-function initCounters() {
-  const counters = document.querySelectorAll("[data-counter]");
-  if (!counters.length) return;
-  const animate = (el) => {
-    const target = Number(el.dataset.counter || "0");
-    const suffix = el.dataset.suffix || "";
-    const duration = 1800;
-    const start = performance.now();
-    const step = (now) => {
-      const p = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.floor(eased * target).toLocaleString() + suffix;
-      if (p < 1) requestAnimationFrame(step);
-      else el.textContent = target.toLocaleString() + suffix;
-    };
-    requestAnimationFrame(step);
-  };
-  if (!("IntersectionObserver" in window)) {
-    counters.forEach(animate);
-    return;
-  }
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          animate(entry.target);
-          io.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.5 }
-  );
-  counters.forEach((el) => io.observe(el));
-}
-
-// ----------------------------------------------------------------
 // Floating chat widget
 // ----------------------------------------------------------------
 function initChatWidget() {
@@ -296,32 +256,6 @@ function initChatWidget() {
   fab.addEventListener("click", () => {
     const hidden = panel.classList.toggle("hidden");
     fab.classList.toggle("active", !hidden);
-  });
-}
-
-// ----------------------------------------------------------------
-// FAQ accordions
-// ----------------------------------------------------------------
-function initFaqAccordions() {
-  document.querySelectorAll("[data-faq-item]").forEach((item) => {
-    const btn = item.querySelector("[data-faq-toggle]");
-    const body = item.querySelector("[data-faq-body]");
-    const badge = btn?.querySelector("div");
-    if (!btn || !body || !badge) return;
-    btn.addEventListener("click", () => {
-      const open = item.classList.toggle("faq-open");
-      body.classList.toggle("grid-rows-[1fr]", open);
-      body.classList.toggle("grid-rows-[0fr]", !open);
-      body.classList.toggle("opacity-100", open);
-      body.classList.toggle("opacity-0", !open);
-      body.classList.toggle("mt-3", open);
-      badge.classList.toggle("bg-accent-500", open);
-      badge.classList.toggle("text-white", open);
-      badge.classList.toggle("rotate-0", open);
-      badge.classList.toggle("bg-secondary", !open);
-      badge.classList.toggle("text-accent-500", !open);
-      badge.classList.toggle("rotate-180", !open);
-    });
   });
 }
 

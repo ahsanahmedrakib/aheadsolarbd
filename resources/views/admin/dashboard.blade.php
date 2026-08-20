@@ -5,7 +5,6 @@
     $statCards = [
         ['label' => 'Services', 'value' => $s['services'], 'color' => 'amber', 'icon' => 'briefcase', 'href' => '/admin/services'],
         ['label' => 'Projects', 'value' => $s['projects'], 'color' => 'green', 'icon' => 'layers', 'href' => '/admin/projects'],
-        ['label' => 'Blogs', 'value' => $s['blogs'], 'color' => 'blue', 'icon' => 'file', 'href' => '/admin/blogs'],
         ['label' => 'Reviews', 'value' => $s['reviews'], 'color' => 'purple', 'icon' => 'message', 'href' => '/admin/reviews'],
         ['label' => 'Team Members', 'value' => $s['team'], 'color' => 'amber', 'icon' => 'users', 'href' => '/admin/team'],
         ['label' => 'Hero Slides', 'value' => $s['heroSlides'], 'color' => 'green', 'icon' => 'image', 'href' => '/admin/hero-slider'],
@@ -32,8 +31,6 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
                         @elseif ($c['icon'] === 'layers')
                             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>
-                        @elseif ($c['icon'] === 'file')
-                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg>
                         @elseif ($c['icon'] === 'message')
                             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                         @elseif ($c['icon'] === 'users')
@@ -71,8 +68,8 @@
                 <div class="admin-bar-chart">
                     @php
                         $max = max(1, max(array_column($statCards, 'value')));
-                        $labels = ['Services', 'Projects', 'Blogs', 'Reviews', 'Team', 'Hero', 'Contact', 'Palash'];
-                        $vals = [$s['services'], $s['projects'], $s['blogs'], $s['reviews'], $s['team'], $s['heroSlides'], $s['contactQueries'], $s['palashApplications']];
+                        $labels = ['Services', 'Projects', 'Reviews', 'Team', 'Hero', 'Contact', 'Palash'];
+                        $vals = [$s['services'], $s['projects'], $s['reviews'], $s['team'], $s['heroSlides'], $s['contactQueries'], $s['palashApplications']];
                     @endphp
                     @foreach ($vals as $i => $v)
                         <div class="admin-bar-group">

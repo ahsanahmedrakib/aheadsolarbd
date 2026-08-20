@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Blog;
 use App\Models\ContactQuery;
 use App\Models\HeroSlide;
 use App\Models\PalashApplication;
@@ -22,7 +21,6 @@ class DashboardController extends Controller
             'stats' => [
                 'services' => Service::count(),
                 'projects' => Project::count(),
-                'blogs' => Blog::count(),
                 'reviews' => Review::count(),
                 'team' => TeamMember::count(),
                 'heroSlides' => HeroSlide::count(),

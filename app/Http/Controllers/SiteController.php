@@ -15,7 +15,6 @@ class SiteController extends Controller
             'heroSlides' => SiteData::heroSlides('ahead'),
             'services' => SiteData::services(),
             'projects' => SiteData::projects(),
-            'blogs' => SiteData::blogs(),
             'reviews' => SiteData::reviews(),
             'site' => 'ahead',
         ]);
@@ -77,26 +76,6 @@ class SiteController extends Controller
         return view('pages.project-single', [
             'project' => $project,
             'allProjects' => SiteData::projects(),
-        ]);
-    }
-
-    public function blogs(): View
-    {
-        return view('pages.blogs', [
-            'blogs' => SiteData::blogs(),
-        ]);
-    }
-
-    public function blog(string $slug): View
-    {
-        $blog = SiteData::blogs()->firstWhere('slug', $slug);
-        if (!$blog) {
-            abort(404);
-        }
-
-        return view('pages.blog-single', [
-            'blog' => $blog,
-            'allBlogs' => SiteData::blogs(),
         ]);
     }
 

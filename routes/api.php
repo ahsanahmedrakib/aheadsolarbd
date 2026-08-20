@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\BlogController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\HeroSlideController;
 use App\Http\Controllers\Api\ImageController;
@@ -27,11 +26,6 @@ Route::prefix('auth')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
     Route::get('me', [AuthController::class, 'me'])->middleware('api.auth');
 });
-
-Route::get('blogs', [BlogController::class, 'index']);
-Route::post('blogs', [BlogController::class, 'store']);
-Route::put('blogs', [BlogController::class, 'update']);
-Route::delete('blogs', [BlogController::class, 'destroy']);
 
 Route::get('projects', [ProjectController::class, 'index']);
 Route::post('projects', [ProjectController::class, 'store']);

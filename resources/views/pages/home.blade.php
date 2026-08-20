@@ -329,92 +329,10 @@
     </div>
 </section>
 
-<section class="w-full bg-cover bg-center relative overflow-hidden" style="background-image:url('{{ url('/images/aheadsolar/what.jpg') }}');background-attachment:fixed;min-height:680px">
-    <div class="absolute inset-0 bg-forest-900/80"></div>
-    <div class="absolute inset-0 bg-linear-to-t from-forest-900/95 via-forest-900/60 to-black/40"></div>
-    <div class="relative z-10 h-full flex flex-col items-center justify-center px-4 py-24">
-        <div class="reveal" data-variant="zoom" data-delay="100">
-            <button type="button" data-video-open="{{ $heroSlides->firstWhere('show_video_button', true)->video_url ?? '' }}" aria-label="Play intro video" {{ empty($heroSlides->firstWhere('show_video_button', true)->video_url ?? '') ? 'disabled' : '' }} class="group relative w-24 h-24 sm:w-28 sm:h-28 rounded-full flex items-center justify-center bg-accent-500 hover:bg-accent-600 text-accent-500 transition-all duration-300 shadow-2xl cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed">
-                <span class="absolute inset-0 rounded-full bg-accent-500 pulse-ring"></span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="#fff" class="ml-1 relative transition-transform duration-300 group-hover:scale-110"><path d="M6 4v16l14-8z"/></svg>
-            </button>
-        </div>
-        <div class="reveal" data-variant="fade-up" data-delay="220">
-            <h3 class="font-heading mt-10 text-accent-500 text-3xl sm:text-5xl font-bold tracking-tight text-center uppercase">See How We Power a Greener Tomorrow</h3>
-        </div>
-        <div class="reveal" data-variant="fade-up" data-delay="320">
-            <p class="mt-3 text-white/70 text-sm sm:text-base font-medium tracking-wide text-center max-w-md">Watch our story — from site assessment to a fully operational rooftop solar plant.</p>
-        </div>
-    </div>
-</section>
-
-{{-- ================================================================
-     FAQ + STATS
-     ================================================================ --}}
-<section class="bg-white py-20 lg:py-25 font-sans">
-    <div class="solar-container grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start pb-16 border-b border-gray-100">
-        <div class="lg:col-span-5 space-y-6 lg:sticky lg:top-8">
-            <div class="reveal" data-variant="fade-up"><span class="section-eyebrow">Frequently Asked Questions</span></div>
-            <div class="reveal" data-variant="fade-up" data-delay="100">
-                <h2 class="font-heading text-3xl sm:text-4xl lg:text-[52px] font-bold text-accent-500 tracking-tight leading-[1.1]">Clear guidance for your solar journey</h2>
-            </div>
-            <div class="reveal" data-variant="fade-up" data-delay="180">
-                <p class="text-[#888888] text-sm sm:text-base font-normal leading-relaxed max-w-md">We&apos;ve answered the most common questions to help you understand rooftop solar for industrial and commercial facilities, installation process, costs, and ongoing support.</p>
-            </div>
-        </div>
-
-        <div class="lg:col-span-7 divide-y divide-gray-100">
-            @foreach ([
-                ['q' => '1. Is rooftop solar suitable for my factory or commercial building?', 'a' => 'Yes, rooftop solar is ideal for most industrial and commercial buildings with adequate roof space. We assess roof structure, sunlight exposure, and your energy consumption to design a system that maximizes savings and performance.'],
-                ['q' => '2. What is the difference between CapEx and OpEx solar models?', 'a' => 'With the CapEx model, you own the solar system outright and enjoy full savings from day one. With the OpEx model, we install and maintain the system at our cost — you simply pay for the electricity generated at a lower rate than the grid.'],
-                ['q' => '3. How much can I save with a rooftop solar system?', 'a' => 'Savings depend on your current electricity consumption, roof size, and system design. Most industrial clients see 30-50% reduction in their electricity costs within the first year of installation.'],
-                ['q' => '4. What maintenance does a rooftop solar system require?', 'a' => 'Rooftop solar systems require minimal maintenance. Regular cleaning to remove dust and debris, combined with annual performance inspections, is usually sufficient. We also provide 24/7 remote monitoring to detect issues early.'],
-                ['q' => '5. Can excess energy be sent back to the grid?', 'a' => 'Yes, depending on your local regulations, excess energy can be exported to the grid through net metering arrangements. This further reduces your electricity costs and can generate additional revenue.'],
-            ] as $idx => $faq)
-                <div class="reveal py-5 first:pt-0 last:pb-0 {{ $idx === 0 ? 'faq-open' : '' }}" data-variant="fade-up" data-delay="{{ $idx * 80 }}" data-faq-item>
-                    <button type="button" data-faq-toggle class="w-full flex items-center cursor-pointer justify-between gap-4 text-left group focus:outline-none">
-                        <h3 class="font-heading text-base sm:text-lg font-bold text-accent-500 tracking-tight transition-colors duration-200 group-hover:text-accent-700">{{ $faq['q'] }}</h3>
-                        <div class="shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all duration-300 {{ $idx === 0 ? 'bg-accent-500 text-white rotate-0' : 'bg-secondary text-accent-500 rotate-180' }}">
-                            <svg data-faq-icon xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3.5 h-3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"/></svg>
-                        </div>
-                    </button>
-                    <div data-faq-body class="grid transition-all duration-300 ease-in-out overflow-hidden {{ $idx === 0 ? 'grid-rows-[1fr] opacity-100 mt-3' : 'grid-rows-[0fr] opacity-0' }}">
-                        <div class="overflow-hidden">
-                            <p class="text-sm sm:text-base text-[#888888] font-medium leading-relaxed pl-0 pr-4 sm:pr-8">{{ $faq['a'] }}</p>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-
-    <div class="reveal" data-variant="fade-up" data-delay="100">
-        <div class="solar-container pt-16">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 items-center">
-                @foreach ([
-                    ['end' => 52, 'suffix' => 'MWp', 'label' => 'Largest Rooftop Solar Project', 'd' => 'M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z'],
-                    ['end' => 30, 'suffix' => 'GWh', 'label' => 'Green Energy Per Year', 'd' => 'M12 3v18M6.343 18.364l11.314-11.314M18.364 18.364L6.343 7.029'],
-                    ['end' => 100, 'suffix' => 'MWp', 'label' => 'Pipeline Capacity', 'd' => 'M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941'],
-                ] as $idx => $stat)
-                    <div class="flex items-center gap-4 pl-2 sm:pl-6 {{ $idx > 0 ? 'md:border-l md:border-gray-100' : '' }}">
-                        <div class="shrink-0 w-12 h-12 rounded-[18px] bg-accent-500 text-white flex items-center justify-center shadow-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $stat['d'] }}"/></svg>
-                        </div>
-                        <div class="space-y-0.5">
-                            <h4 class="font-heading text-3xl sm:text-4xl font-extrabold text-accent-500 tracking-tight"><span data-counter="{{ $stat['end'] }}" data-suffix="{{ $stat['suffix'] }}">0</span></h4>
-                            <p class="text-xs sm:text-sm font-semibold text-[#888888] tracking-tight">{{ $stat['label'] }}</p>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
-</section>
-
 {{-- ================================================================
      TESTIMONIALS
      ================================================================ --}}
-<section class="bg-secondary py-20 lg:py-25 px-4 sm:px-6 lg:px-8 font-sans overflow-hidden">
+<section class="bg-white py-20 lg:py-25 px-4 sm:px-6 lg:px-8 font-sans overflow-hidden">
     <div class="solar-container">
         @if (session('success'))
             <div class="reveal mb-10" data-variant="fade-up">
@@ -526,60 +444,6 @@
         </form>
     </div>
 </div>
-
-{{-- ================================================================
-     BLOGS
-     ================================================================ --}}
-<section class="bg-white py-20 lg:py-25 font-sans overflow-x-hidden">
-    <div class="solar-container space-y-12 lg:space-y-16">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-end">
-            <div class="lg:col-span-7 space-y-4">
-                <div class="reveal" data-variant="fade-up"><span class="section-eyebrow">Latest Blogs</span></div>
-                <div class="reveal" data-variant="fade-up" data-delay="100">
-                    <h2 class="font-heading text-3xl sm:text-4xl lg:text-[52px] font-bold text-accent-500 tracking-tight leading-[1.1]">Insights, trend and updates from the solar industry</h2>
-                </div>
-            </div>
-            <div class="reveal lg:col-span-5" data-variant="fade-up" data-delay="180">
-                <div class="space-y-5 lg:pl-6">
-                    <p class="text-[#888888] text-sm sm:text-base font-normal leading-relaxed">Stay up to date with in-depth insights, emerging trends, and important updates from the solar industry. Our articles cover everything from new.</p>
-                    <a href="/blogs" class="btn-brand group inline-flex">
-                        View All Blogs
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="swiper-dots pb-12" data-swiper data-loop="true" data-delay="3000" data-slides="1" data-breakpoints='{"640":2,"1024":3}'>
-            <div class="swiper-wrapper">
-                @foreach ($blogs as $blog)
-                    <div class="swiper-slide h-auto">
-                        <a href="{{ url('blogs/' . $blog->slug) }}" class="relative h-115 rounded-lg overflow-hidden shadow-sm group flex flex-col justify-end p-4 transition-transform duration-300 hover:-translate-y-1">
-                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style="background-image:url('{{ $blog->image_url }}')"></div>
-                            <div class="absolute inset-0 bg-linear-to-t from-accent-400/80 via-transparent to-transparent z-0"></div>
-                            <div class="relative z-10 w-full rounded-lg p-5 backdrop-blur-md transition-all duration-300 border bg-gold-900/40 backdrop-brightness-90 border-white/20 group-hover:bg-gold-900/70 group-hover:border-accent-500/30">
-                                @if ($blog->category)
-                                    <span class="inline-block mb-2 text-[10px] font-semibold uppercase tracking-wider text-accent-400">{{ $blog->category }}</span>
-                                @endif
-                                <h3 class="font-heading text-lg lg:text-xl font-bold leading-snug tracking-tight text-white">{{ $blog->title }}</h3>
-                                @if ($blog->content)
-                                    <p class="mt-2 text-sm text-white/80 line-clamp-2 max-h-0 opacity-0 overflow-hidden transition-all duration-300 group-hover:max-h-20 group-hover:opacity-100">{{ $blog->content }}</p>
-                                @endif
-                                <div class="mt-4 inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-wider text-white group-hover:text-accent-400 transition-colors">
-                                    <span>Read More</span>
-                                    <span class="flex items-center justify-center w-5 h-5 rounded-full bg-accent-500 text-gold-700">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-                                    </span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                @endforeach
-            </div>
-            <div class="swiper-pagination"></div>
-        </div>
-    </div>
-</section>
 
 {{-- VIDEO MODAL (global) --}}
 <div data-video-modal class="hidden fixed inset-0 z-50 items-center justify-center bg-black/80 backdrop-blur-sm">

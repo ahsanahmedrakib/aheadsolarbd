@@ -55,7 +55,6 @@
                         ],
                         ['label' => 'Services', 'href' => '/services', 'match' => ['/services', 'services/*']],
                         ['label' => 'Projects', 'href' => '/projects', 'match' => ['/projects', 'projects/*']],
-                        ['label' => 'Blogs', 'href' => '/blogs', 'match' => ['/blogs', 'blogs/*']],
                         ['label' => 'Contact', 'href' => '/contact', 'match' => ['/contact']],
                     ];
                     $current = request()->path();

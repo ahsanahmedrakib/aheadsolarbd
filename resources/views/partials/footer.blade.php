@@ -70,7 +70,7 @@
             <div class="lg:col-span-3 space-y-5">
                 <h3 class="font-heading text-xl font-bold text-accent-500">Quick Links</h3>
                 <ul class="space-y-3">
-                    @foreach ([['Home', '/'], ['About Us', '/about'], ['Services', '/services'], ['Projects', '/projects'], ['Blogs', '/blogs']] as [$label, $href])
+                    @foreach ([['Home', '/'], ['About Us', '/about'], ['Services', '/services'], ['Projects', '/projects']] as [$label, $href])
                         <li>
                             <a href="{{ $href }}" class="relative pl-4 text-white/75 hover:text-gold-500 transition-colors text-sm before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-1.5 before:h-1.5 before:rounded-full before:bg-gold-500">
                                 {{ $label }}

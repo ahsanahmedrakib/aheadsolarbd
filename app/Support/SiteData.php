@@ -2,7 +2,6 @@
 
 namespace App\Support;
 
-use App\Models\Blog;
 use App\Models\HeroSlide;
 use App\Models\Project;
 use App\Models\Review;
@@ -38,15 +37,6 @@ class SiteData
             return $data;
         }
         return static::toModels(Project::class, Defaults::projects());
-    }
-
-    public static function blogs(): Collection
-    {
-        $data = Blog::query()->orderBy('date', 'desc')->get();
-        if ($data->isNotEmpty()) {
-            return $data;
-        }
-        return static::toModels(Blog::class, Defaults::blogs());
     }
 
     public static function team(): Collection

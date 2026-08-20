@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 class MediaHelper
 {
-    public const ALLOWED_FOLDERS = ['services', 'projects', 'blogs', 'team', 'hero', 'settings'];
+    public const ALLOWED_FOLDERS = ['services', 'projects', 'team', 'hero', 'settings'];
 
     private const EXTENSION_MAP = [
         'jpeg' => 'jpg',

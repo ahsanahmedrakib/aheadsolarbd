@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Blog;
 use App\Models\ContactQuery;
 use App\Models\HeroSlide;
 use App\Models\PalashApplication;
@@ -25,7 +24,6 @@ class SystemController extends BaseApiController
         $counts = [
             'services' => Service::count(),
             'projects' => Project::count(),
-            'blogs' => Blog::count(),
             'reviews' => Review::count(),
             'team' => TeamMember::count(),
             'heroSlides' => HeroSlide::count(),

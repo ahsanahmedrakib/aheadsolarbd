@@ -26,7 +26,6 @@
                             ['title' => 'Services', 'href' => '/admin/services', 'match' => '/admin/services'],
                             ['title' => 'Projects', 'href' => '/admin/projects', 'match' => '/admin/projects'],
                             ['title' => 'Team', 'href' => '/admin/team', 'match' => '/admin/team'],
-                            ['title' => 'Blogs', 'href' => '/admin/blogs', 'match' => '/admin/blogs'],
                             ['title' => 'Hero Slider', 'href' => '/admin/hero-slider', 'match' => '/admin/hero-slider'],
                             ['title' => 'Contact Queries', 'href' => '/admin/contact', 'match' => '/admin/contact'],
                             ['title' => 'Palash Applications', 'href' => '/admin/palash-applications', 'match' => '/admin/palash-applications'],
