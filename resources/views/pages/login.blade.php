@@ -30,13 +30,6 @@
                     <input type="password" name="password" id="password" placeholder="Enter your password" class="w-full bg-white border border-forest-700/10 text-sm text-forest-900 rounded-lg p-3 outline-none focus:border-accent-500 focus:ring-2 focus:ring-accent-500/20 transition">
                 </div>
 
-                <div class="flex items-center justify-between">
-                    <label class="flex items-center gap-2 cursor-pointer select-none">
-                        <input type="checkbox" name="remember" id="remember" class="w-4 h-4 rounded border-gray-300 text-accent-500 focus:ring-accent-500 cursor-pointer">
-                        <span class="text-sm text-gray-600 font-medium">Remember me</span>
-                    </label>
-                </div>
-
                 <button type="submit" class="w-full btn-brand font-semibold py-3 rounded-full transition-colors flex items-center justify-center gap-2 text-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1h-4"/><path d="m10 17 5-5-5-5"/><path d="M15 12H3"/></svg>
                     Sign In
