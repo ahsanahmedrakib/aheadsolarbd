@@ -9,7 +9,7 @@
     $socialIg = \App\Support\SiteSettings::field('social', 'social-ig');
     $socialLi = \App\Support\SiteSettings::field('social', 'social-li');
     $socialYt = \App\Support\SiteSettings::field('social', 'social-youtube');
-    $footerServices = \App\Models\Service::orderBy('id')->limit(5)->get();
+    $footerServices = \App\Support\SiteData::services()->take(6);
 @endphp
 
 <footer class="bg-forest-700 text-white pt-0 font-sans">
