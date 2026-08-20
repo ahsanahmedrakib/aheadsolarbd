@@ -31,7 +31,7 @@
 <!-- 2. STICKY NAVBAR -->
 <header data-navbar class="sticky top-0 z-50 transition-all duration-300 nav-animate">
     <div class="solar-container">
-        <div data-navbar-inner class="flex bg-white items-center justify-between gap-2 sm:gap-6 px-2 transition-all duration-300 py-2 my-3 rounded-lg shadow-md shadow-forest-900/5">
+        <div data-navbar-inner class="flex bg-white items-center justify-between gap-2 sm:gap-6 px-2 transition-all duration-300 py-2 my-1.5 rounded-lg shadow-md shadow-forest-900/5">
             <!-- LOGO -->
             <a href="/" class="shrink-0 flex items-center">
                 <img src="{{ url('/logo.svg') }}" width="160" height="46" alt="Ahead Solar logo" class="h-7.5 sm:h-11 w-auto object-contain">
@@ -42,7 +42,16 @@
                 @php
                     $navItems = [
                         ['label' => 'Home', 'href' => '/', 'match' => ['/', '/home']],
-                        ['label' => 'About Us', 'href' => '/about', 'match' => ['/about']],
+                        ['label' => 'About Us', 
+                            'children' => [
+                                ['label' => 'About', 'href' => '/about'],
+                                ['label' => 'Company Profile', 'href' => '/about/company-profile'],
+                                ['label' => 'Sister Concern', 'href' => '/about/sister-concern'],
+                                ['label' => "MD's Message", 'href' => '/about/md-message'],
+                                ['label' => 'Our Management', 'href' => '/about/our-management'],
+                            ],
+                             'match' => ['/about/*'],
+                        ],
                         [
                             'label' => 'Solution',
                             'children' => [
@@ -63,7 +72,7 @@
                     @php
                         $active = false;
                         foreach ($item['match'] ?? [] as $m) {
-                            if (request()->is($m)) { $active = true; break; }
+                            if (request()->is($m === '/' ? '/' : ltrim($m, '/'))) { $active = true; break; }
                         }
                     @endphp
                     <div class="relative group">
@@ -110,7 +119,7 @@
                         @php
                             $active = false;
                             foreach ($item['match'] ?? [] as $m) {
-                                if (request()->is($m)) { $active = true; break; }
+                                if (request()->is($m === '/' ? '/' : ltrim($m, '/'))) { $active = true; break; }
                             }
                         @endphp
                         <div>

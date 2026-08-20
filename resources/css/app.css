@@ -530,11 +530,11 @@ body:has(.admin-layout-root) {
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: none;
     }
 }
 .nav-animate {
-    animation: nav-slide-down 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: nav-slide-down 0.7s cubic-bezier(0.22, 1, 0.36, 1) backwards;
 }
 
 @keyframes chat-widget-in {
@@ -937,8 +937,6 @@ button.nav-link-sweep::after {
 
 /* Navbar scrolled state (matches source Navbar) */
 [data-navbar].nav-scrolled [data-navbar-inner] {
-    margin-top: 0.5rem;
-    margin-bottom: 0;
     border-bottom: 1px solid rgba(2, 32, 71, 0.1);
     box-shadow: 0 25px 50px -12px rgba(2, 32, 71, 0.25);
 } /* =====================================================
