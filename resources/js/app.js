@@ -90,16 +90,20 @@ function initReveal() {
     items.forEach((el) => el.classList.add("reveal-revealed"));
     return;
   }
+  const intersecting = new WeakMap();
   const io = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
+        const el = entry.target;
         if (entry.isIntersecting) {
-          const el = entry.target;
+          intersecting.set(el, true);
           const delay = el.dataset.delay ? Number(el.dataset.delay) : 0;
           setTimeout(() => {
-            el.classList.add("reveal-revealed");
+            if (intersecting.get(el)) el.classList.add("reveal-revealed");
           }, delay);
-          io.unobserve(el);
+        } else {
+          intersecting.set(el, false);
+          el.classList.remove("reveal-revealed");
         }
       });
     },
@@ -120,7 +124,8 @@ function initRevealImages() {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("reveal-revealed");
-          io.unobserve(entry.target);
+        } else {
+          entry.target.classList.remove("reveal-revealed");
         }
       });
     },
