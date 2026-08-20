@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@php
+    $pageTitle = 'Services';
+    $metaDescription = 'Discover Ahead Solar\'s solar energy services including battery storage, residential and commercial solar installation, and maintenance.';
+@endphp
+
 @section('content')
 <x-page-banner title="Our" titleAccent="Services" crumb="Our Services" image="/images/aheadsolar/banner.jpg" />
 

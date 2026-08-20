@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@php
+    $pageTitle = 'Login';
+    $metaDescription = 'Sign in to the Ahead Solar admin dashboard.';
+@endphp
+
 @section('content')
 <div class="min-h-screen flex items-center justify-center bg-secondary px-4 py-4">
     <div class="w-full max-w-md">

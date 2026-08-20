@@ -33,6 +33,18 @@
     if ($showYoutube && trim((string) $ytUrl)) {
         $links[] = ['key' => 'youtube', 'title' => 'Subscribe to our YouTube channel', 'aria' => 'YouTube', 'bg' => '#FF0000', 'href' => $ytUrl, 'icon' => 'youtube'];
     }
+
+    $chatOverrides = $chatWidgetOverrides ?? [];
+    foreach ($chatOverrides as $key => $override) {
+        foreach ($links as $i => $link) {
+            if ($link['key'] !== $key) {
+                continue;
+            }
+            $links[$i]['href'] = is_array($override) ? ($override['href'] ?? $link['href']) : $override;
+            $links[$i]['title'] = is_array($override) ? ($override['title'] ?? $link['title']) : $link['title'];
+            break;
+        }
+    }
 @endphp
 
 @if (count($links) > 0 && !request()->is('admin*'))

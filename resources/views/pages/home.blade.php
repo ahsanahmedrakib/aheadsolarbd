@@ -1,10 +1,15 @@
 @extends('layouts.app')
 
+@php
+    $titleFull = 'Ahead Solar - Leading Renewable Energy Solutions';
+    $metaDescription = 'Top-rated solar panel installation, battery storage, and maintenance for residential and commercial properties.';
+@endphp
+
 @section('content')
 {{-- ================================================================
      HERO — fade slider
      ================================================================ --}}
-@php $heroVideo = $heroSlides->first()->background_video ?? '/videos/hero.mp4'; @endphp
+@php $heroVideo = $heroSlides->first()->background_video ?: '/videos/hero.mp4'; @endphp
 <section class="w-full relative min-h-187.5 overflow-hidden select-none" data-fade-slider data-autoplay="true">
     <video class="absolute inset-0 w-full h-full object-cover" src="{{ $heroVideo }}" autoplay muted loop playsinline preload="auto"></video>
     <div class="absolute inset-0 bg-linear-to-r from-forest-900/90 via-forest-900/60 to-transparent z-10"></div>

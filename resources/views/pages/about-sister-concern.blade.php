@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@php
+    $pageTitle = 'Sister Concern';
+    $metaDescription = 'Discover Ahead Solar\'s sister concern - Palash Charging Station, delivering 100% solar-charged lithium-ion battery rentals for easy-bikes and Mishuks.';
+@endphp
+
 @section('content')
 <x-page-banner title="Sister" titleAccent="Concern" crumb="Sister Concern" :crumb-parent="['label' => 'About Us', 'href' => '/about']" image="/images/aheadsolar/banner-2.jpg" eyebrow="Our Group" />
 

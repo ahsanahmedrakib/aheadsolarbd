@@ -44,21 +44,16 @@ class SettingController extends Controller
             'contact-email' => 'email',
             'phone-number' => 'tel',
             'hq-address' => 'text',
+            'google-map' => 'url',
             'whatsapp-number' => 'tel',
             'whatsapp-message' => 'textarea',
             'messenger-username' => 'text',
-            'facebook-url' => 'text',
-            'linkedin-url' => 'text',
-            'youtube-url' => 'text',
+            'facebook-url' => 'url',
+            'linkedin-url' => 'url',
+            'youtube-url' => 'url',
             'meta-title' => 'text',
             'meta-desc' => 'textarea',
             'meta-keywords' => 'text',
-            'social-fb' => 'text',
-            'social-x' => 'text',
-            'social-li' => 'text',
-            'social-ig' => 'text',
-            'social-youtube' => 'text',
-            'google-map' => 'text',
         ];
 
         $fieldLabels = [
@@ -66,6 +61,7 @@ class SettingController extends Controller
             'contact-email' => 'Contact Email',
             'phone-number' => 'Phone Number',
             'hq-address' => 'HQ Address',
+            'google-map' => 'Google Map Embed URL',
             'whatsapp-number' => 'WhatsApp Number',
             'whatsapp-message' => 'WhatsApp Message',
             'messenger-username' => 'Messenger Username',
@@ -75,19 +71,12 @@ class SettingController extends Controller
             'meta-title' => 'Meta Title',
             'meta-desc' => 'Meta Description',
             'meta-keywords' => 'Meta Keywords',
-            'social-fb' => 'Facebook URL',
-            'social-x' => 'X (Twitter) URL',
-            'social-li' => 'LinkedIn URL',
-            'social-ig' => 'Instagram URL',
-            'social-youtube' => 'YouTube URL',
-            'google-map' => 'Google Map Embed URL',
         ];
 
         $sectionMeta = [
             'general' => ['title' => 'General', 'color' => 'amber'],
             'chat-widgets' => ['title' => 'Chat Widgets', 'color' => 'green'],
             'seo' => ['title' => 'SEO', 'color' => 'blue'],
-            'social' => ['title' => 'Social Links', 'color' => 'purple'],
         ];
 
         $sections = [];

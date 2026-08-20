@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@php
+    $pageTitle = 'CapEx Model';
+    $metaDescription = 'Explore Ahead Solar\'s CapEx solar model - full ownership of your rooftop solar system, capital investment from your own source, and free electricity after payback.';
+@endphp
+
 @section('content')
 <x-page-banner title="CapEx" titleAccent="Model" crumb="CapEx Model" image="/images/aheadsolar/banner.jpg" eyebrow="Solution" />
 

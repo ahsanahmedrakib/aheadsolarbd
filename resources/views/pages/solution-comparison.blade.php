@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@php
+    $pageTitle = 'CapEx vs OpEx vs BOT Comparison';
+    $metaDescription = 'Compare Ahead Solar\'s CapEx, OpEx, and BOT solar models side by side to choose the right financial structure for your rooftop solar project.';
+@endphp
+
 @section('content')
 <x-page-banner title="Model" titleAccent="Comparison" crumb="Model Comparison" image="/images/aheadsolar/banner.jpg" eyebrow="Solution" />
 

@@ -88,6 +88,7 @@ class SiteController extends Controller
         return view('pages.projects', [
             'projects' => $projects,
             'categories' => $categories,
+            'heroSlides' => SiteData::heroSlides('projects'),
         ]);
     }
 
@@ -107,7 +108,7 @@ class SiteController extends Controller
     public function contact(): View
     {
         return view('pages.contact', [
-            'mapUrl' => SiteSettings::field('social', 'google-map'),
+            'mapUrl' => SiteSettings::field('general', 'google-map'),
             'email' => SiteSettings::field('general', 'contact-email'),
             'phone' => SiteSettings::field('general', 'phone-number'),
             'address' => SiteSettings::field('general', 'hq-address'),
@@ -127,6 +128,16 @@ class SiteController extends Controller
     {
         return view('pages.palash', [
             'heroSlides' => SiteData::heroSlides('palash'),
+            'chatWidgetOverrides' => [
+                'facebook' => [
+                    'title' => 'Visit Palash Charging Station on Facebook',
+                    'href' => 'https://www.facebook.com/profile.php?id=61589795817520',
+                ],
+                'messenger' => [
+                    'title' => 'Chat with Palash Charging Station on Messenger',
+                    'href' => 'https://m.me/61589795817520',
+                ],
+            ],
         ]);
     }
 

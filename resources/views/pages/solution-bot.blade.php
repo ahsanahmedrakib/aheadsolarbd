@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@php
+    $pageTitle = 'BOT Model';
+    $metaDescription = 'Explore Ahead Solar\'s Build-Operate-Transfer (BOT) solar model - complete financing, installation, and operation by the service provider, with ownership transferred to the roof owner at zero additional cost.';
+@endphp
+
 @section('content')
 <x-page-banner title="BOT" titleAccent="Model" crumb="BOT Model" image="/images/aheadsolar/banner.jpg" eyebrow="Solution" />
 

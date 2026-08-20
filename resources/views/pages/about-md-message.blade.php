@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@php
+    $pageTitle = "MD's Message";
+    $metaDescription = 'Read the Managing Director\'s message at Ahead Solar - our vision to replace diesel generators with solar and battery storage fusion systems across Bangladesh.';
+@endphp
+
 @section('content')
 <x-page-banner title="MD's" titleAccent="Message" crumb="MD's Message" :crumb-parent="['label' => 'About Us', 'href' => '/about']" image="/images/aheadsolar/about-2.jpg" eyebrow="Leadership" />
 

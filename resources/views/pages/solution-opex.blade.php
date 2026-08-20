@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@php
+    $pageTitle = 'OpEx Model';
+    $metaDescription = 'Discover Ahead Solar\'s OpEx solar model - zero upfront investment, no financial risk, annual installments, and guaranteed maintenance for 20 years.';
+@endphp
+
 @section('content')
 <x-page-banner title="OpEx" titleAccent="Model" crumb="OpEx Model" image="/images/aheadsolar/banner.jpg" eyebrow="Solution" />
 

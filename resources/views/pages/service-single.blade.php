@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@php
+    $pageTitle = $service->title;
+    $metaDescription = Str::limit(strip_tags($service->description ?? ''), 160);
+@endphp
+
 @section('content')
 <x-page-banner :title="$service->title" :crumb="$service->title" :crumbParent="['label' => 'Services', 'href' => '/services']" image="/images/aheadsolar/banner.jpg" />
 

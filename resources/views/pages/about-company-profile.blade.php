@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@php
+    $pageTitle = 'Company Profile';
+    $metaDescription = 'Explore Ahead Solar\'s company profile - a vertically integrated solar company delivering end-to-end rooftop solar and energy storage solutions across Bangladesh.';
+@endphp
+
 @section('content')
 <x-page-banner title="Company" titleAccent="Profile" crumb="Company Profile" :crumb-parent="['label' => 'About Us', 'href' => '/about']" image="/images/aheadsolar/about-1.jpg" eyebrow="Who We Are" />
 

@@ -1,11 +1,6 @@
 @php
     $email = \App\Support\SiteSettings::field('general', 'contact-email');
     $phone = \App\Support\SiteSettings::field('general', 'phone-number');
-    $socialFb = \App\Support\SiteSettings::field('social', 'social-fb');
-    $socialX = \App\Support\SiteSettings::field('social', 'social-x');
-    $socialIg = \App\Support\SiteSettings::field('social', 'social-ig');
-    $socialLi = \App\Support\SiteSettings::field('social', 'social-li');
-    $socialYt = \App\Support\SiteSettings::field('social', 'social-youtube');
 @endphp
 
 <!-- 1. TOPBAR -->
@@ -21,10 +16,6 @@
                 <span>{{ $phone }}</span>
             </a>
         </div>
-
-        <!-- <div class="flex items-center gap-1">
-            @include('partials.social-icons')
-        </div> -->
     </div>
 </div>
 
@@ -77,7 +68,7 @@
                     @endphp
                     <div class="relative group">
                         @if (!empty($item['children']))
-                            <button type="button" class="nav-link-sweep py-1.25 px-3 rounded-full transition-colors inline-flex items-center gap-1 cursor-pointer {{ $active ? 'text-accent-500 nav-link-active' : 'text-accent-500 hover:text-gold-500' }}">
+                            <button type="button" class="nav-link-sweep py-2 px-3 rounded-full transition-colors inline-flex items-center gap-1 cursor-pointer {{ $active ? 'text-accent-500 nav-link-active' : 'text-accent-500 hover:text-gold-500' }}">
                                 {{ $item['label'] }}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
                             </button>
@@ -91,7 +82,7 @@
                                 </div>
                             </div>
                         @else
-                            <a href="{{ $item['href'] }}" class="nav-link-sweep py-2 px-3 rounded-full transition-colors {{ $active ? 'text-accent-500 nav-link-active' : 'text-accent-500 hover:text-gold-500' }}">
+                            <a href="{{ $item['href'] }}" class="nav-link-sweep py-2 px-3 rounded-full transition-colors inline-flex items-center {{ $active ? 'text-accent-500 nav-link-active' : 'text-accent-500 hover:text-gold-500' }}">
                                 {{ $item['label'] }}
                             </a>
                         @endif

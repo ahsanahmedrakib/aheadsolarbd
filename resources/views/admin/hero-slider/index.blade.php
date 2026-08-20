@@ -65,6 +65,8 @@
                                 <td>
                                     @if ($slide->site === 'palash')
                                         <span class="text-[11px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 px-2 py-1 rounded">Palash</span>
+                                    @elseif ($slide->site === 'projects')
+                                        <span class="text-[11px] font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-1 rounded">Projects</span>
                                     @else
                                         <span class="text-[11px] font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 px-2 py-1 rounded">Ahead Solar</span>
                                     @endif

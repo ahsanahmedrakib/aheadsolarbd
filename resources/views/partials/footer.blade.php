@@ -4,11 +4,6 @@
     $phone = \App\Support\SiteSettings::field('general', 'phone-number');
     $email = \App\Support\SiteSettings::field('general', 'contact-email');
     $address = \App\Support\SiteSettings::field('general', 'hq-address');
-    $socialFb = \App\Support\SiteSettings::field('social', 'social-fb');
-    $socialX = \App\Support\SiteSettings::field('social', 'social-x');
-    $socialIg = \App\Support\SiteSettings::field('social', 'social-ig');
-    $socialLi = \App\Support\SiteSettings::field('social', 'social-li');
-    $socialYt = \App\Support\SiteSettings::field('social', 'social-youtube');
     $footerServices = \App\Support\SiteData::services()->take(4);
 @endphp
 
@@ -16,7 +11,7 @@
     <div class="solar-container">
         <!-- FOOTER CONTACT BOXES -->
         <div class="reveal" data-variant="fade-up">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-4 py-4 border-b border-white/20">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-4 py-4">
             <div class="flex items-center gap-5">
                 <div class="w-16 h-16 rounded-xl bg-accent-500 text-white flex items-center justify-center shrink-0 chat-idle" style="animation-delay: 0s">
                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
@@ -51,19 +46,13 @@
 
         <!-- MEGA FOOTER GRID -->
         <div class="reveal" data-variant="fade-up" data-delay="100">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 py-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 py-4 border-y border-white/20">
             <!-- BRAND COLUMN -->
             <div class="lg:col-span-5 space-y-6">
                 <a href="/">
                     <img src="{{ url('/logo.svg') }}" width="160" height="48" alt="Ahead Solar logo" class="h-12 w-auto object-contain">
                 </a>
                 <p class="text-white/75 text-sm leading-relaxed max-w-sm">{{ $tagline }}</p>
-                <!-- <div class="space-y-3">
-                    <h4 class="font-heading text-lg font-bold text-white">Follow Us On Socials:</h4>
-                    <div class="flex items-center gap-2">
-                        @include('partials.social-icons')
-                    </div>
-                </div> -->
             </div>
 
             <!-- QUICK LINKS -->
@@ -95,11 +84,11 @@
             </div>
         </div>
 
-        <!-- COPYRIGHT -->
-        <p class="flex justify-between flex-wrap gap-3 text-sm text-white/70 mb-6">
-            <span>Copyright © {{ date('Y') }} {{ $companyName }}. All rights reserved.</span>
-            <span>Design &amp; Development by <a href="https://bct.com.bd/" target="_blank" class="hover:text-gold-500">Bismillah Computer &amp; Technology</a></span>
-        </p>
+         <!-- COPYRIGHT -->
+            <p class="flex justify-between flex-wrap gap-3 text-sm text-white/70 py-2">
+                <span>Copyright © {{ date('Y') }} {{ $companyName }}. All rights reserved.</span>
+                <span>Design &amp; Development by <a href="https://bct.com.bd/" target="_blank" class="hover:text-gold-500">Bismillah Computer &amp; Technology</a></span>
+            </p>
         </div>
     </div>
 </footer>

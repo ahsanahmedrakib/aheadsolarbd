@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ isset($pageTitle) ? $pageTitle . ' | ' : '' }}{{ config('app.name') }}</title>
-    <meta name="description" content="{{ $metaDescription ?? \App\Support\SiteSettings::field('seo', 'meta-desc') }}">
+    @php
+        $siteTitle = $titleFull ?? (isset($pageTitle) ? $pageTitle . ' | ' . config('app.name') : config('app.name'));
+        $siteDesc = $metaDescription ?? \App\Support\SiteSettings::field('seo', 'meta-desc');
+    @endphp
+
+    <title>{{ $siteTitle }}</title>
+    <meta name="description" content="{{ $siteDesc }}">
     @php $keywords = \App\Support\SiteSettings::field('seo', 'meta-keywords'); @endphp
     @if ($keywords)
         <meta name="keywords" content="{{ $keywords }}">
@@ -16,8 +21,8 @@
 
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="{{ config('app.name') }}">
-    <meta property="og:title" content="{{ isset($pageTitle) ? $pageTitle . ' | ' : '' }}{{ config('app.name') }}">
-    <meta property="og:description" content="{{ $metaDescription ?? \App\Support\SiteSettings::field('seo', 'meta-desc') }}">
+    <meta property="og:title" content="{{ $siteTitle }}">
+    <meta property="og:description" content="{{ $siteDesc }}">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:image" content="{{ url('/images/home/hero-bg-image.jpg') }}">
     <meta name="twitter:card" content="summary_large_image">

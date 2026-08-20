@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@php
+    $pageTitle = $project->title;
+    $metaDescription = Str::limit(strip_tags($project->description ?? ''), 160);
+@endphp
+
 @section('content')
 @php
     $gallery = collect($project->images ?? [])->filter()->values();

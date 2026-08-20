@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@php
+    $pageTitle = 'About Us';
+    $metaDescription = 'Learn about Ahead Solar - Empowering Your Clean Energy Future. Discover our mission, team, and commitment to clean and reliable solar energy solutions.';
+@endphp
+
 @section('content')
 <x-page-banner title="About" titleAccent="Us" crumb="About Us" image="/images/aheadsolar/banner.jpg" />
 

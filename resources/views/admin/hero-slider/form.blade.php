@@ -27,7 +27,7 @@
 
             <div class="flex flex-col gap-1.5">
                 <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">Site *</label>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                     <label class="flex items-center gap-2.5 rounded-lg border p-3 cursor-pointer transition {{ old('site', $item?->site) === 'ahead' ? 'border-(--admin-accent) bg-(--admin-accent-muted)' : 'border-(--admin-border) bg-(--admin-surface-2) hover:border-(--admin-border)/70' }}">
                         <input type="radio" name="site" value="ahead" {{ old('site', $item?->site) === 'ahead' ? 'checked' : '' }} class="accent-(--admin-accent)">
                         <span>
@@ -40,6 +40,13 @@
                         <span>
                             <span class="block text-[13px] font-semibold text-(--admin-text-primary)">Palash</span>
                             <span class="block text-[11px] text-(--admin-text-muted)">Palash applications site</span>
+                        </span>
+                    </label>
+                    <label class="flex items-center gap-2.5 rounded-lg border p-3 cursor-pointer transition {{ old('site', $item?->site) === 'projects' ? 'border-(--admin-accent) bg-(--admin-accent-muted)' : 'border-(--admin-border) bg-(--admin-surface-2) hover:border-(--admin-border)/70' }}">
+                        <input type="radio" name="site" value="projects" {{ old('site', $item?->site) === 'projects' ? 'checked' : '' }} class="accent-(--admin-accent)">
+                        <span>
+                            <span class="block text-[13px] font-semibold text-(--admin-text-primary)">Projects</span>
+                            <span class="block text-[11px] text-(--admin-text-muted)">Projects page hero slider</span>
                         </span>
                     </label>
                 </div>
@@ -77,14 +84,6 @@
             </div>
 
             <div class="flex flex-col gap-1.5">
-                <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">Background Video</label>
-                <input type="text" name="background_video" value="{{ old('background_video', $item?->background_video) }}" placeholder="/video/xxx.mp4 or youtube/drive URL or image path"
-                    class="w-full bg-(--admin-surface-2) border {{ $errors->has('background_video') ? 'border-(--admin-danger)' : 'border-(--admin-border)' }} text-sm text-(--admin-text-primary) rounded-lg p-2.5 outline-none focus:border-(--admin-accent) transition">
-                <p class="text-[11px] text-(--admin-text-muted)">Paste a /video path, YouTube/Drive URL, or image path.</p>
-                @error('background_video')<span class="text-[11px] text-(--admin-danger)">{{ $message }}</span>@enderror
-            </div>
-
-            <div class="flex flex-col gap-1.5">
                 <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">Video URL</label>
                 <input type="text" name="video_url" value="{{ old('video_url', $item?->video_url) }}" placeholder="https://www.youtube.com/embed/..."
                     class="w-full bg-(--admin-surface-2) border {{ $errors->has('video_url') ? 'border-(--admin-danger)' : 'border-(--admin-border)' }} text-sm text-(--admin-text-primary) rounded-lg p-2.5 outline-none focus:border-(--admin-accent) transition">
@@ -101,8 +100,8 @@
 
                 <div class="flex flex-col gap-1.5">
                     <label class="flex items-center gap-2 cursor-pointer w-fit">
-                        <input type="checkbox" name="is_active" value="1" {{ old('is_active', $item?->is_active) ? 'checked' : '' }} class="w-4 h-4 accent-(--admin-accent)">
-                        <span class="text-sm text-(--admin-text-primary)">Active (visible on homepage)</span>
+                        <input type="checkbox" name="is_active" value="1" {{ old('is_active', $item?->is_active ?? true) ? 'checked' : '' }} class="w-4 h-4 accent-(--admin-accent)">
+                        <span class="text-sm text-(--admin-text-primary)">Active (visible on the selected page)</span>
                     </label>
                 </div>
             </div>

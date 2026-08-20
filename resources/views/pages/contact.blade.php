@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@php
+    $pageTitle = 'Contact Us';
+    $metaDescription = 'Get in touch with Ahead Solar for solar panel installation, battery storage, and maintenance. Request a free consultation today.';
+@endphp
+
 @section('content')
 
 @php $mapUrl = trim($mapUrl ?? ''); @endphp

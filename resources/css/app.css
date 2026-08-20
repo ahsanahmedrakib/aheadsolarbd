@@ -589,21 +589,17 @@ body:has(.admin-layout-root) {
     content: "";
     position: absolute;
     left: 0;
-    bottom: 6px;
+    right: 0;
+    bottom: 4px;
     height: 2px;
-    width: 100%;
-    transform: scaleX(0);
-    transform-origin: right;
     background: #f7b308;
-    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    border-radius: 999px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 .nav-link-sweep:hover::after,
 .nav-link-sweep.nav-link-active::after {
-    transform: scaleX(1);
-    transform-origin: left;
-}
-button.nav-link-sweep::after {
-    width: calc(100% - 18px);
+    opacity: 1;
 }
 
 .card-shine {
