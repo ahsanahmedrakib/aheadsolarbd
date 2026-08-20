@@ -2,13 +2,9 @@
     $name = $name ?? 'content';
     $label = $label ?? 'Content';
     $value = $value ?? '';
-    $uid = $uid ?? $name . '_' . uniqid();
 @endphp
 <div class="flex flex-col gap-1.5" data-rich-editor>
-    <div class="flex items-center justify-between">
-        <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">{{ $label }}</label>
-        <button type="button" data-rich-source-toggle class="text-[11px] font-medium text-(--admin-accent) hover:underline cursor-pointer">HTML Source</button>
-    </div>
+    <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">{{ $label }}</label>
 
     <div class="rounded-lg border border-(--admin-border) overflow-hidden bg-(--admin-surface-2)">
         <div class="flex flex-wrap items-center gap-0.5 border-b border-(--admin-border) bg-(--admin-surface) px-1.5 py-1" data-rich-toolbar>
@@ -46,10 +42,7 @@
             </button>
         </div>
         <div class="max-h-96 overflow-y-auto">
-            <div data-rich-source class="hidden">
-                <textarea data-rich-source-ta rows="12" class="w-full bg-(--admin-surface-2) text-sm text-(--admin-text-primary) p-3 outline-none resize-y font-mono text-[12.5px]" placeholder="Paste or edit HTML content..."></textarea>
-            </div>
-            <div data-rich-editor-area class="prose-admin min-h-44 p-3 text-sm text-(--admin-text-primary) outline-none"></div>
+            <div data-rich-editor-area contenteditable="true" class="prose-admin min-h-44 p-3 text-sm text-(--admin-text-primary) outline-none"></div>
         </div>
     </div>
     <input type="hidden" name="{{ $name }}" value="{{ $value }}">
@@ -64,20 +57,14 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll("[data-rich-editor]").forEach(function (root) {
         var area = root.querySelector("[data-rich-editor-area]");
         var hidden = root.querySelector('input[type="hidden"]');
-        var sourceBox = root.querySelector("[data-rich-source]");
-        var sourceTa = root.querySelector("[data-rich-source-ta]");
-        var toggle = root.querySelector("[data-rich-source-toggle]");
-        var sourceMode = false;
 
         area.innerHTML = hidden.value || "";
-        sourceTa.value = hidden.value || "";
 
         function sync() {
-            hidden.value = sourceMode ? sourceTa.value : area.innerHTML;
+            hidden.value = area.innerHTML;
         }
 
         area.addEventListener("input", sync);
-        sourceTa.addEventListener("input", sync);
         area.addEventListener("paste", function (e) {
             e.preventDefault();
             var html = (e.clipboardData || window.clipboardData).getData("text/html") ||
@@ -88,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         root.querySelectorAll("[data-rich-cmd]").forEach(function (btn) {
             btn.addEventListener("click", function () {
-                if (sourceMode) return;
+                area.focus();
                 var cmd = btn.getAttribute("data-rich-cmd");
                 if (cmd === "createLink") {
                     var url = prompt("Enter link URL (https://...):");
@@ -99,15 +86,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
                 sync();
             });
-        });
-
-        toggle.addEventListener("click", function () {
-            sourceMode = !sourceMode;
-            sourceBox.classList.toggle("hidden", !sourceMode);
-            area.classList.toggle("hidden", sourceMode);
-            toggle.textContent = sourceMode ? "Visual Editor" : "HTML Source";
-            if (sourceMode) sourceTa.value = area.innerHTML;
-            sync();
         });
     });
 });

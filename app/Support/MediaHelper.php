@@ -140,7 +140,8 @@ class MediaHelper
     public static function saveUploadedImage(
         \Illuminate\Http\UploadedFile $file,
         string $folderName,
-        string|int $id
+        string|int $id,
+        int $maxSize = 5 * 1024 * 1024
     ): string {
         if (!in_array($folderName, self::ALLOWED_FOLDERS, true)) {
             throw new \Exception("Invalid folder name: \"{$folderName}\"");
@@ -150,8 +151,8 @@ class MediaHelper
         $extension = self::EXTENSION_MAP[$extension] ?? ($file->guessExtension() ?: 'jpg');
         $extension = self::EXTENSION_MAP[$extension] ?? 'jpg';
 
-        if ($file->getSize() > self::MAX_IMAGE_SIZE) {
-            throw new \Exception('Image must be 5MB or smaller');
+        if ($file->getSize() > $maxSize) {
+            throw new \Exception('Image must be ' . (int) ($maxSize / 1024 / 1024) . 'MB or smaller');
         }
 
         $relativeDir = '/images/api/' . $folderName;

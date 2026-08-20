@@ -4,10 +4,9 @@
 <x-page-banner :title="$service->title" :crumb="$service->title" :crumbParent="['label' => 'Services', 'href' => '/services']" image="/images/aheadsolar/banner.jpg" />
 
 @php
-    $allServices = \App\Models\Service::orderBy('id')->get();
-    $gallery = collect($service->images ?? [])->filter()->values()->all();
-    $slides = count($gallery) > 0 ? array_merge([$service->image], $gallery) : [$service->image];
-    $slides = array_values(array_unique(array_filter($slides)));
+    $allServices = \App\Support\SiteData::services();
+    $gallery = collect($service->images ?? [])->filter()->values();
+    $slides = $gallery->prepend($service->image)->unique()->values();
 @endphp
 
 <div class="bg-white min-h-screen text-accent-500 font-sans antialiased">
@@ -31,19 +30,21 @@
                 <div class="reveal" data-variant="fade-up">
                     <section class="flex flex-col gap-6">
                         <div class="flex flex-col">
-                            <div class="reveal-image relative w-full h-64 sm:h-96 rounded-lg overflow-hidden shadow-md border border-gray-100">
-                                <div data-swiper data-loop="true" data-delay="4000" data-navigation="true" data-slides="1"  class="single-image-slider absolute inset-0">
-                                    <div class="swiper-wrapper">
-                                        @foreach ($slides as $img)
-                                            <div class="swiper-slide relative w-full h-full">
-                                                <img src="{{ $img }}" alt="{{ $service->title }}" class="absolute inset-0 w-full h-full object-cover">
-                                            </div>
-                                        @endforeach
+                            <div class="reveal-image w-full h-64 sm:h-96 rounded-lg overflow-hidden shadow-md border border-gray-100">
+                                @if ($slides->count() === 1)
+                                    <div class="h-full w-full bg-cover bg-center" style="background-image:url('{{ $slides->first() }}')"></div>
+                                @else
+                                    <div data-swiper data-loop="true" data-delay="4000" data-navigation="true" data-slides="1" class="single-image-slider relative h-full w-full">
+                                        <div class="swiper-wrapper h-full">
+                                            @foreach ($slides as $img)
+                                                <div class="swiper-slide relative w-full h-full bg-cover bg-center" style="background-image:url('{{ $img }}')"></div>
+                                            @endforeach
+                                        </div>
+                                        <div class="swiper-button-prev"></div>
+                                        <div class="swiper-button-next"></div>
+                                        <div class="swiper-pagination"></div>
                                     </div>
-                                    <div class="swiper-button-prev"></div>
-                                    <div class="swiper-button-next"></div>
-                                    <div class="swiper-pagination"></div>
-                                </div>
+                                @endif
                             </div>
                         </div>
                         <div class="text-[#888888] text-sm leading-relaxed space-y-4">{!! $service->service_details !!}</div>

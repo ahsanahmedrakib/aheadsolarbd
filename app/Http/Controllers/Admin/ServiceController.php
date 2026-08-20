@@ -93,8 +93,11 @@ class ServiceController extends Controller
             'alt' => ['required', 'string', 'min:5', 'max:255'],
             'icon_name' => ['required', 'string', 'max:50'],
             'image' => ['nullable', 'string'],
+            'image_file' => ['nullable', 'file', 'max:5120'],
             'images' => ['nullable', 'array'],
             'images.*' => ['nullable', 'string'],
+            'images_files' => ['nullable', 'array'],
+            'images_files.*' => ['file', 'max:10240'],
         ]);
     }
 
@@ -132,13 +135,6 @@ class ServiceController extends Controller
 
     private function resolveGallery(Request $request, string $folder, string|int $id, array $current = []): array
     {
-        if ($request->hasFile('images_files')) {
-            $paths = [];
-            foreach ($request->file('images_files') as $file) {
-                $paths[] = MediaHelper::saveUploadedImage($file, $folder, $id);
-            }
-            return array_values(array_filter($paths));
-        }
         $list = $request->input('images', []);
         if (!is_array($list)) {
             $list = [];
@@ -151,6 +147,11 @@ class ServiceController extends Controller
             }
             $out[] = MediaHelper::isBase64Image($img) ? MediaHelper::saveImage($img, $folder, $id) : $img;
         }
-        return $out;
+        if ($request->hasFile('images_files')) {
+            foreach ($request->file('images_files') as $file) {
+                $out[] = MediaHelper::saveUploadedImage($file, $folder, $id, 10 * 1024 * 1024);
+            }
+        }
+        return array_values(array_unique(array_filter($out)));
     }
 }

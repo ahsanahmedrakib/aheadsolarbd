@@ -87,25 +87,21 @@
 
             <div class="flex flex-col gap-1.5" data-gallery>
                 <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">Blog Gallery Images</label>
-                <input type="file" name="images_files[]" accept="image/*" multiple class="block w-full text-[12px] text-(--admin-text-secondary)
+                <input type="file" name="images_files[]" accept="image/*" multiple data-gallery-file class="block w-full text-[12px] text-(--admin-text-secondary) bg-(--admin-surface-2) border border-(--admin-border) rounded-lg p-2 transition
                     file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border file:border-(--admin-border) file:bg-(--admin-surface-2)
                     file:text-(--admin-text-primary) file:text-[12px] file:font-semibold file:cursor-pointer hover:file:bg-(--admin-border)/40">
-                <p class="text-[11px] text-(--admin-text-muted)">Or paste existing image paths below:</p>
-                <div class="space-y-2" data-gallery-list>
-                    @foreach ($gallery as $i => $img)
-                        <div class="flex items-center gap-2" data-gallery-row>
-                            <input type="text" name="images[]" value="{{ $img }}" placeholder="/images/services/gallery-1.jpg"
-                                class="flex-1 bg-(--admin-surface-2) border border-(--admin-border) text-sm font-mono text-[12.5px] text-(--admin-text-primary) rounded-lg p-2.5 outline-none focus:border-(--admin-accent) transition">
-                            <button type="button" data-gallery-remove class="admin-action-btn danger" title="Remove">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+                <p class="text-[11px] text-(--admin-text-muted)">Max 10MB per image.</p>
+                <div class="grid grid-cols-3 sm:grid-cols-4 gap-2 {{ count($gallery) ? '' : 'hidden' }}" data-gallery-list>
+                    @foreach ($gallery as $img)
+                        <div class="relative rounded-lg overflow-hidden border border-(--admin-border) aspect-square" data-gallery-row>
+                            <img src="{{ $img }}" alt="" class="w-full h-full object-cover">
+                            <input type="hidden" name="images[]" value="{{ $img }}">
+                            <button type="button" data-gallery-remove class="absolute top-1 right-1 z-10 w-5 h-5 rounded-full bg-black/70 text-white flex items-center justify-center cursor-pointer hover:bg-red-600" title="Remove">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
                             </button>
                         </div>
                     @endforeach
                 </div>
-                <button type="button" data-gallery-add class="text-[12px] font-medium text-(--admin-accent) hover:underline flex items-center gap-1 w-fit cursor-pointer">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
-                    Add gallery path
-                </button>
             </div>
 
             <div class="flex justify-end gap-3 pt-3 border-t border-(--admin-border)">
@@ -145,21 +141,66 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     var gallery = document.querySelector("[data-gallery]");
+    var fileInput = gallery?.querySelector("[data-gallery-file]");
     var list = gallery?.querySelector("[data-gallery-list]");
-    var addBtn = gallery?.querySelector("[data-gallery-add]");
-    if (gallery && list && addBtn) {
-        addBtn.addEventListener("click", function () {
+    var files = [];
+
+    function makeRemoveBtn(onClick) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "absolute top-1 right-1 z-10 w-5 h-5 rounded-full bg-black/70 text-white flex items-center justify-center cursor-pointer hover:bg-red-600";
+        btn.title = "Remove";
+        btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>';
+        btn.addEventListener("click", onClick);
+        return btn;
+    }
+
+    function rebuildInput() {
+        var dt = new DataTransfer();
+        files.forEach(function (f) { dt.items.add(f); });
+        fileInput.files = dt.files;
+    }
+
+    function renderNewFiles() {
+        list.querySelectorAll("[data-new]").forEach(function (r) { r.remove(); });
+        files.forEach(function (file, idx) {
             var row = document.createElement("div");
-            row.className = "flex items-center gap-2";
-            row.innerHTML = '<input type="text" name="images[]" placeholder="/images/services/gallery-1.jpg" class="flex-1 bg-(--admin-surface-2) border border-(--admin-border) text-sm font-mono text-[12.5px] text-(--admin-text-primary) rounded-lg p-2.5 outline-none focus:border-(--admin-accent) transition">' +
-                '<button type="button" data-gallery-remove class="admin-action-btn danger" title="Remove"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg></button>';
+            row.className = "relative rounded-lg overflow-hidden border border-(--admin-border) aspect-square";
+            row.dataset.new = "1";
+            var img = document.createElement("img");
+            img.className = "w-full h-full object-cover";
+            img.src = URL.createObjectURL(file);
+            img.alt = file.name;
+            var btn = makeRemoveBtn(function () {
+                files.splice(idx, 1);
+                renderNewFiles();
+                rebuildInput();
+            });
+            row.appendChild(img);
+            row.appendChild(btn);
             list.appendChild(row);
-            bindRow(row);
         });
-        function bindRow(row) {
-            row.querySelector("[data-gallery-remove]").addEventListener("click", function () { row.remove(); });
+        list.classList.remove("hidden");
+    }
+
+    fileInput?.addEventListener("change", function () {
+        files = [];
+        var oversized = [];
+        Array.prototype.forEach.call(fileInput.files, function (f) {
+            if (f.size > 10 * 1024 * 1024) { oversized.push(f.name); return; }
+            files.push(f);
+        });
+        renderNewFiles();
+        if (oversized.length) {
+            alert("Some images were skipped because they are larger than 10MB:\n" + oversized.join("\n"));
         }
-        list.querySelectorAll("[data-gallery-row]").forEach(bindRow);
+    });
+
+    if (gallery && list) {
+        list.querySelectorAll("[data-gallery-row]").forEach(function (row) {
+            var btn = row.querySelector("[data-gallery-remove]");
+            if (btn) btn.addEventListener("click", function () { row.remove(); });
+        });
     }
 });
 </script>

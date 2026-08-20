@@ -80,6 +80,7 @@ class TeamController extends Controller
             'role' => ['required', 'string', 'max:100'],
             'bio' => ['nullable', 'string'],
             'image' => ['nullable', 'string'],
+            'image_file' => ['nullable', 'file', 'max:5120'],
             'social_facebook' => ['nullable', 'string'],
             'social_instagram' => ['nullable', 'string'],
             'social_x' => ['nullable', 'string'],

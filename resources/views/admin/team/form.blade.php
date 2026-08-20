@@ -53,7 +53,7 @@
                 'label' => 'Member Photo',
                 'value' => old('image', $item?->image),
                 'required' => false,
-                'hint' => 'Upload a file or paste a path. Max 5MB.',
+                'hint' => 'Upload an image. Max 5MB.',
             ])
 
             <div class="flex flex-col gap-1.5">
