@@ -190,6 +190,10 @@
         no-repeat center center / contain;
 }
 
+.palash-page .hero-swiper-bullet-active {
+    background: var(--color-forest-500);
+}
+
 /* ================================================================
    GLOBAL BASE STYLES
    ================================================================ */

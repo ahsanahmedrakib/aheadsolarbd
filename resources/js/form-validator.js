@@ -12,7 +12,12 @@
 
 const VALIDATORS = {
   required(value, param, field) {
-    if (field.type === "checkbox") return field.checked;
+    if (field.type === "checkbox") {
+      var form = field.closest("form");
+      var group = form ? form.querySelectorAll('[name="' + field.name + '"]') : [field];
+      if (group.length > 1) return Array.from(group).some(function (c) { return c.checked; });
+      return field.checked;
+    }
     if (field.type === "radio") {
       var group = field.closest("form").querySelectorAll('[name="' + field.name + '"]');
       return Array.from(group).some(function (r) { return r.checked; });
@@ -96,7 +101,7 @@ function validateField(field) {
 }
 
 function findWrapper(field) {
-  return field.closest(".flex.flex-col.gap-2") || field.closest(".flex.flex-col") || field.parentElement;
+  return field.closest(".flex.flex-col.gap-2") || field.closest(".flex.flex-col.gap-3") || field.closest(".flex.flex-col") || field.parentElement;
 }
 
 function showError(field, message) {
@@ -112,7 +117,7 @@ function showError(field, message) {
   }
   errEl.textContent = message;
 
-  if (field.type === "hidden" || field.type === "file") return;
+  if (field.type === "hidden" || field.type === "file" || field.type === "radio" || field.type === "checkbox") return;
 
   field.classList.add("border-red-500", "focus:ring-red-500");
   field.classList.remove(
@@ -130,7 +135,7 @@ function clearError(field) {
   var errEl = wrapper.querySelector("[data-validation-error]");
   if (errEl) errEl.remove();
 
-  if (field.type === "hidden" || field.type === "file") return;
+  if (field.type === "hidden" || field.type === "file" || field.type === "radio" || field.type === "checkbox") return;
 
   field.classList.remove("border-red-500", "focus:ring-red-500");
   if (field.closest(".admin-layout-root")) {
@@ -141,14 +146,13 @@ function clearError(field) {
 }
 
 function validateGroup(field) {
-  if (field.type === "radio") {
+  if (field.type === "radio" || field.type === "checkbox") {
     var form = field.closest("form");
     if (form) {
-      var radios = form.querySelectorAll('[name="' + field.name + '"]');
-      radios.forEach(function (r) {
-        var err = validateField(r);
-        if (err) showError(r, err); else clearError(r);
-      });
+      var siblings = form.querySelectorAll('[name="' + field.name + '"]');
+      var target = siblings[0];
+      var err = validateField(target);
+      if (err) showError(target, err); else clearError(target);
     }
     return;
   }
@@ -189,6 +193,8 @@ export function showServerErrors(form, errors) {
 
 export function initFormValidation() {
   document.querySelectorAll("form[data-validate]").forEach(function (form) {
+    var boundGroups = {};
+
     form.querySelectorAll("[data-rules]").forEach(function (field) {
       field.addEventListener("blur", function () { validateGroup(field); });
       field.addEventListener("input", function () {
@@ -198,6 +204,14 @@ export function initFormValidation() {
       });
       if (field.type === "radio" || field.type === "checkbox") {
         field.addEventListener("change", function () { validateGroup(field); });
+        if (!boundGroups[field.name]) {
+          boundGroups[field.name] = true;
+          form.querySelectorAll('[name="' + field.name + '"]').forEach(function (sibling) {
+            if (sibling !== field) {
+              sibling.addEventListener("change", function () { validateGroup(sibling); });
+            }
+          });
+        }
       }
     });
 

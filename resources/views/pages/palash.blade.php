@@ -436,7 +436,7 @@
                                 <p class="text-forest-500 text-sm font-bold tracking-wide">Which service are you interested in? / আপনি কোন ধরনের ডিলারশিপ নিতে আগ্রহী?*</p>
                                 @foreach ($servicesOptions as $option)
                                 <label class="flex items-center gap-3 cursor-pointer group" data-palash-service-label>
-                                    <input type="checkbox" name="services[]" value="{{ $option['value'] }}" class="w-4 h-4 rounded border-gray-300 text-forest-500 focus:ring-accent-500 cursor-pointer">
+                                    <input type="checkbox" name="services[]" value="{{ $option['value'] }}" {{ $loop->first ? 'data-rules="required" data-label="Service"' : '' }} class="w-4 h-4 rounded border-gray-300 text-forest-500 focus:ring-accent-500 cursor-pointer">
                                     <span class="text-base text-[#888888] font-medium group-hover:text-forest-500 transition-colors">{{ $option['label'] }} - <span class="font-semibold">{{ $option['bangla'] }}</span></span>
                                 </label>
                                 @endforeach
@@ -446,7 +446,7 @@
                                 <p class="text-forest-500 text-sm font-bold tracking-wide">Do you currently have a business related to easy-bikes or batteries? / ইজি-বাইক বা ব্যাটারি সংক্রান্ত বর্তমানে আপনার কোনো ব্যবসা আছে কি?*</p>
                                 <div class="flex flex-col sm:flex-row sm:gap-8 gap-3">
                                     <label class="flex items-center gap-3 cursor-pointer group">
-                                        <input type="radio" name="hasBusiness" value="yes" class="w-4 h-4 border-gray-300 text-forest-500 focus:ring-accent-500 cursor-pointer">
+                                        <input type="radio" name="hasBusiness" value="yes" data-rules="required" data-label="Business" class="w-4 h-4 border-gray-300 text-forest-500 focus:ring-accent-500 cursor-pointer">
                                         <span class="text-base text-[#888888] font-medium group-hover:text-forest-500 transition-colors">Yes / হ্যাঁ</span>
                                     </label>
                                     <label class="flex items-center gap-3 cursor-pointer group">
@@ -656,30 +656,6 @@
             serviceInputs.forEach(function(el) {
                 if (el.checked) services.push(el.value);
             });
-
-            if (services.length === 0) {
-                var errBox = errorBox;
-                if (errorText) errorText.textContent = "Please select at least one service.";
-                errBox.classList.remove("hidden");
-                serviceInputs[0]?.focus();
-                return;
-            }
-
-            var hasBusinessVal = form.hasBusiness.value || "";
-            if (!hasBusinessVal) {
-                if (errorText) errorText.textContent = "Please select whether you have a business.";
-                errorBox.classList.remove("hidden");
-                form.querySelector("input[name='hasBusiness']")?.focus();
-                return;
-            }
-
-            var spaceVal = form.space.value || "";
-            if (!spaceVal) {
-                if (errorText) errorText.textContent = "Please select your space option.";
-                errorBox.classList.remove("hidden");
-                form.querySelector("input[name='space']")?.focus();
-                return;
-            }
 
             var payload = {
                 fullName: form.fullName.value,
