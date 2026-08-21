@@ -338,7 +338,7 @@
             </div>
 
             <div class="reveal" data-variant="fade-up" data-delay="150">
-                <form id="palash-application-form" action="{{ route('palash.submit') }}" method="POST" data-validate class="max-w-5xl mx-auto bg-secondary rounded-2xl p-6 sm:p-10 shadow-sm">
+                <form id="palash-application-form" action="{{ route('palash.submit') }}" method="POST" class="max-w-5xl mx-auto bg-secondary rounded-2xl p-6 sm:p-10 shadow-sm">
                     @csrf
 
                     <div id="palash-success" class="hidden mb-8 transition-all">
@@ -432,23 +432,23 @@
                             </div>
                         </div>
                         <div class="mt-6 space-y-6">
-                            <div class="flex flex-col gap-3">
+                            <div class="flex flex-col gap-3" data-palash-services-group>
                                 <p class="text-forest-500 text-sm font-bold tracking-wide">Which service are you interested in? / আপনি কোন ধরনের ডিলারশিপ নিতে আগ্রহী?*</p>
-                                <span data-validation-error class="text-red-500 text-xs font-medium px-1"></span>
+                                <span data-palash-services-error class="text-red-500 text-xs font-medium px-1 hidden"></span>
                                 @foreach ($servicesOptions as $option)
                                 <label class="flex items-center gap-3 cursor-pointer group" data-palash-service-label>
-                                    <input type="checkbox" name="services[]" value="{{ $option['value'] }}" {{ $loop->first ? 'data-rules="required" data-label="Service"' : '' }} class="w-4 h-4 rounded border-gray-300 text-forest-500 focus:ring-accent-500 cursor-pointer">
+                                    <input type="checkbox" name="services[]" value="{{ $option['value'] }}" class="w-4 h-4 rounded border-gray-300 text-forest-500 focus:ring-accent-500 cursor-pointer">
                                     <span class="text-base text-[#888888] font-medium group-hover:text-forest-500 transition-colors">{{ $option['label'] }} - <span class="font-semibold">{{ $option['bangla'] }}</span></span>
                                 </label>
                                 @endforeach
                             </div>
 
-                            <div class="flex flex-col gap-3">
+                            <div class="flex flex-col gap-3" data-palash-business-group>
                                 <p class="text-forest-500 text-sm font-bold tracking-wide">Do you currently have a business related to easy-bikes or batteries? / ইজি-বাইক বা ব্যাটারি সংক্রান্ত বর্তমানে আপনার কোনো ব্যবসা আছে কি?*</p>
-                                <span data-validation-error class="text-red-500 text-xs font-medium px-1"></span>
+                                <span data-palash-business-error class="text-red-500 text-xs font-medium px-1 hidden"></span>
                                 <div class="flex flex-col sm:flex-row sm:gap-8 gap-3">
                                     <label class="flex items-center gap-3 cursor-pointer group">
-                                        <input type="radio" name="hasBusiness" value="yes" data-rules="required" data-label="Business Information" class="w-4 h-4 border-gray-300 text-forest-500 focus:ring-accent-500 cursor-pointer">
+                                        <input type="radio" name="hasBusiness" value="yes" class="w-4 h-4 border-gray-300 text-forest-500 focus:ring-accent-500 cursor-pointer">
                                         <span class="text-base text-[#888888] font-medium group-hover:text-forest-500 transition-colors">Yes / হ্যাঁ</span>
                                     </label>
                                     <label class="flex items-center gap-3 cursor-pointer group">
@@ -478,9 +478,10 @@
                         <div class="mt-6 space-y-6">
                             <div class="flex flex-col gap-3">
                                 <p class="text-forest-500 text-sm font-bold tracking-wide">Do you have an existing space / garage for the charging station or battery stock? / চার্জিং স্টেশন বা ব্যাটারি মজুতের জন্য আপনার কি জায়গা / গ্যারেজ আছে?*</p>
+                                <span data-palash-space-error class="text-red-500 text-xs font-medium px-1 hidden"></span>
                                 <div class="flex flex-col gap-3">
                                     <label class="flex items-center gap-3 cursor-pointer group">
-                                        <input type="radio" name="space" value="own" data-rules="required" data-label="Space" class="w-4 h-4 border-gray-300 text-forest-500 focus:ring-accent-500 cursor-pointer">
+                                        <input type="radio" name="space" value="own" class="w-4 h-4 border-gray-300 text-forest-500 focus:ring-accent-500 cursor-pointer">
                                         <span class="text-base text-[#888888] font-medium group-hover:text-forest-500 transition-colors">Yes, I have my own space / হ্যাঁ, আমার নিজস্ব জায়গা আছে</span>
                                     </label>
                                     <label class="flex items-center gap-3 cursor-pointer group">
@@ -621,8 +622,16 @@
         var bothInput = form.querySelector("input[name='services[]'][value='both']");
         var expField = form.querySelector("[data-palash-exp]");
 
+        var servicesErr = document.querySelector("[data-palash-services-error]");
+        var businessErr = document.querySelector("[data-palash-business-error]");
+        var spaceErr = document.querySelector("[data-palash-space-error]");
+
+        function showGroupError(el, msg) { if (el) { el.textContent = msg; el.classList.remove("hidden"); } }
+        function clearGroupError(el) { if (el) { el.textContent = ""; el.classList.add("hidden"); } }
+
         serviceInputs.forEach(function(input) {
             input.addEventListener("change", function() {
+                clearGroupError(servicesErr);
                 var isBoth = bothInput && bothInput.checked;
                 serviceInputs.forEach(function(el) {
                     var disabled = el.value !== "both" && isBoth;
@@ -643,7 +652,14 @@
 
         form.querySelectorAll("input[name='hasBusiness']").forEach(function(input) {
             input.addEventListener("change", function() {
+                clearGroupError(businessErr);
                 if (expField) expField.classList.toggle("hidden", !(input.value === "yes" && input.checked));
+            });
+        });
+
+        form.querySelectorAll("input[name='space']").forEach(function(input) {
+            input.addEventListener("change", function() {
+                clearGroupError(spaceErr);
             });
         });
 
@@ -658,6 +674,26 @@
             serviceInputs.forEach(function(el) {
                 if (el.checked) services.push(el.value);
             });
+
+            if (services.length === 0) {
+                showGroupError(servicesErr, "Please select at least one service.");
+                form.querySelector("input[name='services[]']")?.scrollIntoView({ behavior: "smooth", block: "center" });
+                return;
+            }
+
+            var hasBusinessVal = form.hasBusiness.value || "";
+            if (!hasBusinessVal) {
+                showGroupError(businessErr, "Business Information is required");
+                form.querySelector("input[name='hasBusiness']")?.scrollIntoView({ behavior: "smooth", block: "center" });
+                return;
+            }
+
+            var spaceVal = form.space.value || "";
+            if (!spaceVal) {
+                showGroupError(spaceErr, "Space Information is required");
+                form.querySelector("input[name='space']")?.scrollIntoView({ behavior: "smooth", block: "center" });
+                return;
+            }
 
             var payload = {
                 fullName: form.fullName.value,
@@ -696,6 +732,9 @@
                         successBox.classList.remove("hidden");
                         form.reset();
                         if (expField) expField.classList.add("hidden");
+                        clearGroupError(servicesErr);
+                        clearGroupError(businessErr);
+                        clearGroupError(spaceErr);
                         serviceInputs.forEach(function(el) {
                             el.disabled = false;
                         });
