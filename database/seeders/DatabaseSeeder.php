@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
                 'iconName' => 'MessageSquare',
                 'color' => '#10b981',
                 'fields' => [
-                    ['label' => 'WhatsApp Phone Number (with Country Code)', 'type' => 'text', 'value' => '+8801712947551', 'id' => 'whatsapp-number'],
+                    ['label' => 'WhatsApp Phone Number (with Country Code)', 'type' => 'text', 'value' => '+8801335127307', 'id' => 'whatsapp-number'],
                     ['label' => 'WhatsApp Default Greeting Message', 'type' => 'text', 'value' => 'Hello Ahead Solar, I would like to inquire about solar energy solutions.', 'id' => 'whatsapp-message'],
                     ['label' => 'Facebook Messenger Username / Page ID', 'type' => 'text', 'value' => '61591154285690', 'id' => 'messenger-username'],
                     ['label' => 'Facebook Page URL', 'type' => 'url', 'value' => 'https://www.facebook.com/profile.php?id=61591154285690', 'id' => 'facebook-url'],
