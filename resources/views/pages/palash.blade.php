@@ -434,18 +434,17 @@
                         <div class="mt-6 space-y-6">
                             <div class="flex flex-col gap-3" data-palash-services-group>
                                 <p class="text-forest-500 text-sm font-bold tracking-wide">Which service are you interested in? / আপনি কোন ধরনের ডিলারশিপ নিতে আগ্রহী?*</p>
-                                <span data-palash-services-error class="text-red-500 text-xs font-medium px-1 hidden"></span>
                                 @foreach ($servicesOptions as $option)
                                 <label class="flex items-center gap-3 cursor-pointer group" data-palash-service-label>
                                     <input type="checkbox" name="services[]" value="{{ $option['value'] }}" class="w-4 h-4 rounded border-gray-300 text-forest-500 focus:ring-accent-500 cursor-pointer">
                                     <span class="text-base text-[#888888] font-medium group-hover:text-forest-500 transition-colors">{{ $option['label'] }} - <span class="font-semibold">{{ $option['bangla'] }}</span></span>
                                 </label>
                                 @endforeach
+                                <span data-palash-services-error class="text-red-500 text-xs font-medium px-1 hidden"></span>
                             </div>
 
                             <div class="flex flex-col gap-3" data-palash-business-group>
                                 <p class="text-forest-500 text-sm font-bold tracking-wide">Do you currently have a business related to easy-bikes or batteries? / ইজি-বাইক বা ব্যাটারি সংক্রান্ত বর্তমানে আপনার কোনো ব্যবসা আছে কি?*</p>
-                                <span data-palash-business-error class="text-red-500 text-xs font-medium px-1 hidden"></span>
                                 <div class="flex flex-col sm:flex-row sm:gap-8 gap-3">
                                     <label class="flex items-center gap-3 cursor-pointer group">
                                         <input type="radio" name="hasBusiness" value="yes" class="w-4 h-4 border-gray-300 text-forest-500 focus:ring-accent-500 cursor-pointer">
@@ -456,6 +455,7 @@
                                         <span class="text-base text-[#888888] font-medium group-hover:text-forest-500 transition-colors">No, I am a new investor / না, আমি নতুন ব্যবসা শুরু করতে চাই</span>
                                     </label>
                                 </div>
+                                <span data-palash-business-error class="text-red-500 text-xs font-medium px-1 hidden"></span>
                             </div>
 
                             <div class="hidden" data-palash-exp>
@@ -478,7 +478,6 @@
                         <div class="mt-6 space-y-6">
                             <div class="flex flex-col gap-3">
                                 <p class="text-forest-500 text-sm font-bold tracking-wide">Do you have an existing space / garage for the charging station or battery stock? / চার্জিং স্টেশন বা ব্যাটারি মজুতের জন্য আপনার কি জায়গা / গ্যারেজ আছে?*</p>
-                                <span data-palash-space-error class="text-red-500 text-xs font-medium px-1 hidden"></span>
                                 <div class="flex flex-col gap-3">
                                     <label class="flex items-center gap-3 cursor-pointer group">
                                         <input type="radio" name="space" value="own" class="w-4 h-4 border-gray-300 text-forest-500 focus:ring-accent-500 cursor-pointer">
@@ -493,6 +492,7 @@
                                         <span class="text-base text-[#888888] font-medium group-hover:text-forest-500 transition-colors">No, I am looking for a space / না, আমি জায়গা খুঁজছি</span>
                                     </label>
                                 </div>
+                                <span data-palash-space-error class="text-red-500 text-xs font-medium px-1 hidden"></span>
                             </div>
 
                             <div class="flex flex-col gap-2">
