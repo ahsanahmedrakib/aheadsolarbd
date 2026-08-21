@@ -1,0 +1,16 @@
+node_modules
+vendor
+.git
+.env
+storage/framework/views/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/logs/*
+public/build
+*.zip
+*.tar.gz
+.idea
+.vscode
+.editorconfig
+README.md
+aheadsolar-mysql-dump.sql
