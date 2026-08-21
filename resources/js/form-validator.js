@@ -101,14 +101,6 @@ function validateField(field) {
 }
 
 function findWrapper(field) {
-  if (field.type === "radio" || field.type === "checkbox") {
-    var el = field.parentElement;
-    while (el && el !== field.closest("form")) {
-      var hasQuestion = el.querySelector("p");
-      if (hasQuestion && el.classList.contains("flex") && el.classList.contains("flex-col")) return el;
-      el = el.parentElement;
-    }
-  }
   return field.closest(".flex.flex-col.gap-2") || field.closest(".flex.flex-col.gap-3") || field.closest(".flex.flex-col") || field.parentElement;
 }
 

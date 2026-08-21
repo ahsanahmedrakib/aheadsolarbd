@@ -434,6 +434,7 @@
                         <div class="mt-6 space-y-6">
                             <div class="flex flex-col gap-3">
                                 <p class="text-forest-500 text-sm font-bold tracking-wide">Which service are you interested in? / আপনি কোন ধরনের ডিলারশিপ নিতে আগ্রহী?*</p>
+                                <span data-validation-error class="text-red-500 text-xs font-medium px-1"></span>
                                 @foreach ($servicesOptions as $option)
                                 <label class="flex items-center gap-3 cursor-pointer group" data-palash-service-label>
                                     <input type="checkbox" name="services[]" value="{{ $option['value'] }}" {{ $loop->first ? 'data-rules="required" data-label="Service"' : '' }} class="w-4 h-4 rounded border-gray-300 text-forest-500 focus:ring-accent-500 cursor-pointer">
@@ -444,6 +445,7 @@
 
                             <div class="flex flex-col gap-3">
                                 <p class="text-forest-500 text-sm font-bold tracking-wide">Do you currently have a business related to easy-bikes or batteries? / ইজি-বাইক বা ব্যাটারি সংক্রান্ত বর্তমানে আপনার কোনো ব্যবসা আছে কি?*</p>
+                                <span data-validation-error class="text-red-500 text-xs font-medium px-1"></span>
                                 <div class="flex flex-col sm:flex-row sm:gap-8 gap-3">
                                     <label class="flex items-center gap-3 cursor-pointer group">
                                         <input type="radio" name="hasBusiness" value="yes" data-rules="required" data-label="Business Information" class="w-4 h-4 border-gray-300 text-forest-500 focus:ring-accent-500 cursor-pointer">
