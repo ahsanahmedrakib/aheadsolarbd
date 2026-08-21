@@ -666,8 +666,10 @@
         form.addEventListener("submit", function(e) {
             e.preventDefault();
 
+            var valid = true;
+
             if (typeof window.validateForm === "function" && !window.validateForm(form)) {
-                return;
+                valid = false;
             }
 
             var services = [];
@@ -677,23 +679,22 @@
 
             if (services.length === 0) {
                 showGroupError(servicesErr, "Please select at least one service.");
-                form.querySelector("input[name='services[]']")?.scrollIntoView({ behavior: "smooth", block: "center" });
-                return;
+                valid = false;
             }
 
             var hasBusinessVal = form.hasBusiness.value || "";
             if (!hasBusinessVal) {
                 showGroupError(businessErr, "Business Information is required");
-                form.querySelector("input[name='hasBusiness']")?.scrollIntoView({ behavior: "smooth", block: "center" });
-                return;
+                valid = false;
             }
 
             var spaceVal = form.space.value || "";
             if (!spaceVal) {
                 showGroupError(spaceErr, "Space Information is required");
-                form.querySelector("input[name='space']")?.scrollIntoView({ behavior: "smooth", block: "center" });
-                return;
+                valid = false;
             }
+
+            if (!valid) return;
 
             var payload = {
                 fullName: form.fullName.value,
