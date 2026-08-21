@@ -478,7 +478,7 @@
                                 <p class="text-forest-500 text-sm font-bold tracking-wide">Do you have an existing space / garage for the charging station or battery stock? / চার্জিং স্টেশন বা ব্যাটারি মজুতের জন্য আপনার কি জায়গা / গ্যারেজ আছে?*</p>
                                 <div class="flex flex-col gap-3">
                                     <label class="flex items-center gap-3 cursor-pointer group">
-                                        <input type="radio" name="space" value="own" class="w-4 h-4 border-gray-300 text-forest-500 focus:ring-accent-500 cursor-pointer">
+                                        <input type="radio" name="space" value="own" data-rules="required" data-label="Space" class="w-4 h-4 border-gray-300 text-forest-500 focus:ring-accent-500 cursor-pointer">
                                         <span class="text-base text-[#888888] font-medium group-hover:text-forest-500 transition-colors">Yes, I have my own space / হ্যাঁ, আমার নিজস্ব জায়গা আছে</span>
                                     </label>
                                     <label class="flex items-center gap-3 cursor-pointer group">

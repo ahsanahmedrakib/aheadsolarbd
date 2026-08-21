@@ -20,7 +20,11 @@
                 The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
             </p>
         </div>
-        <div class="reveal" data-variant="fade-up" data-delay="300">
+        <div class="reveal flex flex-col sm:flex-row items-center justify-center gap-4" data-variant="fade-up" data-delay="300">
+            <button onclick="history.back()" class="text-sm font-semibold px-8 py-3 rounded-full shadow-md transition-colors duration-200 inline-flex items-center gap-2 border border-forest-500 text-forest-500 hover:bg-forest-500 hover:text-white cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                <span>Go Back</span>
+            </button>
             <a href="{{ url('/') }}" class="btn-brand text-sm font-semibold px-8 py-3 rounded-full shadow-md transition-colors duration-200 inline-flex items-center gap-2">
                 <span>Back to Home</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4v16l14-8z"/></svg>
