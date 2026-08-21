@@ -338,7 +338,7 @@
             </div>
 
             <div class="reveal" data-variant="fade-up" data-delay="150">
-                <form id="palash-application-form" action="{{ route('palash.submit') }}" method="POST" class="max-w-5xl mx-auto bg-secondary rounded-2xl p-6 sm:p-10 shadow-sm">
+                <form id="palash-application-form" action="{{ route('palash.submit') }}" method="POST" data-validate class="max-w-5xl mx-auto bg-secondary rounded-2xl p-6 sm:p-10 shadow-sm">
                     @csrf
 
                     <div id="palash-success" class="hidden mb-8 transition-all">
@@ -446,7 +446,7 @@
                                 <p class="text-forest-500 text-sm font-bold tracking-wide">Do you currently have a business related to easy-bikes or batteries? / ইজি-বাইক বা ব্যাটারি সংক্রান্ত বর্তমানে আপনার কোনো ব্যবসা আছে কি?*</p>
                                 <div class="flex flex-col sm:flex-row sm:gap-8 gap-3">
                                     <label class="flex items-center gap-3 cursor-pointer group">
-                                        <input type="radio" name="hasBusiness" value="yes" data-rules="required" data-label="Business" class="w-4 h-4 border-gray-300 text-forest-500 focus:ring-accent-500 cursor-pointer">
+                                        <input type="radio" name="hasBusiness" value="yes" data-rules="required" data-label="Business Information" class="w-4 h-4 border-gray-300 text-forest-500 focus:ring-accent-500 cursor-pointer">
                                         <span class="text-base text-[#888888] font-medium group-hover:text-forest-500 transition-colors">Yes / হ্যাঁ</span>
                                     </label>
                                     <label class="flex items-center gap-3 cursor-pointer group">
