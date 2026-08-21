@@ -1,0 +1,88 @@
+{
+  "_fonts-C7guB1R8.css": {
+    "file": "assets/fonts-C7guB1R8.css",
+    "src": "_fonts-C7guB1R8.css"
+  },
+  "_rajdhani-400-normal-C6_q4usG.woff": {
+    "file": "assets/rajdhani-400-normal-C6_q4usG.woff",
+    "src": "_rajdhani-400-normal-C6_q4usG.woff"
+  },
+  "_rajdhani-400-normal-CurJOxDW.woff2": {
+    "file": "assets/rajdhani-400-normal-CurJOxDW.woff2",
+    "src": "_rajdhani-400-normal-CurJOxDW.woff2"
+  },
+  "_rajdhani-500-normal-ByNUCHrt.woff2": {
+    "file": "assets/rajdhani-500-normal-ByNUCHrt.woff2",
+    "src": "_rajdhani-500-normal-ByNUCHrt.woff2"
+  },
+  "_rajdhani-500-normal-DfvNI-Td.woff": {
+    "file": "assets/rajdhani-500-normal-DfvNI-Td.woff",
+    "src": "_rajdhani-500-normal-DfvNI-Td.woff"
+  },
+  "_rajdhani-600-normal-CXCVEoA9.woff2": {
+    "file": "assets/rajdhani-600-normal-CXCVEoA9.woff2",
+    "src": "_rajdhani-600-normal-CXCVEoA9.woff2"
+  },
+  "_rajdhani-600-normal-Dx02qI2_.woff": {
+    "file": "assets/rajdhani-600-normal-Dx02qI2_.woff",
+    "src": "_rajdhani-600-normal-Dx02qI2_.woff"
+  },
+  "_rajdhani-700-normal-BPDUZo87.woff2": {
+    "file": "assets/rajdhani-700-normal-BPDUZo87.woff2",
+    "src": "_rajdhani-700-normal-BPDUZo87.woff2"
+  },
+  "_rajdhani-700-normal-e0Uj8ZlN.woff": {
+    "file": "assets/rajdhani-700-normal-e0Uj8ZlN.woff",
+    "src": "_rajdhani-700-normal-e0Uj8ZlN.woff"
+  },
+  "_rubik-400-normal-BV1Ho3GG.woff": {
+    "file": "assets/rubik-400-normal-BV1Ho3GG.woff",
+    "src": "_rubik-400-normal-BV1Ho3GG.woff"
+  },
+  "_rubik-400-normal-j0pmKyiQ.woff2": {
+    "file": "assets/rubik-400-normal-j0pmKyiQ.woff2",
+    "src": "_rubik-400-normal-j0pmKyiQ.woff2"
+  },
+  "_rubik-500-normal-1os41rQk.woff2": {
+    "file": "assets/rubik-500-normal-1os41rQk.woff2",
+    "src": "_rubik-500-normal-1os41rQk.woff2"
+  },
+  "_rubik-500-normal-LZYVHeqz.woff": {
+    "file": "assets/rubik-500-normal-LZYVHeqz.woff",
+    "src": "_rubik-500-normal-LZYVHeqz.woff"
+  },
+  "_rubik-600-normal-7iWW07_k.woff2": {
+    "file": "assets/rubik-600-normal-7iWW07_k.woff2",
+    "src": "_rubik-600-normal-7iWW07_k.woff2"
+  },
+  "_rubik-600-normal-Bd1rsTk4.woff": {
+    "file": "assets/rubik-600-normal-Bd1rsTk4.woff",
+    "src": "_rubik-600-normal-Bd1rsTk4.woff"
+  },
+  "_rubik-700-normal-D-tMm-eS.woff2": {
+    "file": "assets/rubik-700-normal-D-tMm-eS.woff2",
+    "src": "_rubik-700-normal-D-tMm-eS.woff2"
+  },
+  "_rubik-700-normal-KHOtubUA.woff": {
+    "file": "assets/rubik-700-normal-KHOtubUA.woff",
+    "src": "_rubik-700-normal-KHOtubUA.woff"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-B-dyTvbr.css",
+    "name": "app",
+    "names": [
+      "app.css"
+    ],
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-dt75GQ-a.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "css": [
+      "assets/app-D8xBziat.css"
+    ]
+  }
+}
