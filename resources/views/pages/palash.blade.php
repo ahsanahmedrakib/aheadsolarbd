@@ -87,7 +87,7 @@
     @endphp
 
 
-    <section class="bg-white pt-4 px-4 sm:px-6 lg:px-8 font-sans overflow-x-hidden flex justify-center">
+    <section class="bg-white pt-4 px-4 sm:px-6 lg:px-8 font-sans overflow-clip flex justify-center">
         <a href="#become-partner" class="group flex gap-1 justify-between items-center bg-forest-500 text-white disabled:bg-gray-400 text-base font-semibold px-8 py-3.5 rounded-full shadow-md transition-colors duration-200 cursor-pointer disabled:cursor-not-allowed">
             <span>Become A Partner</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
@@ -96,7 +96,7 @@
             </svg>
         </a>
     </section>
-    <section class="bg-white py-10 px-4 sm:px-6 lg:px-8 font-sans overflow-x-hidden">
+    <section class="bg-white py-10 px-4 sm:px-6 lg:px-8 font-sans overflow-clip">
         <div class="solar-container grid grid-cols-1 lg:grid-cols-12 gap-24 items-center">
             <div class="lg:col-span-6 space-y-6">
                 <div class="reveal sm:flex sm:items-center sm:justify-between gap-4" data-variant="fade-up">
@@ -183,7 +183,7 @@
     ];
     @endphp
 
-    <section class="bg-secondary py-20 lg:py-25 px-4 sm:px-6 lg:px-8 font-sans overflow-x-hidden">
+    <section class="bg-secondary py-20 lg:py-25 px-4 sm:px-6 lg:px-8 font-sans overflow-clip">
         <div class="solar-container space-y-14">
             <div class="text-center max-w-3xl mx-auto space-y-4">
                 <div class="reveal" data-variant="fade-up">
@@ -245,7 +245,7 @@
         </div>
     </section>
 
-    <section class="bg-white py-20 lg:py-25 px-4 sm:px-6 lg:px-8 font-sans overflow-x-hidden">
+    <section class="bg-white py-20 lg:py-25 px-4 sm:px-6 lg:px-8 font-sans overflow-clip">
         <div class="solar-container">
             <div class="text-center mb-12 space-y-4">
                 <div class="reveal" data-variant="fade-up">
@@ -276,7 +276,7 @@
     ];
     @endphp
 
-    <section class="bg-secondary py-20 lg:py-25 px-4 sm:px-6 lg:px-8 font-sans overflow-x-hidden">
+    <section class="bg-secondary py-20 lg:py-25 px-4 sm:px-6 lg:px-8 font-sans overflow-clip">
         <div class="solar-container">
             <div class="reveal" data-variant="fade-up">
                 <span class="section-eyebrow">Station Gallery</span>
@@ -314,7 +314,7 @@
     $inputClass = 'w-full bg-white px-4 py-3 rounded-[14px] border border-transparent outline-none placeholder-gray-400 text-base focus:ring-2 focus:ring-accent-500 transition-all';
     @endphp
 
-    <section class="bg-white py-20 lg:py-25 px-4 sm:px-6 lg:px-8 font-sans overflow-x-hidden" id="become-partner">
+    <section class="bg-white py-20 lg:py-25 px-4 sm:px-6 lg:px-8 font-sans overflow-clip" id="become-partner">
         <div class="solar-container">
             <div class="max-w-3xl mx-auto text-center space-y-4 mb-12">
                 <div class="reveal" data-variant="fade-up">
@@ -516,7 +516,7 @@
     ];
     @endphp
 
-    <section class="bg-forest-900 py-20 lg:py-25 px-4 sm:px-6 lg:px-8 font-sans overflow-x-hidden">
+    <section class="bg-forest-900 py-20 lg:py-25 px-4 sm:px-6 lg:px-8 font-sans overflow-clip">
         <div class="solar-container grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-10 items-stretch">
             <div class="space-y-6">
                 <div class="reveal" data-variant="fade-up">
