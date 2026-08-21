@@ -89,7 +89,7 @@
 
 @if (count($links) > 0 && !request()->is('admin*'))
     <div id="chat-widget"
-        class="fixed top-1/2 right-[15px] translate-y-[-50%] z-50 opacity-0 translate-x-4 pointer-events-none transition-all duration-500">
+        class="fixed top-1/2 right-3 translate-y-[-50%] z-50 opacity-0 translate-x-4 pointer-events-none transition-all duration-500">
         <div class="chat-idle flex flex-col gap-2">
             @foreach ($links as $i => $link)
                 <div style="animation-delay: {{ 0.15 + $i * 0.1 }}s" class="chat-btn-pop group relative">
