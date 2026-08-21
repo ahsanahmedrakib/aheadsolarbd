@@ -21,7 +21,7 @@
     @include('admin.partials._errors')
 
     <div class="admin-section-card">
-        <form method="POST" action="{{ $isEdit ? route('admin.projects.update', $item->id) : route('admin.projects.store') }}" enctype="multipart/form-data" class="p-6 space-y-4">
+        <form method="POST" action="{{ $isEdit ? route('admin.projects.update', $item->id) : route('admin.projects.store') }}" enctype="multipart/form-data" class="p-6 space-y-4" data-validate>
             @csrf
             @if ($isEdit)
                 @method('PUT')
@@ -30,14 +30,14 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="flex flex-col gap-1.5">
                     <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">Project Title *</label>
-                    <input type="text" name="title" value="{{ old('title', $item?->title) }}" placeholder="e.g. Residential Rooftop Solar Installation"
+                    <input type="text" name="title" value="{{ old('title', $item?->title) }}" placeholder="e.g. Residential Rooftop Solar Installation" data-rules="required|min:3|max:255" data-label="Project Title"
                         class="w-full bg-(--admin-surface-2) border {{ $errors->has('title') ? 'border-(--admin-danger)' : 'border-(--admin-border)' }} text-sm text-(--admin-text-primary) rounded-lg p-2.5 outline-none focus:border-(--admin-accent) transition" data-slug-source>
                     @error('title')<span class="text-[11px] text-(--admin-danger)">{{ $message }}</span>@enderror
                 </div>
 
                 <div class="flex flex-col gap-1.5">
                     <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">Slug (URL Segment) *</label>
-                    <input type="text" name="slug" value="{{ old('slug', $item?->slug) }}" placeholder="e.g. residential-rooftop-solar-installation"
+                    <input type="text" name="slug" value="{{ old('slug', $item?->slug) }}" placeholder="e.g. residential-rooftop-solar-installation" data-rules="required" data-label="Slug"
                         class="w-full bg-(--admin-surface-2) border {{ $errors->has('slug') ? 'border-(--admin-danger)' : 'border-(--admin-border)' }} text-sm font-mono text-(--admin-text-primary) rounded-lg p-2.5 outline-none focus:border-(--admin-accent) transition" data-slug-target>
                     @error('slug')<span class="text-[11px] text-(--admin-danger)">{{ $message }}</span>@enderror
                 </div>
@@ -46,7 +46,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="flex flex-col gap-1.5">
                     <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">Category *</label>
-                    <input type="text" name="category" value="{{ old('category', $item?->category) }}" placeholder="e.g. Residential"
+                    <input type="text" name="category" value="{{ old('category', $item?->category) }}" placeholder="e.g. Residential" data-rules="required|max:100" data-label="Category"
                         class="w-full bg-(--admin-surface-2) border {{ $errors->has('category') ? 'border-(--admin-danger)' : 'border-(--admin-border)' }} text-sm text-(--admin-text-primary) rounded-lg p-2.5 outline-none focus:border-(--admin-accent) transition">
                     @error('category')<span class="text-[11px] text-(--admin-danger)">{{ $message }}</span>@enderror
                 </div>
@@ -80,6 +80,7 @@
                 'name' => 'image_url',
                 'label' => 'Project Image',
                 'value' => old('image_url', $item?->image_url),
+                'isRequired' => !$isEdit,
                 'hint' => 'Upload an image. Max 5MB.',
             ])
 
@@ -104,7 +105,7 @@
 
             <div class="flex flex-col gap-1.5">
                 <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">Project Description *</label>
-                <textarea name="description" rows="4" placeholder="Provide a short summary of the completed project..."
+                <textarea name="description" rows="4" placeholder="Provide a short summary of the completed project..." data-rules="required|min:10|max:500" data-label="Description"
                     class="w-full bg-(--admin-surface-2) border {{ $errors->has('description') ? 'border-(--admin-danger)' : 'border-(--admin-border)' }} text-sm text-(--admin-text-primary) rounded-lg p-2.5 outline-none focus:border-(--admin-accent) transition resize-none">{{ old('description', $item?->description) }}</textarea>
                 @error('description')<span class="text-[11px] text-(--admin-danger)">{{ $message }}</span>@enderror
             </div>
@@ -113,6 +114,8 @@
                 'name' => 'project_details',
                 'label' => 'Project Details (Rich Content)',
                 'value' => old('project_details', $item?->project_details),
+                'rules' => 'required|min:10',
+                'dataLabel' => 'Project Details',
             ])
 
             <div class="flex justify-end gap-3 pt-3 border-t border-(--admin-border)">

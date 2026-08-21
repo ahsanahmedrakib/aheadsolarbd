@@ -4,6 +4,7 @@
     $value = $value ?? '';
     $required = $required ?? true;
     $hint = $hint ?? null;
+    $isRequired = $isRequired ?? false;
 @endphp
 <div class="flex flex-col gap-1.5">
     <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">
@@ -20,7 +21,7 @@
         </div>
 
         <div class="flex-1 flex flex-col gap-2">
-            <input type="file" name="{{ $name }}_file" accept="image/*" data-preview-box="preview-box-{{ $name }}" class="block w-full text-[12px] text-(--admin-text-secondary) bg-(--admin-surface-2) border border-(--admin-border) rounded-lg p-2 transition
+            <input type="file" name="{{ $name }}_file" accept="image/*" data-preview-box="preview-box-{{ $name }}" @if($isRequired) data-rules="required" data-label="{{ $label }}" @endif class="block w-full text-[12px] text-(--admin-text-secondary) bg-(--admin-surface-2) border border-(--admin-border) rounded-lg p-2 transition
                 file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border file:border-(--admin-border) file:bg-(--admin-surface-2)
                 file:text-(--admin-text-primary) file:text-[12px] file:font-semibold file:cursor-pointer hover:file:bg-(--admin-border)/40">
             @if ($hint)

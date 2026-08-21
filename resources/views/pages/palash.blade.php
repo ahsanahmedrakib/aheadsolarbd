@@ -372,7 +372,7 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-6">
                             <div class="flex flex-col gap-2">
                                 <label class="text-forest-500 text-sm font-bold tracking-wide">Full Name / আপনার সম্পূর্ণ নাম*</label>
-                                <input type="text" name="fullName" placeholder="Enter your full name" class="{{ $inputClass }}">
+                                <input type="text" name="fullName" placeholder="Enter your full name" data-rules="required|min:2" data-label="Full Name" class="{{ $inputClass }}">
                             </div>
 
                             <div class="flex flex-col gap-2">
@@ -382,17 +382,17 @@
 
                             <div class="flex flex-col gap-2">
                                 <label class="text-forest-500 text-sm font-bold tracking-wide">Mobile Number / মোবাইল নম্বর*</label>
-                                <input type="tel" name="mobile" placeholder="Enter mobile number" class="{{ $inputClass }}">
+                                <input type="tel" name="mobile" placeholder="Enter mobile number" data-rules="required|phone" data-label="Mobile Number" class="{{ $inputClass }}">
                             </div>
 
                             <div class="flex flex-col gap-2">
                                 <label class="text-forest-500 text-sm font-bold tracking-wide">WhatsApp Number / হোয়াটসঅ্যাপ নম্বর</label>
-                                <input type="tel" name="whatsapp" placeholder="Enter WhatsApp number" class="{{ $inputClass }}">
+                                <input type="tel" name="whatsapp" placeholder="Enter WhatsApp number" data-rules="phone" data-label="WhatsApp Number" class="{{ $inputClass }}">
                             </div>
 
                             <div class="flex flex-col gap-2 sm:col-span-2">
                                 <label class="text-forest-500 text-sm font-bold tracking-wide">Email Address (Optional) / ইমেইল ঠিকানা (ঐচ্ছিক)</label>
-                                <input type="email" name="email" placeholder="Enter email address" class="{{ $inputClass }}">
+                                <input type="email" name="email" placeholder="Enter email address" data-rules="email" data-label="Email Address" class="{{ $inputClass }}">
                             </div>
                         </div>
                     </div>
@@ -408,17 +408,17 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-6">
                             <div class="flex flex-col gap-2">
                                 <label class="text-forest-500 text-sm font-bold tracking-wide">District / জেলা*</label>
-                                <input type="text" name="district" placeholder="Enter district" class="{{ $inputClass }}">
+                                <input type="text" name="district" placeholder="Enter district" data-rules="required|min:2" data-label="District" class="{{ $inputClass }}">
                             </div>
 
                             <div class="flex flex-col gap-2">
                                 <label class="text-forest-500 text-sm font-bold tracking-wide">Thana / Upazila / থানা / উপজেলা*</label>
-                                <input type="text" name="thana" placeholder="Enter thana or upazila" class="{{ $inputClass }}">
+                                <input type="text" name="thana" placeholder="Enter thana or upazila" data-rules="required|min:2" data-label="Thana / Upazila" class="{{ $inputClass }}">
                             </div>
 
                             <div class="flex flex-col gap-2 sm:col-span-2">
                                 <label class="text-forest-500 text-sm font-bold tracking-wide">Full Shop / Garage Address / শপ / গ্যারেজের সম্পূর্ণ ঠিকানা*</label>
-                                <textarea name="address" rows="3" placeholder="Enter your full shop or garage address" class="{{ $inputClass }} resize-none"></textarea>
+                                <textarea name="address" rows="3" placeholder="Enter your full shop or garage address" data-rules="required|min:5" data-label="Address" class="{{ $inputClass }} resize-none"></textarea>
                             </div>
                         </div>
                     </div>
@@ -648,10 +648,38 @@
         form.addEventListener("submit", function(e) {
             e.preventDefault();
 
+            if (typeof window.validateForm === "function" && !window.validateForm(form)) {
+                return;
+            }
+
             var services = [];
             serviceInputs.forEach(function(el) {
                 if (el.checked) services.push(el.value);
             });
+
+            if (services.length === 0) {
+                var errBox = errorBox;
+                if (errorText) errorText.textContent = "Please select at least one service.";
+                errBox.classList.remove("hidden");
+                serviceInputs[0]?.focus();
+                return;
+            }
+
+            var hasBusinessVal = form.hasBusiness.value || "";
+            if (!hasBusinessVal) {
+                if (errorText) errorText.textContent = "Please select whether you have a business.";
+                errorBox.classList.remove("hidden");
+                form.querySelector("input[name='hasBusiness']")?.focus();
+                return;
+            }
+
+            var spaceVal = form.space.value || "";
+            if (!spaceVal) {
+                if (errorText) errorText.textContent = "Please select your space option.";
+                errorBox.classList.remove("hidden");
+                form.querySelector("input[name='space']")?.focus();
+                return;
+            }
 
             var payload = {
                 fullName: form.fullName.value,

@@ -19,7 +19,7 @@
     @include('admin.partials._errors')
 
     <div class="admin-section-card">
-        <form method="POST" action="{{ $isEdit ? route('admin.hero-slider.update', $item->id) : route('admin.hero-slider.store') }}" enctype="multipart/form-data" class="p-6 space-y-4">
+        <form method="POST" action="{{ $isEdit ? route('admin.hero-slider.update', $item->id) : route('admin.hero-slider.store') }}" enctype="multipart/form-data" class="p-6 space-y-4" data-validate>
             @csrf
             @if ($isEdit)
                 @method('PUT')
@@ -29,7 +29,7 @@
                 <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">Site *</label>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                     <label class="flex items-center gap-2.5 rounded-lg border p-3 cursor-pointer transition {{ old('site', $item?->site) === 'ahead' ? 'border-(--admin-accent) bg-(--admin-accent-muted)' : 'border-(--admin-border) bg-(--admin-surface-2) hover:border-(--admin-border)/70' }}">
-                        <input type="radio" name="site" value="ahead" {{ old('site', $item?->site) === 'ahead' ? 'checked' : '' }} class="accent-(--admin-accent)">
+                        <input type="radio" name="site" value="ahead" {{ old('site', $item?->site) === 'ahead' ? 'checked' : '' }} class="accent-(--admin-accent)" data-rules="required|in:ahead,palash,projects" data-label="Site">
                         <span>
                             <span class="block text-[13px] font-semibold text-(--admin-text-primary)">Ahead Solar</span>
                             <span class="block text-[11px] text-(--admin-text-muted)">Main solar brand site</span>
@@ -56,14 +56,14 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="flex flex-col gap-1.5">
                     <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">Tagline *</label>
-                    <input type="text" name="tagline" value="{{ old('tagline', $item?->tagline) }}" placeholder="e.g. Powering Bangladesh"
+                    <input type="text" name="tagline" value="{{ old('tagline', $item?->tagline) }}" placeholder="e.g. Powering Bangladesh" data-rules="required|max:100" data-label="Tagline"
                         class="w-full bg-(--admin-surface-2) border {{ $errors->has('tagline') ? 'border-(--admin-danger)' : 'border-(--admin-border)' }} text-sm text-(--admin-text-primary) rounded-lg p-2.5 outline-none focus:border-(--admin-accent) transition">
                     @error('tagline')<span class="text-[11px] text-(--admin-danger)">{{ $message }}</span>@enderror
                 </div>
 
                 <div class="flex flex-col gap-1.5">
                     <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">Title *</label>
-                    <input type="text" name="title" value="{{ old('title', $item?->title) }}" placeholder="e.g. Clean Solar Energy for"
+                    <input type="text" name="title" value="{{ old('title', $item?->title) }}" placeholder="e.g. Clean Solar Energy for" data-rules="required|max:200" data-label="Title"
                         class="w-full bg-(--admin-surface-2) border {{ $errors->has('title') ? 'border-(--admin-danger)' : 'border-(--admin-border)' }} text-sm text-(--admin-text-primary) rounded-lg p-2.5 outline-none focus:border-(--admin-accent) transition">
                     @error('title')<span class="text-[11px] text-(--admin-danger)">{{ $message }}</span>@enderror
                 </div>
@@ -78,7 +78,7 @@
 
             <div class="flex flex-col gap-1.5">
                 <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">Description *</label>
-                <textarea name="description" rows="4" placeholder="Short description shown on the hero slide..."
+                <textarea name="description" rows="4" placeholder="Short description shown on the hero slide..." data-rules="required|min:10" data-label="Description"
                     class="w-full bg-(--admin-surface-2) border {{ $errors->has('description') ? 'border-(--admin-danger)' : 'border-(--admin-border)' }} text-sm text-(--admin-text-primary) rounded-lg p-2.5 outline-none focus:border-(--admin-accent) transition resize-none">{{ old('description', $item?->description) }}</textarea>
                 @error('description')<span class="text-[11px] text-(--admin-danger)">{{ $message }}</span>@enderror
             </div>

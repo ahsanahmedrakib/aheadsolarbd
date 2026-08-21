@@ -3,6 +3,7 @@
 // ================================================================
 import Swiper from "swiper/bundle";
 import "swiper/css/bundle";
+import { initFormValidation } from "./form-validator";
 
 document.addEventListener("DOMContentLoaded", () => {
   initNavbar();
@@ -15,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initMobileSubmenus();
   initToasts();
   initVideoModals();
+  initFormValidation();
 });
 
 // ----------------------------------------------------------------

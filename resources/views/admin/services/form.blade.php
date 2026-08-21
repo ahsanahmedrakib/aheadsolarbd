@@ -22,7 +22,7 @@
     @include('admin.partials._errors')
 
     <div class="admin-section-card">
-        <form method="POST" action="{{ $isEdit ? route('admin.services.update', $item->id) : route('admin.services.store') }}" enctype="multipart/form-data" class="p-6 space-y-4">
+        <form method="POST" action="{{ $isEdit ? route('admin.services.update', $item->id) : route('admin.services.store') }}" enctype="multipart/form-data" class="p-6 space-y-4" data-validate>
             @csrf
             @if ($isEdit)
                 @method('PUT')
@@ -31,14 +31,14 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="flex flex-col gap-1.5">
                     <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">Service Title *</label>
-                    <input type="text" name="title" value="{{ old('title', $item?->title) }}" placeholder="e.g. Off-Grid Solar Setup"
+                    <input type="text" name="title" value="{{ old('title', $item?->title) }}" placeholder="e.g. Off-Grid Solar Setup" data-rules="required|min:3|max:255" data-label="Service Title"
                         class="w-full bg-(--admin-surface-2) border {{ $errors->has('title') ? 'border-(--admin-danger)' : 'border-(--admin-border)' }} text-sm text-(--admin-text-primary) rounded-lg p-2.5 outline-none focus:border-(--admin-accent) transition" data-slug-source>
                     @error('title')<span class="text-[11px] text-(--admin-danger)">{{ $message }}</span>@enderror
                 </div>
 
                 <div class="flex flex-col gap-1.5">
                     <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">Slug (URL Segment) *</label>
-                    <input type="text" name="slug" value="{{ old('slug', $item?->slug) }}" placeholder="e.g. off-grid-solar-setup"
+                    <input type="text" name="slug" value="{{ old('slug', $item?->slug) }}" placeholder="e.g. off-grid-solar-setup" data-rules="required" data-label="Slug"
                         class="w-full bg-(--admin-surface-2) border {{ $errors->has('slug') ? 'border-(--admin-danger)' : 'border-(--admin-border)' }} text-sm font-mono text-(--admin-text-primary) rounded-lg p-2.5 outline-none focus:border-(--admin-accent) transition" data-slug-target>
                     @error('slug')<span class="text-[11px] text-(--admin-danger)">{{ $message }}</span>@enderror
                 </div>
@@ -58,7 +58,7 @@
                         </button>
                     @endforeach
                 </div>
-                <input type="hidden" name="icon_name" value="{{ old('icon_name', $item?->icon_name) }}" data-icon-value>
+                <input type="hidden" name="icon_name" value="{{ old('icon_name', $item?->icon_name) }}" data-icon-value data-rules="required" data-label="Icon">
                 @error('icon_name')<span class="text-[11px] text-(--admin-danger)">{{ $message }}</span>@enderror
             </div>
 
@@ -67,11 +67,12 @@
                     'name' => 'image',
                     'label' => 'Service Image',
                     'value' => old('image', $item?->image),
+                    'isRequired' => !$isEdit,
                     'hint' => 'Upload an image. Max 5MB.',
                 ])
                 <div class="flex flex-col gap-1.5">
                     <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">Accessibility Alt Text *</label>
-                    <input type="text" name="alt" value="{{ old('alt', $item?->alt) }}" placeholder="e.g. Battery storage system inside a home garage"
+                    <input type="text" name="alt" value="{{ old('alt', $item?->alt) }}" placeholder="e.g. Battery storage system inside a home garage" data-rules="required|min:5|max:255" data-label="Alt Text"
                         class="w-full bg-(--admin-surface-2) border {{ $errors->has('alt') ? 'border-(--admin-danger)' : 'border-(--admin-border)' }} text-sm text-(--admin-text-primary) rounded-lg p-2.5 outline-none focus:border-(--admin-accent) transition">
                     @error('alt')<span class="text-[11px] text-(--admin-danger)">{{ $message }}</span>@enderror
                 </div>
@@ -98,7 +99,7 @@
 
             <div class="flex flex-col gap-1.5">
                 <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">Service Description *</label>
-                <textarea name="description" rows="4" placeholder="Provide details about what this service offers..."
+                <textarea name="description" rows="4" placeholder="Provide details about what this service offers..." data-rules="required|min:10|max:500" data-label="Description"
                     class="w-full bg-(--admin-surface-2) border {{ $errors->has('description') ? 'border-(--admin-danger)' : 'border-(--admin-border)' }} text-sm text-(--admin-text-primary) rounded-lg p-2.5 outline-none focus:border-(--admin-accent) transition resize-none">{{ old('description', $item?->description) }}</textarea>
                 @error('description')<span class="text-[11px] text-(--admin-danger)">{{ $message }}</span>@enderror
             </div>
@@ -107,6 +108,8 @@
                 'name' => 'service_details',
                 'label' => 'Service Details (Rich Content)',
                 'value' => old('service_details', $item?->service_details),
+                'rules' => 'required|min:10',
+                'dataLabel' => 'Service Details',
             ])
 
             <div class="flex justify-end gap-3 pt-3 border-t border-(--admin-border)">

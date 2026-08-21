@@ -16,7 +16,7 @@
     @include('admin.partials._errors')
 
     <div class="admin-section-card">
-        <form method="POST" action="{{ $item ? route('admin.reviews.update', $item->id) : route('admin.reviews.store') }}" class="p-6 space-y-4">
+        <form method="POST" action="{{ $item ? route('admin.reviews.update', $item->id) : route('admin.reviews.store') }}" class="p-6 space-y-4" data-validate>
             @csrf
             @if ($item)
                 @method('PUT')
@@ -25,7 +25,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="flex flex-col gap-1.5">
                     <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">Name *</label>
-                    <input type="text" name="name" value="{{ old('name', $item?->name) }}" placeholder="e.g. Mahmudul Hasan"
+                    <input type="text" name="name" value="{{ old('name', $item?->name) }}" placeholder="e.g. Mahmudul Hasan" data-rules="required|min:2|max:255" data-label="Name"
                         class="w-full bg-(--admin-surface-2) border {{ $errors->has('name') ? 'border-(--admin-danger)' : 'border-(--admin-border)' }} text-sm text-(--admin-text-primary) rounded-lg p-2.5 outline-none focus:border-(--admin-accent) transition">
                     @error('name')<span class="text-[11px] text-(--admin-danger)">{{ $message }}</span>@enderror
                 </div>
@@ -40,7 +40,7 @@
 
             <div class="flex flex-col gap-1.5">
                 <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">Rating *</label>
-                <select name="rating" class="w-full bg-(--admin-surface-2) border {{ $errors->has('rating') ? 'border-(--admin-danger)' : 'border-(--admin-border)' }} text-sm text-(--admin-text-primary) rounded-lg p-2.5 outline-none focus:border-(--admin-accent) transition">
+                <select name="rating" data-rules="required|in:1,2,3,4,5" data-label="Rating" class="w-full bg-(--admin-surface-2) border {{ $errors->has('rating') ? 'border-(--admin-danger)' : 'border-(--admin-border)' }} text-sm text-(--admin-text-primary) rounded-lg p-2.5 outline-none focus:border-(--admin-accent) transition">
                     @for ($i = 1; $i <= 5; $i++)
                         <option value="{{ $i }}" {{ old('rating', $item?->rating) == $i ? 'selected' : '' }}>{{ $i }} star{{ $i > 1 ? 's' : '' }}</option>
                     @endfor
@@ -59,7 +59,7 @@
 
             <div class="flex flex-col gap-1.5">
                 <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">Quote *</label>
-                <textarea name="quote" rows="5" placeholder="What did this customer say about their experience?"
+                <textarea name="quote" rows="5" placeholder="What did this customer say about their experience?" data-rules="required|min:10" data-label="Quote"
                     class="w-full bg-(--admin-surface-2) border {{ $errors->has('quote') ? 'border-(--admin-danger)' : 'border-(--admin-border)' }} text-sm text-(--admin-text-primary) rounded-lg p-2.5 outline-none focus:border-(--admin-accent) transition resize-none">{{ old('quote', $item?->quote) }}</textarea>
                 @error('quote')<span class="text-[11px] text-(--admin-danger)">{{ $message }}</span>@enderror
             </div>

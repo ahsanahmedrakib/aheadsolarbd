@@ -2,6 +2,8 @@
     $name = $name ?? 'content';
     $label = $label ?? 'Content';
     $value = $value ?? '';
+    $rules = $rules ?? '';
+    $dataLabel = $dataLabel ?? $label;
 @endphp
 <div class="flex flex-col gap-1.5" data-rich-editor>
     <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">{{ $label }}</label>
@@ -45,7 +47,7 @@
             <div data-rich-editor-area contenteditable="true" class="prose-admin min-h-44 p-3 text-sm text-(--admin-text-primary) outline-none"></div>
         </div>
     </div>
-    <input type="hidden" name="{{ $name }}" value="{{ $value }}">
+    <input type="hidden" name="{{ $name }}" value="{{ $value }}" @if($rules) data-rules="{{ $rules }}" data-label="{{ $dataLabel }}" @endif>
     @if ($errors->has($name))
         <span class="text-[11px] text-(--admin-danger)">{{ $errors->first($name) }}</span>
     @endif
@@ -65,6 +67,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         area.addEventListener("input", sync);
+        area.addEventListener("input", function () {
+            var hidden = root.querySelector('input[type="hidden"]');
+            if (hidden && hidden.dataset.rules) {
+                var wrapper = root;
+                var errEl = wrapper.querySelector("[data-validation-error]");
+                if (errEl) errEl.remove();
+            }
+        });
         area.addEventListener("paste", function (e) {
             e.preventDefault();
             var html = (e.clipboardData || window.clipboardData).getData("text/html") ||

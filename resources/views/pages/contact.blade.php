@@ -67,19 +67,32 @@
                 </div>
             @endif
 
-            <form action="{{ route('contact.submit') }}" method="POST" class="flex flex-col gap-5">
+            <div id="contact-success" class="hidden mb-6">
+                <div class="bg-accent-500/15 text-accent-500 p-4 rounded-lg text-sm font-medium border border-accent-500/40 flex items-center gap-2">
+                    <svg class="w-5 h-5 shrink-0 text-accent-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                    <span>Thank you! Your message has been sent successfully. We will get back to you soon.</span>
+                </div>
+            </div>
+            <div id="contact-error" class="hidden mb-6">
+                <div class="bg-red-50 text-red-600 p-4 rounded-lg text-sm font-medium border border-red-200 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 shrink-0"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+                    <span data-contact-error-text>Something went wrong. Please try again.</span>
+                </div>
+            </div>
+
+            <form action="{{ route('contact.submit') }}" method="POST" class="flex flex-col gap-5" id="contact-form" data-validate>
                 @csrf
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div class="flex flex-col gap-2">
                         <label for="first_name" class="text-accent-500 text-xs font-bold tracking-wide">First Name*</label>
-                        <input type="text" id="first_name" name="first_name" value="{{ old('first_name') }}" placeholder="Enter First Name" class="w-full bg-white px-4 py-3 rounded-lg border outline-none placeholder-gray-400 text-sm focus:ring-2 transition-all @error('first_name') border-red-500 focus:ring-red-500 @else border-transparent focus:ring-accent-500 @enderror">
+                        <input type="text" id="first_name" name="first_name" value="{{ old('first_name') }}" placeholder="Enter First Name" data-rules="required|min:2|max:60" data-label="First Name" class="w-full bg-white px-4 py-3 rounded-lg border outline-none placeholder-gray-400 text-sm focus:ring-2 transition-all @error('first_name') border-red-500 focus:ring-red-500 @else border-transparent focus:ring-accent-500 @enderror">
                         @error('first_name')
                             <span class="text-red-500 text-xs font-medium px-1">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="flex flex-col gap-2">
                         <label for="last_name" class="text-accent-500 text-xs font-bold tracking-wide">Last Name*</label>
-                        <input type="text" id="last_name" name="last_name" value="{{ old('last_name') }}" placeholder="Enter Last Name" class="w-full bg-white px-4 py-3 rounded-lg border outline-none placeholder-gray-400 text-sm focus:ring-2 transition-all @error('last_name') border-red-500 focus:ring-red-500 @else border-transparent focus:ring-accent-500 @enderror">
+                        <input type="text" id="last_name" name="last_name" value="{{ old('last_name') }}" placeholder="Enter Last Name" data-rules="required|min:2|max:60" data-label="Last Name" class="w-full bg-white px-4 py-3 rounded-lg border outline-none placeholder-gray-400 text-sm focus:ring-2 transition-all @error('last_name') border-red-500 focus:ring-red-500 @else border-transparent focus:ring-accent-500 @enderror">
                         @error('last_name')
                             <span class="text-red-500 text-xs font-medium px-1">{{ $message }}</span>
                         @enderror
@@ -89,14 +102,14 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div class="flex flex-col gap-2">
                         <label for="phone" class="text-accent-500 text-xs font-bold tracking-wide">Phone Number*</label>
-                        <input type="tel" id="phone" name="phone" value="{{ old('phone') }}" placeholder="Enter Phone Number" class="w-full bg-white px-4 py-3 rounded-lg border outline-none placeholder-gray-400 text-sm focus:ring-2 transition-all @error('phone') border-red-500 focus:ring-red-500 @else border-transparent focus:ring-accent-500 @enderror">
+                        <input type="tel" id="phone" name="phone" value="{{ old('phone') }}" placeholder="Enter Phone Number" data-rules="required|phone|max:40" data-label="Phone Number" class="w-full bg-white px-4 py-3 rounded-lg border outline-none placeholder-gray-400 text-sm focus:ring-2 transition-all @error('phone') border-red-500 focus:ring-red-500 @else border-transparent focus:ring-accent-500 @enderror">
                         @error('phone')
                             <span class="text-red-500 text-xs font-medium px-1">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="flex flex-col gap-2">
                         <label for="email" class="text-accent-500 text-xs font-bold tracking-wide">Email Address*</label>
-                        <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="Enter Email Address" class="w-full bg-white px-4 py-3 rounded-lg border outline-none placeholder-gray-400 text-sm focus:ring-2 transition-all @error('email') border-red-500 focus:ring-red-500 @else border-transparent focus:ring-accent-500 @enderror">
+                        <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="Enter Email Address" data-rules="required|email|max:190" data-label="Email Address" class="w-full bg-white px-4 py-3 rounded-lg border outline-none placeholder-gray-400 text-sm focus:ring-2 transition-all @error('email') border-red-500 focus:ring-red-500 @else border-transparent focus:ring-accent-500 @enderror">
                         @error('email')
                             <span class="text-red-500 text-xs font-medium px-1">{{ $message }}</span>
                         @enderror
@@ -105,7 +118,7 @@
 
                 <div class="flex flex-col gap-2">
                     <label for="message" class="text-accent-500 text-xs font-bold tracking-wide">Message*</label>
-                    <textarea id="message" name="message" rows="5" placeholder="Any Message..." class="w-full bg-white px-4 py-3 rounded-lg border outline-none placeholder-gray-400 text-sm resize-none focus:ring-2 transition-all @error('message') border-red-500 focus:ring-red-500 @else border-transparent focus:ring-accent-500 @enderror">{{ old('message') }}</textarea>
+                    <textarea id="message" name="message" rows="5" placeholder="Any Message..." data-rules="required|min:10|max:5000" data-label="Message" class="w-full bg-white px-4 py-3 rounded-lg border outline-none placeholder-gray-400 text-sm resize-none focus:ring-2 transition-all @error('message') border-red-500 focus:ring-red-500 @else border-transparent focus:ring-accent-500 @enderror">{{ old('message') }}</textarea>
                     @error('message')
                         <span class="text-red-500 text-xs font-medium px-1">{{ $message }}</span>
                     @enderror
@@ -146,3 +159,86 @@
 </section>
 
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    var form = document.getElementById("contact-form");
+    if (!form) return;
+
+    var successBox = document.getElementById("contact-success");
+    var errorBox = document.getElementById("contact-error");
+    var errorText = document.querySelector("[data-contact-error-text]");
+    var submitBtn = form.querySelector("button[type='submit']");
+    var csrfToken = document.querySelector('meta[name="csrf-token"]');
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        if (typeof window.validateForm === "function" && !window.validateForm(form)) {
+            return;
+        }
+
+        var payload = {
+            first_name: form.first_name.value,
+            last_name: form.last_name.value,
+            phone: form.phone.value,
+            email: form.email.value,
+            message: form.message.value,
+        };
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending...";
+        errorBox.classList.add("hidden");
+        successBox.classList.add("hidden");
+
+        fetch(form.action, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "X-CSRF-TOKEN": csrfToken ? csrfToken.content : "",
+            },
+            body: JSON.stringify(payload),
+        })
+            .then(function (res) {
+                if (res.status === 422) {
+                    return res.json().then(function (json) {
+                        throw { errors: json.errors || {}, status: 422 };
+                    });
+                }
+                return res.json();
+            })
+            .then(function (json) {
+                if (json.success) {
+                    successBox.classList.remove("hidden");
+                    form.reset();
+                    setTimeout(function () { successBox.classList.add("hidden"); }, 5000);
+                } else {
+                    if (errorText) errorText.textContent = json.message || "Something went wrong. Please try again.";
+                    errorBox.classList.remove("hidden");
+                }
+            })
+            .catch(function (err) {
+                if (err && err.errors) {
+                    if (typeof window.showServerErrors === "function") {
+                        window.showServerErrors(form, err.errors);
+                    }
+                    var msgs = [];
+                    Object.values(err.errors).forEach(function (arr) {
+                        msgs.push(arr.join(" "));
+                    });
+                    if (errorText) errorText.textContent = msgs.join(" ");
+                } else if (errorText) {
+                    errorText.textContent = "An error occurred. Please try again.";
+                }
+                errorBox.classList.remove("hidden");
+            })
+            .finally(function () {
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Submit Message";
+            });
+    });
+});
+</script>
+@endpush

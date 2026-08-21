@@ -19,7 +19,7 @@
     @include('admin.partials._errors')
 
     <div class="admin-section-card">
-        <form method="POST" action="{{ $isEdit ? route('admin.team.update', $item->id) : route('admin.team.store') }}" enctype="multipart/form-data" class="p-6 space-y-4">
+        <form method="POST" action="{{ $isEdit ? route('admin.team.update', $item->id) : route('admin.team.store') }}" enctype="multipart/form-data" class="p-6 space-y-4" data-validate>
             @csrf
             @if ($isEdit)
                 @method('PUT')
@@ -28,14 +28,14 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="flex flex-col gap-1.5">
                     <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">Name *</label>
-                    <input type="text" name="name" value="{{ old('name', $item?->name) }}" placeholder="e.g. Rakibul Hasan"
+                    <input type="text" name="name" value="{{ old('name', $item?->name) }}" placeholder="e.g. Rakibul Hasan" data-rules="required|min:2|max:255" data-label="Name"
                         class="w-full bg-(--admin-surface-2) border {{ $errors->has('name') ? 'border-(--admin-danger)' : 'border-(--admin-border)' }} text-sm text-(--admin-text-primary) rounded-lg p-2.5 outline-none focus:border-(--admin-accent) transition">
                     @error('name')<span class="text-[11px] text-(--admin-danger)">{{ $message }}</span>@enderror
                 </div>
 
                 <div class="flex flex-col gap-1.5">
                     <label class="text-xs font-semibold text-(--admin-text-secondary) uppercase tracking-wider">Role *</label>
-                    <input type="text" name="role" value="{{ old('role', $item?->role) }}" placeholder="e.g. Senior Solar Engineer"
+                    <input type="text" name="role" value="{{ old('role', $item?->role) }}" placeholder="e.g. Senior Solar Engineer" data-rules="required|max:100" data-label="Role"
                         class="w-full bg-(--admin-surface-2) border {{ $errors->has('role') ? 'border-(--admin-danger)' : 'border-(--admin-border)' }} text-sm text-(--admin-text-primary) rounded-lg p-2.5 outline-none focus:border-(--admin-accent) transition">
                     @error('role')<span class="text-[11px] text-(--admin-danger)">{{ $message }}</span>@enderror
                 </div>
@@ -53,6 +53,7 @@
                 'label' => 'Member Photo',
                 'value' => old('image', $item?->image),
                 'required' => false,
+                'isRequired' => !$isEdit,
                 'hint' => 'Upload an image. Max 5MB.',
             ])
 

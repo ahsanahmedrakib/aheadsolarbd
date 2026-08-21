@@ -237,6 +237,18 @@ class Defaults
                 'order' => 1,
             ],
             [
+                'tagline' => 'Affordable Daily Rental',
+                'title' => 'Long-Lasting Power',
+                'title_accent' => 'Zero Hassle, Maximum Mileage',
+                'description' => 'Spend less time waiting and more time earning. Our lithium-ion batteries deliver up to 140 km per charge — keeping you on the road every day.',
+                'background_video' => '/videos/palash-hero.mp4',
+                'site' => 'palash',
+                'video_url' => '',
+                'show_video_button' => false,
+                'is_active' => true,
+                'order' => 2,
+            ],
+            [
                 'tagline' => 'Our Completed Projects',
                 'title' => 'Projects That Power',
                 'title_accent' => 'Bangladesh\'s Leading Industries',
