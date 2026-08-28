@@ -152,9 +152,9 @@ class Defaults
     {
         return [
             [
-                'name' => 'Leslie Alexander',
+                'name' => 'Juzhong Wang',
                 'role' => 'Lead Solar Engineer',
-                'image' => '/images/aheadsolar/team-1.jpg',
+                'image' => '/images/aheadsolar/wang-juzhong.jpg',
                 'social_links' => [
                     'facebook' => 'https://www.facebook.com/',
                     'instagram' => 'https://www.instagram.com/',
@@ -163,9 +163,9 @@ class Defaults
                 ],
             ],
             [
-                'name' => 'Marvin McKinney',
-                'role' => 'Lead Solar Engineer',
-                'image' => '/images/aheadsolar/team-2.jpg',
+                'name' => 'Chanchal Bahadur',
+                'role' => 'Senior Manager Business Strategy',
+                'image' => '/images/aheadsolar/chanchal-bahadur.jpg',
                 'social_links' => [
                     'facebook' => 'https://www.facebook.com/',
                     'instagram' => 'https://www.instagram.com/',
@@ -174,9 +174,9 @@ class Defaults
                 ],
             ],
             [
-                'name' => 'Kathryn Murphy',
-                'role' => 'Lead Solar Engineer',
-                'image' => '/images/aheadsolar/team-3.jpg',
+                'name' => 'Obaidullah-Al-Mahmud',
+                'role' => 'Deputy Chief Engineer',
+                'image' => '/images/aheadsolar/obaidullah-al-mahmud.jpg',
                 'social_links' => [
                     'facebook' => 'https://www.facebook.com/',
                     'instagram' => 'https://www.instagram.com/',

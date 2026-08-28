@@ -64,7 +64,7 @@
             </div>
 
             <div class="reveal-image relative w-full h-87.5 sm:h-112.5 lg:h-137.5 lg:col-span-5 rounded-lg shadow-lg" style="transition-delay:150ms">
-                <img src="{{ url('/images/about/approach-image.jpg') }}" alt="Ahead Solar engineers reviewing solar planning on a tablet" class="absolute inset-0 w-full h-full object-cover object-center">
+                <img src="{{ url('/images/aheadsolar/about-1.jpg') }}" alt="Ahead Solar engineers reviewing solar planning on a tablet" class="absolute inset-0 w-full h-full object-cover object-center">
             </div>
         </div>
     </div>

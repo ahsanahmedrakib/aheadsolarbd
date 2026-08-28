@@ -32,7 +32,7 @@
 
             <div class="lg:col-span-5">
                 <div class="reveal-image relative w-full h-72 sm:h-95 lg:h-115 rounded-lg shadow-lg" style="transition-delay:150ms">
-                    <img src="{{ url('/images/about/team-image-1.jpg') }}" alt="Ahead Solar management team" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="{{ url('/images/aheadsolar/group-photo.jpg') }}" alt="Ahead Solar management team" class="absolute inset-0 w-full h-full object-cover">
                 </div>
             </div>
         </div>
