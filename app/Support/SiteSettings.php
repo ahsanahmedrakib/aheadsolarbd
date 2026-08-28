@@ -19,6 +19,8 @@ class SiteSettings
             'brand-tagline' => 'Empowering Your Clean Energy Future',
             'contact-email' => 'info@aheadsolarbd.com',
             'phone-number' => '+88 01335 127 300',
+            'support-phone' => '+88 01335 127 307',
+            'support-phone-2' => '+88 01335 127 317',
             'hq-address' => 'House 12, Road 7, Sector 11, Uttara, Dhaka 1230',
             'google-map' => ' https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3393.9947761658013!2d90.39066177501897!3d23.87729687858403!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c5003133f351%3A0xc57cc5d4675738ff!2sAhead%20Center!5e1!3m2!1sen!2sbd!4v1784135178921!5m2!1sen!2sbd',
         ],

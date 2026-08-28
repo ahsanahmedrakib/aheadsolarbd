@@ -1,7 +1,8 @@
 @php
     $companyName = config('app.name');
     $tagline = \App\Support\SiteSettings::field('general', 'brand-tagline');
-    $phone = \App\Support\SiteSettings::field('general', 'phone-number');
+    $supportPhone = \App\Support\SiteSettings::field('general', 'support-phone');
+    $supportPhone2 = \App\Support\SiteSettings::field('general', 'support-phone-2');
     $email = \App\Support\SiteSettings::field('general', 'contact-email');
     $address = \App\Support\SiteSettings::field('general', 'hq-address');
     $footerServices = \App\Support\SiteData::services()->take(4);
@@ -28,7 +29,8 @@
                 </div>
                 <div>
                     <h3 class="text-xl font-heading font-bold text-white mb-1">Customer Support</h3>
-                    <a href="tel:{{ preg_replace('/\s+/', '', $phone) }}" class="text-white/80 hover:text-accent-400 transition-colors text-sm">{{ $phone }}</a>
+                    <a href="tel:{{ preg_replace('/\s+/', '', $supportPhone) }}" class="text-white/80 hover:text-accent-400 transition-colors text-sm block">{{ $supportPhone }}</a>
+                    <a href="tel:{{ preg_replace('/\s+/', '', $supportPhone2) }}" class="text-white/80 hover:text-accent-400 transition-colors text-sm block">{{ $supportPhone2 }}</a>
                 </div>
             </div>
 

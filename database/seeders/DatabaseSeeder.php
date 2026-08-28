@@ -38,6 +38,8 @@ class DatabaseSeeder extends Seeder
                     ['label' => 'Brand Tagline', 'type' => 'text', 'value' => 'Empowering Your Clean Energy Future', 'id' => 'brand-tagline'],
                     ['label' => 'Support Email Address', 'type' => 'email', 'value' => 'info@aheadsolarbd.com', 'id' => 'contact-email'],
                     ['label' => 'Primary Phone Number', 'type' => 'tel', 'value' => '+88 01335 127 300', 'id' => 'phone-number'],
+                    ['label' => 'Customer Support Phone Number 1', 'type' => 'tel', 'value' => '+88 01335 127 307', 'id' => 'support-phone'],
+                    ['label' => 'Customer Support Phone Number 2', 'type' => 'tel', 'value' => '+88 01335 127 317', 'id' => 'support-phone-2'],
                     ['label' => 'Headquarters Address', 'type' => 'text', 'value' => 'House 12, Road 7, Sector 11, Uttara, Dhaka 1230', 'id' => 'hq-address'],
                 ],
             ],
