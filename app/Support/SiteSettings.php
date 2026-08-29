@@ -42,7 +42,25 @@ class SiteSettings
     public static function getSections(): array
     {
         $setting = Setting::first();
-        return $setting?->sections ?? [];
+        $sections = $setting?->sections ?? [];
+
+        // Stored settings may lack the section-level metadata (id/title/...),
+        // so normalize each section by mapping it back to its known section id.
+        $defaultIds = array_keys(self::DEFAULT_SECTIONS);
+
+        return array_values(array_map(function ($section, $index) use ($defaultIds) {
+            if (!empty($section['id'])) {
+                return $section;
+            }
+
+            $sectionId = $defaultIds[$index] ?? ('section-' . ($index + 1));
+            $section['id'] = $sectionId;
+            $section['title'] ??= ucwords(str_replace('-', ' ', $sectionId));
+            $section['color'] ??= 'slate';
+            $section['iconName'] ??= $sectionId;
+
+            return $section;
+        }, $sections, array_keys($sections)));
     }
 
     public static function field(string $sectionId, string $fieldId): string
