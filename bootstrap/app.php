@@ -19,6 +19,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'api.auth' => ApiAuthenticate::class,
         ]);
 
+        $middleware->web(append: [
+            \App\Http\Middleware\TrackTraffic::class,
+        ]);
+
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

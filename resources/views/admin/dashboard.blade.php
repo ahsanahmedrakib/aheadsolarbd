@@ -10,6 +10,8 @@
         ['label' => 'Hero Slides', 'value' => $s['heroSlides'], 'color' => 'green', 'icon' => 'image', 'href' => '/admin/hero-slider'],
         ['label' => 'Contact Queries', 'value' => $s['contactQueries'], 'color' => 'blue', 'icon' => 'mail', 'href' => '/admin/contact'],
         ['label' => 'Palash Applications', 'value' => $s['palashApplications'], 'color' => 'purple', 'icon' => 'battery', 'href' => '/admin/palash-applications'],
+        ['label' => "Today's Traffic", 'value' => $s['trafficToday'], 'color' => 'cyan', 'icon' => 'chart', 'href' => null],
+        ['label' => 'Total Traffic', 'value' => $s['trafficTotal'], 'color' => 'orange', 'icon' => 'chart', 'href' => null],
     ];
 @endphp
 
@@ -23,7 +25,11 @@
 
     <div class="admin-stats-grid">
         @foreach ($statCards as $c)
-            <a href="{{ $c['href'] }}" class="admin-stat-card" style="text-decoration:none">
+            @if (empty($c['href']))
+                <div class="admin-stat-card">
+            @else
+                <a href="{{ $c['href'] }}" class="admin-stat-card" style="text-decoration:none">
+            @endif
                 <div class="admin-stat-header">
                     <span class="admin-stat-label">{{ $c['label'] }}</span>
                     <div class="admin-stat-icon {{ $c['color'] }}">
@@ -41,6 +47,8 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                         @elseif ($c['icon'] === 'battery')
                             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="16" height="10" rx="2"/><line x1="22" x2="22" y1="11" y2="13"/><line x1="6" x2="6" y1="11" y2="13"/><line x1="10" x2="10" y1="11" y2="13"/><line x1="14" x2="14" y1="11" y2="13"/></svg>
+                        @elseif ($c['icon'] === 'chart')
+                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 13v4"/><path d="M11 9v8"/><path d="M15 6v11"/><path d="M19 3v14"/></svg>
                         @endif
                     </div>
                 </div>
@@ -52,7 +60,11 @@
                     </span>
                     <span class="admin-stat-sub">in database</span>
                 </div>
-            </a>
+            @if (empty($c['href']))
+                </div>
+            @else
+                </a>
+            @endif
         @endforeach
     </div>
 

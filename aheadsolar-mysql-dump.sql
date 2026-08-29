@@ -232,7 +232,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -241,7 +241,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'0001_01_01_000000_create_users_table',1),(2,'0001_01_01_000001_create_cache_table',1),(3,'0001_01_01_000002_create_jobs_table',1),(4,'2024_01_01_000001_create_services_table',1),(5,'2024_01_01_000002_create_projects_table',1),(6,'2024_01_01_000004_create_reviews_table',1),(7,'2024_01_01_000005_create_team_members_table',1),(8,'2024_01_01_000006_create_hero_slides_table',1),(9,'2024_01_01_000007_create_settings_table',1),(10,'2024_01_01_000008_create_contact_queries_table',1),(11,'2024_01_01_000009_create_palash_applications_table',1),(12,'2026_08_20_000001_add_status_to_reviews_table',1),(13,'2026_08_20_000002_drop_role_from_users_table',1);
+INSERT INTO `migrations` VALUES (1,'0001_01_01_000000_create_users_table',1),(2,'0001_01_01_000001_create_cache_table',1),(3,'0001_01_01_000002_create_jobs_table',1),(4,'2024_01_01_000001_create_services_table',1),(5,'2024_01_01_000002_create_projects_table',1),(6,'2024_01_01_000004_create_reviews_table',1),(7,'2024_01_01_000005_create_team_members_table',1),(8,'2024_01_01_000006_create_hero_slides_table',1),(9,'2024_01_01_000007_create_settings_table',1),(10,'2024_01_01_000008_create_contact_queries_table',1),(11,'2024_01_01_000009_create_palash_applications_table',1),(12,'2026_08_20_000001_add_status_to_reviews_table',1),(13,'2026_08_20_000002_drop_role_from_users_table',1),(14,'2026_08_29_000001_create_traffic_table',1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -520,6 +520,33 @@ LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` VALUES (1,'Super Admin','admin@aheadsolarbd.com',NULL,'$2y$12$BvmvmRRuWToYlrOxGBXT4.HQB.AFxH1QtcR5qLcxxBB0fYqDx7VUS',NULL,'2026-08-20 16:58:31','2026-08-20 16:58:31');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `traffic`
+--
+
+DROP TABLE IF EXISTS `traffic`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `traffic` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `views` bigint(20) unsigned NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `traffic_date_unique` (`date`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `traffic`
+--
+
+LOCK TABLES `traffic` WRITE;
+/*!40000 ALTER TABLE `traffic` DISABLE KEYS */;
+/*!40000 ALTER TABLE `traffic` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

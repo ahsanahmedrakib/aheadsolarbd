@@ -10,6 +10,7 @@ use App\Models\Project;
 use App\Models\Review;
 use App\Models\Service;
 use App\Models\TeamMember;
+use App\Models\Traffic;
 use App\Models\User;
 use Illuminate\View\View;
 
@@ -27,6 +28,8 @@ class DashboardController extends Controller
                 'users' => User::count(),
                 'contactQueries' => ContactQuery::count(),
                 'palashApplications' => PalashApplication::count(),
+                'trafficToday' => Traffic::today(),
+                'trafficTotal' => Traffic::total(),
             ],
         ]);
     }
