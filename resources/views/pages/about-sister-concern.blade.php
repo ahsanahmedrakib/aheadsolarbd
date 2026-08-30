@@ -100,7 +100,8 @@
                     <div class="relative aspect-16/10 w-full overflow-hidden p-4 pb-0">
                         <div
                             class="relative h-full w-full overflow-hidden rounded-lg bg-white flex items-center justify-center">
-                            <img src="{{ url('/logo.svg') }}" alt="Ahead Solar Ltd logo" class="h-16 w-auto object-contain">
+                            <img src="{{ url('/logo.svg') }}" alt="Ahead Solar Ltd logo"
+                                class="h-full w-auto object-contain">
                         </div>
                     </div>
                     <div class="flex flex-col p-6 pt-5">
@@ -130,7 +131,7 @@
                         <div
                             class="relative h-full w-full overflow-hidden rounded-lg bg-white flex items-center justify-center">
                             <img src="{{ url('/images/palash/logo-palash.png') }}" alt="Palash logo"
-                                class="h-16 w-auto object-contain">
+                                class="h-full w-auto object-contain">
                         </div>
                     </div>
                     <div class="flex flex-col p-6 pt-5">
