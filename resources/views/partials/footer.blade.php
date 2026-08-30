@@ -11,7 +11,7 @@
 <footer class="bg-forest-700 text-white pt-0 font-sans">
     <div class="solar-container">
         <!-- FOOTER CONTACT BOXES -->
-        <div class="reveal" data-variant="fade-up">
+        <div class="reveal border-t border-white/20" data-variant="fade-up">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-4 py-4">
                 <div class="flex items-center gap-5">
                     <div class="w-16 h-16 rounded-xl bg-accent-500 text-white flex items-center justify-center shrink-0 chat-idle"
