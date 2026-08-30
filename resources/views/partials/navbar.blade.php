@@ -91,7 +91,7 @@
             </nav>
 
             <div class="flex gap-2">
-                <a href="/palash-charging-station" class="border-2 rounded-lg border-accent-500 mr-0 lg:mr-2.25">
+                <a href="/palash-charging-station" target="_blank" class="border-2 rounded-lg border-accent-500 mr-0 lg:mr-2.25">
                     <img src="{{ url('/images/palash/logo-palash.png') }}" alt="Palash" height="40" width="70" class="p-2">
                 </a>
 
