@@ -3,8 +3,9 @@
     $trafficTotal = \App\Models\Traffic::total();
 @endphp
 
-<section class="visitor-counter-section bg-forest-700 border-t border-white/10 py-3 reveal" data-variant="fade-up">
-    <div class="solar-container flex flex-col lg:flex-row items-center justify-center gap-x-10 gap-y-6">
+<section class="visitor-counter-section bg-forest-700 border-t border-white/10 py-3 reveal"
+    data-variant="fade-up">
+    <div class="solar-container flex flex-col lg:flex-row items-center justify-center gap-x-10 gap-y-6 chat-idle" style="animation-delay: 0s">
         <span class="flex items-center gap-3 shrink-0">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
