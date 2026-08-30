@@ -38,6 +38,7 @@
     </main>
 
     @include('partials.marquee')
+    @include('partials.visitor-counter')
     @include('partials.footer')
     @include('partials.chat-widget')
 

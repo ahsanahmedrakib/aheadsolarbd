@@ -13,6 +13,11 @@ require __DIR__.'/vendor/autoload.php';
 /** @var Application $app */
 $app = require_once __DIR__.'/bootstrap/app.php';
 
+// Add an alias to force the dev server to run on port 4000
+if (isset($_SERVER['argv'][1]) && $_SERVER['argv'][1] === 'serve' && !in_array('--port', $_SERVER['argv'], true)) {
+    $_SERVER['argv'][] = '--port=4000';
+}
+
 $status = $app->handleCommand(new ArgvInput);
 
 exit($status);

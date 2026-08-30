@@ -122,17 +122,6 @@
                         <img src="{{ url('/images/palash/palash-1.webp') }}" alt="Solar charging station project" class="h-full w-full object-cover">
                     </div>
                 </div>
-                <div class="flex flex-col p-6 pt-5">
-                    <h3 class="font-heading text-xl font-bold text-accent-500">Nitol Niloy Group</h3>
-                    <p class="mt-1 text-xs font-semibold uppercase tracking-wider text-gold-500">Strategic Group Partner</p>
-                    <p class="mt-3 text-sm text-[#888888] leading-relaxed">
-                        An esteemed partner group collaborating with Ahead Solar to launch advanced solar EV charging solutions and expand clean mobility across Bangladesh.
-                    </p>
-                    <a href="/contact" class="mt-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent-500 hover:text-gold-500 transition-colors">
-                        Contact Us
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-                    </a>
-                </div>
             </div>
         </div>
     </div>

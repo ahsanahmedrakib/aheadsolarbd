@@ -6,8 +6,6 @@
     $email = \App\Support\SiteSettings::field('general', 'contact-email');
     $address = \App\Support\SiteSettings::field('general', 'hq-address');
     $footerServices = \App\Support\SiteData::services()->take(4);
-    $trafficToday = \App\Models\Traffic::today();
-    $trafficTotal = \App\Models\Traffic::total();
 @endphp
 
 <footer class="bg-forest-700 text-white pt-0 font-sans">
@@ -80,18 +78,6 @@
                     </a>
                     <p class="text-white/75 text-sm leading-relaxed max-w-sm">{{ $tagline }}</p>
 
-
-                    <span class="flex flex-wrap items-center gap-4">
-                        <span class="font-medium text-white/85">
-                            Website Visitor ->
-                        </span>
-                        <span class="font-medium text-white/85">
-                            Today : <span class="text-gold-500">{{ number_format($trafficToday) }}</span>
-                        </span>
-                        <span class="font-medium text-white/85">
-                            Total : <span class="text-gold-500">{{ number_format($trafficTotal) }}</span>
-                        </span>
-                    </span>
                 </div>
 
                 <!-- QUICK LINKS -->
