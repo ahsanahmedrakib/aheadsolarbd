@@ -1,58 +1,102 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+    <img src="https://aheadsolarbd.com/favicon.ico" width="80" alt="Ahead Solar Logo">
 </p>
 
-## About Laravel
+<h1 align="center">Ahead Solar Bangladesh</h1>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<p align="center">
+    Official website for <strong>Ahead Solar</strong> (<a href="https://aheadsolarbd.com">aheadsolarbd.com</a>) — a solar energy solutions provider in Bangladesh.
+</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Overview
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Ahead Solar BD is a full-featured corporate website built with **Laravel** that presents the company's services, projects, and solutions alongside a complete admin panel for managing site content.
 
-## Learning Laravel
+### Public Site
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Landing page with animated hero slider, services, featured projects and customer reviews
+- About pages: company profile, sister concerns, MD's message, management team
+- Services listing with individual service detail pages
+- Projects portfolio with category filtering and detail pages
+- Solar financing solutions: CAPEX, OPEX, Build–Operate–Transfer (BOT) and a cost comparison
+- Dedicated landing page for **Palash Charging Station** (EV charging)
+- Contact page with Google Map integration and a form backed by the admin panel
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Admin Panel
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+- Authenticated dashboard at `/admin`
+- Full CRUD management for services, projects, team members and hero sliders
+- Inbox for contact messages, Palash EV charging applications and customer reviews (with approval workflow)
+- User administration with role-based access
+- Site settings editor (contact details, Google Map, and general metadata)
 
-## Agentic Development
+## Tech Stack
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+- **Backend:** Laravel (PHP 8.3+)
+- **Frontend:** Blade templates, Tailwind CSS 4, Swiper for carousels
+- **Build tool:** Vite
+- **Database:** MySQL
+- **Testing:** PHPUnit / Pest
+
+## Requirements
+
+- PHP ^8.3
+- Composer
+- Node.js (for frontend assets)
+- MySQL
+
+## Installation
 
 ```bash
-composer require laravel/boost --dev
+# 1. Install PHP dependencies
+composer install
 
-php artisan boost:install
+# 2. Set up environment
+cp .env.example .env
+php artisan key:generate
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Configure your database credentials in `.env`, then run:
 
-## Contributing
+```bash
+# 3. Create tables
+php artisan migrate
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# 4. Install and build frontend assets
+npm install
+npm run build
 
-## Code of Conduct
+# 5. Start the dev server
+php artisan serve
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Existing installs can bootstrap everything in one step:
 
-## Security Vulnerabilities
+```bash
+composer run setup
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Default Admin Credentials
+
+These are defined in `.env.example` — change them in production!
+
+- **Email:** `admin@aheadsolarbd.com`
+- **Password:** `Admin@123`
+
+## Development
+
+```bash
+composer run dev          # Laravel + Vite dev servers
+npm run dev               # Vite only
+npm run build             # Production asset build
+composer run test         # Run the test suite
+```
+
+## Useful Scripts
+
+- `composer run setup` — full bootstrap (composer install, env, migrate, build assets)
+- `composer run dev` — start the Laravel and Vite dev servers
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Proprietary. All rights reserved to Ahead Solar Bangladesh.
