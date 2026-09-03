@@ -72,25 +72,21 @@
 
     <section class="bg-white py-20 lg:py-25 font-sans overflow-x-hidden">
         <div class="solar-container">
-            <div class="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-12 items-end mb-16">
-                <div class="lg:col-span-7 space-y-4">
-                    <div class="reveal" data-variant="fade-up">
-                        <span class="section-eyebrow">Our Concerns</span>
-                    </div>
-                    <div class="reveal" data-variant="fade-up" data-delay="100">
-                        <h2
-                            class="font-heading text-3xl font-bold tracking-tight text-accent-500 sm:text-4xl lg:text-[52px] lg:leading-[1.1]">
-                            The companies behind Ahead Solar
-                        </h2>
-                    </div>
+            <div class="flex flex-col gap-4 mb-16">
+                <div class="reveal" data-variant="fade-up">
+                    <span class="section-eyebrow">Our Concerns</span>
                 </div>
-                <div class="lg:col-span-5 lg:pl-4">
-                    <div class="reveal" data-variant="fade-up" data-delay="180">
-                        <p class="text-sm leading-relaxed text-[#888888] sm:text-base">
-                            Each concern brings deep expertise and a shared commitment to making clean, reliable energy
-                            accessible to everyone in Bangladesh.
-                        </p>
-                    </div>
+                <div class="reveal" data-variant="fade-up" data-delay="100">
+                    <h2
+                        class="font-heading text-3xl font-bold tracking-tight text-accent-500 sm:text-4xl lg:text-[52px] lg:leading-[1.1]">
+                        The companies behind Ahead Solar
+                    </h2>
+                </div>
+                <div class="reveal" data-variant="fade-up" data-delay="180">
+                    <p class="text-sm leading-relaxed text-[#888888] sm:text-base">
+                        Each concern brings deep expertise and a shared commitment to making clean, reliable energy
+                        accessible to everyone in Bangladesh.
+                    </p>
                 </div>
             </div>
 
