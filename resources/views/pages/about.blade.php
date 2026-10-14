@@ -97,7 +97,7 @@
                             <p class="text-[11px] sm:text-xs text-[#888888] font-medium mt-1">Largest Rooftop Project</p>
                         </div>
                         <div class="border-l border-gray-200 pl-4 sm:pl-6">
-                            <h3 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-accent-500 tracking-tight"> <span class="exp"></span></h3>
+                            <h3 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-accent-500 tracking-tight"><span class="exp"></span></h3>
                             <p class="text-[11px] sm:text-xs text-[#888888] font-medium mt-1">Years In Solar Business</p>
                         </div>
                     </div>
