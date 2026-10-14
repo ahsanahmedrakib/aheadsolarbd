@@ -106,7 +106,7 @@
 
             <div class="reveal absolute bottom-0 left-0 w-[42%] aspect-[1/.85] flex flex-col justify-center items-center bg-forest-700 text-white p-4 rounded-lg shadow-md text-center z-20" data-variant="fade-up" data-delay="200">
                 <div class="animate-float flex flex-col items-center">
-                    <h3 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-1 text-white">06+</h3>
+                    <h3 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-1 text-white"><span class="exp"></span></h3>
                     <p class="text-xs sm:text-sm text-white/70 font-semibold leading-snug">Years In<br>Solar Business</p>
                 </div>
             </div>
@@ -226,7 +226,7 @@
             </div>
             <div class="reveal" data-variant="fade-up" data-delay="180">
                 <p class="text-[#888888] text-sm sm:text-base font-normal leading-relaxed max-w-xl">
-                    We deliver complete solar solutions — from system design and engineering to installation and ongoing maintenance — backed by 06+ years of experience serving Bangladesh&apos;s top industrial sectors.
+                    We deliver complete solar solutions — from system design and engineering to installation and ongoing maintenance — backed by <span class="exp"></span> years of experience serving Bangladesh&apos;s top industrial sectors.
                 </p>
             </div>
 
@@ -254,7 +254,7 @@
                             <p class="text-[11px] sm:text-xs text-[#888888] font-medium mt-1">Green Energy Per Year</p>
                         </div>
                         <div class="border-l border-gray-200 pl-4 sm:pl-6">
-                            <h3 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-accent-500 tracking-tight">06+</h3>
+                            <h3 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-accent-500 tracking-tight"><span class="exp"></span></h3>
                             <p class="text-[11px] sm:text-xs text-[#888888] font-medium mt-1">Years In Solar Business</p>
                         </div>
                     </div>
@@ -484,5 +484,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+ document.querySelectorAll('.exp').forEach(el => {
+    el.textContent = new Date().getFullYear() - 2020 + '+';
+  });
+
 </script>
 @endpush

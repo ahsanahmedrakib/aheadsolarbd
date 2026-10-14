@@ -15,7 +15,7 @@ Ahead Solar BD is a full-featured corporate website built with **Laravel** that 
 ### Public Site
 
 - Landing page with animated hero slider, services, featured projects and customer reviews
-- About pages: company profile, sister concerns, MD's message, management team
+- About pages: company profile, sister concerns, Message from Managing Director, management team
 - Services listing with individual service detail pages
 - Projects portfolio with category filtering and detail pages
 - Solar financing solutions: CAPEX, OPEX, Build–Operate–Transfer (BOT) and a cost comparison

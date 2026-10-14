@@ -38,7 +38,7 @@
                                 ['label' => 'About Us', 'href' => '/about'],
                                 ['label' => 'Company Profile', 'href' => '/about/company-profile'],
                                 ['label' => 'Sister Concern', 'href' => '/about/sister-concern'],
-                                ['label' => "MD's Message", 'href' => '/about/md-message'],
+                                ['label' => "Message from Managing Director", 'href' => '/about/md-message'],
                                 ['label' => 'Our Management', 'href' => '/about/our-management'],
                             ],
                              'match' => ['/about', '/about/*'],

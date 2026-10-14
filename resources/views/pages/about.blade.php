@@ -19,7 +19,7 @@
 
                     <div class="reveal" data-variant="fade-up" data-delay="100">
                         <h2 class="mt-4 font-heading text-3xl font-bold tracking-tight text-accent-500 sm:text-4xl lg:text-[52px] lg:leading-[1.1]">
-                            Turning your clean energy vision <br class="hidden sm:inline"> into reality
+                            Turning your clean energy vision into reality
                         </h2>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
             </div>
             <div class="reveal" data-variant="fade-up" data-delay="180">
                 <p class="text-[#888888] text-sm sm:text-base font-normal leading-relaxed max-w-xl">
-                    We deliver complete solar solutions — from system design and engineering to installation and ongoing maintenance — backed by 06+ years of experience serving Bangladesh&apos;s top industrial sectors.
+                    We deliver complete solar solutions — from system design and engineering to installation and ongoing maintenance — backed by <span class="exp"></span> years of experience serving Bangladesh&apos;s top industrial sectors.
                 </p>
             </div>
 
@@ -93,15 +93,11 @@
                 <div class="border-t border-b border-gray-100 py-6 my-8">
                     <div class="grid grid-cols-3 gap-4 sm:gap-6 text-left">
                         <div>
-                            <h3 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-accent-500 tracking-tight">52MWp</h3>
+                            <h3 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-accent-500 tracking-tight">10MWp</h3>
                             <p class="text-[11px] sm:text-xs text-[#888888] font-medium mt-1">Largest Rooftop Project</p>
                         </div>
                         <div class="border-l border-gray-200 pl-4 sm:pl-6">
-                            <h3 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-accent-500 tracking-tight">30GWh</h3>
-                            <p class="text-[11px] sm:text-xs text-[#888888] font-medium mt-1">Green Energy Per Year</p>
-                        </div>
-                        <div class="border-l border-gray-200 pl-4 sm:pl-6">
-                            <h3 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-accent-500 tracking-tight">06+</h3>
+                            <h3 class="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-accent-500 tracking-tight"> <span class="exp"></span></h3>
                             <p class="text-[11px] sm:text-xs text-[#888888] font-medium mt-1">Years In Solar Business</p>
                         </div>
                     </div>
@@ -295,5 +291,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+ document.querySelectorAll('.exp').forEach(el => {
+    el.textContent = new Date().getFullYear() - 2020 + '+';
+  });
+
 </script>
 @endpush
